@@ -5,7 +5,7 @@
 Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos crientes.
 
 ### Página inicial
-- [ ] <i><b>Home page</b></i> CRLcoin Technology Group Dashboard
+- [x] <i><b>Home page</b></i> CRLcoin Technology Group Dashboard
 - [ ] Área de contato
 ---
 ### Páginas de acesso
