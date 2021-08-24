@@ -1,0 +1,80 @@
+<div class="col-12 order-2" panel-crlcoin="appTablesConfig">
+
+    <div class="row">
+
+        <div class="col-12">
+            <h3>
+                Table List
+            </h3>
+        </div>
+
+        {{#each tablesConfig}}
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box ribbon-box ">
+
+                <div class="row">
+                    <div class="col-12 mb-2">
+
+                        <a href="http://localhost:3000/f/a/e/dashboard/use/tables?id=use&refLink={{table_id}}" data-crl="use-table" class="btn btn-success waves-effect waves-light">
+                            <i class="mdi mdi-file-table-box-multiple"></i>
+                        </a>
+                        <a href="http://localhost:3000/f/a/e/dashboard/use/tables?id=edit&refLink={{table_id}}" data-crl="edit-table" class="btn btn-blue waves-effect waves-light">
+                            <i class="mdi mdi-square-edit-outline"></i>
+                        </a>
+                        <button type="button" value="{{table_id}}" data-crl="removeTable" class="btn btn-danger waves-effect waves-light">
+                            <i class="mdi mdi-close"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-7 text-left mb-2">
+                        <h4 class="text-truncate" title="{{name}}">
+                            {{name}}
+                        </h4>
+                    </div>
+                    <div class="col-5">
+                        <h4 class="text-truncate text-right">
+                            <span class="h5 text-muted">Used&nbsp;</span>
+                            <span class="h4" data-plugin="counterup">
+                                {{usedBy}}
+                            </span>
+                            <span class="h5 text-muted">&nbsp;Times</span>
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-muted text-truncate mb-0">
+                            Table Functions:
+                            <span>
+                                {{#if functions}}
+                                {{functions}}
+                                {{else}}
+                                empty
+                                {{/if}}
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="text-muted text-trucate mb-0">
+                            Table Columns:
+                            <span data-plugin="counterup">
+                                {{columnsCount}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+
+</div>

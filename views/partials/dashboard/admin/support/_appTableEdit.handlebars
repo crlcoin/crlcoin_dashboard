@@ -1,0 +1,130 @@
+<div class="col-12 order-3" panel-crlcoin="appEditTables">
+
+    <div class="card">
+        <div class="card-body bg-pattern bg-dark rounded">
+
+            <div class="d-flex align-items-center justify-content-left">
+
+                <h3 class="text-light">
+                    Edit Table
+                </h3>
+
+                <div class="card-widgets float-right mb-3 ml-auto">
+                    <a title="Refresh" data-crl="refreshCreateTable" data-crl-edit="true" href="javascript: void(0);" data-toggle="reload"
+                        class="btn btn-blue text-light">
+                        <i class="mdi mdi-refresh"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <div id="cardCollNewTable" class="pt-3" style="">
+                <div class="text-left">
+
+                    {{#with tableConfig}}
+
+                    <form id="formNewTable" data-crl-table-id="{{table_id}}" method="post">
+
+                        <div class="mb-3">
+                            <label for="tableName" class="form-label text-light">Table Name</label>
+                            <input type="text" class="form-control" id="tableName" data-crl="tableName" value="{{name}}"
+                                placeholder="Support" required="true">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tableFunction" class="form-label text-light">Table Function</label>
+                            <textarea class="form-control" id="tableFunction" rows="3" value="{{functions}}"
+                                placeholder='if(col("status") === "finished", "Response A", "Response B" )'>{{functions}}</textarea>
+                        </div>
+
+                        <div class="my-3">
+                            <h3 class="d-flex align-items-center justify-content-left text-light">
+                                <span id="coluns-table-name"></span>&nbsp;Columns
+                            </h3>
+                        </div>
+
+                        <span data-crl="table-columns-anchor">
+
+                            {{#each columns}}
+
+                            <div data-crl="column-form" class="row border border-muted rounded mb-3 mx-1 bg-light">
+
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-danger mt-3 mb-2" data-crl="removeColumn">
+                                        <i class="mdi mdi-table-column-remove"></i>
+                                        <span> Remove Column </span>
+                                    </button>
+                                </div>
+
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="columnName" class="form-label">Column Name</label>
+                                    <input type="text" class="form-control" id="columnName" placeholder="Status"
+                                        value="{{name}}" required="true">
+                                </div>
+
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="columnOptionsList" class="form-label">Column Type</label>
+                                    <input class="form-control" list="datalistOptions" id="columnOptionsList"
+                                        value="{{type}}" data-crl="columnOptionsList" placeholder="Type to search..."
+                                        required="true">
+                                    <datalist id="datalistOptions">
+                                        <option value="date">
+                                        <option value="function">
+                                        <option value="id">
+                                        <option value="link">
+                                        <option value="number">
+                                        <option value="options">
+                                        <option value="percent">
+                                        <option value="text">
+                                    </datalist>
+                                </div>
+
+                                <div class="mb-3 col-12 pre-hidden {{isEqualAndReturn type "options" "pre-show"}}"
+                                    data-crl="columnOptions">
+                                    <label for="columnOptions" class="form-label">Options</label>
+                                    <small class="text-blue">
+                                        <i class="mdi mdi-information"></i>
+                                        <span> Options split by semicolon or comma </span>
+                                    </small>
+                                    <input type="text" class="form-control custom-letter" id="columnOptions" value="{{options}}"
+                                        data-crl="columnOptions" placeholder="Opt 1;Opt 2;Opt 3;Opt 4,Opt 5,Opt 7;">
+                                    <span class="columnOptionsPreview"></span>
+                                </div>
+
+                                <div class="mb-3 col-12 pre-hidden {{isEqualAndReturn type "function" "pre-show"}}"
+                                    data-crl="columnFunction">
+                                    <label for="columnFunction" class="form-label">Column Function</label>
+                                    <textarea class="form-control custom-letter" id="columnFunction" rows="3"
+                                        placeholder='if(parentRow("status") === "start", "Response A", "Response B" )'>{{functions}}</textarea>
+                                </div>
+
+                            </div>
+
+                            {{/each}}
+
+                        </span>
+
+                        <div class="mb-3">
+                            <button type="button" data-crl="newColumn" class="btn btn-primary">
+                                <i class="mdi mdi-table-column-plus-after"></i>
+                                <span> New Column </span>
+                            </button>
+                            <button type="button" data-crl="updateTableConfig" class="btn btn-success">
+                                <i class="mdi mdi-content-save-outline"></i>
+                                <span> Save Table </span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                    {{/with}}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<hr>

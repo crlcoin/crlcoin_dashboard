@@ -1,3 +1,9 @@
+# Tests
+test/
+.vscode
+public/page/php
+public/page/scss
+
 # Logs
 logs
 *.log

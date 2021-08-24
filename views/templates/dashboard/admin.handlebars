@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{page.title}} | CRLcoin Technology Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="CRLcoin Technology Group" name="description" />
+    <meta content="CRLcoin Technology Group" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{!-- <!-- App favicon --> --}}
+    <link rel="shortcut icon" href="{{page.PrincipalURL}}/dash/assets/images/favicon.ico">
+
+    {{!-- <!-- App css --> --}}
+    <link href="{{page.PrincipalURL}}/dash/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="{{page.PrincipalURL}}/dash/assets/css/app.min.css" rel="stylesheet" type="text/css"
+        id="app-default-stylesheet" />
+
+    <link href="{{page.PrincipalURL}}/dash/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" />
+    <link href="{{page.PrincipalURL}}/dash/assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
+        id="app-dark-stylesheet" />
+
+    <link href="{{page.PrincipalURL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="{{page.PrincipalURL}}/dash/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <link href="{{page.PrincipalURL}}/dash/assets/libs/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js">
+
+    {{!-- icons --}}
+    <link href="{{page.PrincipalURL}}/dash/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    {{!-- Custom --}}
+    <link href="{{page.PrincipalURL}}/dash/assets/custom/css/custom.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="loading">
+
+    {{!-- Begin page --}}
+    <div id="wrapper">
+
+        {{>dashboard/admin/_navbar}}
+
+        {{>dashboard/admin/_leftSlidebar}}
+
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">CRLcoin Technology
+                                                Group</a></li>
+                                        <li class="breadcrumb-item active">{{page.title}}</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">{{page.title}}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- App --}}
+                        {{#if page.App}}
+                        {{>dashboard/admin/_app}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Tables --}}
+                        {{#if page.Tables}}
+                        {{>dashboard/admin/_appTables}}
+                        {{/if}}
+
+                        {{#if tablesConfig}}
+                        {{>dashboard/admin/_appTablesConfig}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Tables --}}
+                        {{#if page.editTables}}
+                        {{>dashboard/admin/support/_appTableEdit}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Charts --}}
+                        {{#if page.Charts}}
+                        {{>dashboard/admin/_appCharts}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Companies --}}
+                        {{#if page.Companies}}
+                        {{>dashboard/admin/_appCompanies}}
+                        {{/if}}
+
+                        {{#if preloginData}}
+                        {{>dashboard/admin/_appPreloginCompanies}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Tickets --}}
+                        {{#if page.Tickets}}
+                        {{>dashboard/admin/_appTickets}}
+                        {{/if}}
+
+                    </div>
+
+                    {{!-- Account --}}
+                    <div class="row">
+                    {{#if page.Account}}
+                        {{>dashboard/admin/_managerAccount}}
+                    {{/if}}
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Settings --}}
+                        {{!-- {{#if page.title.Settings}}
+                        {{>dashboard/admin/_managerSettings}}
+                        {{/if}}--}}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{>_copyright}}
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- ============================================================== -->
+
+    </div>
+
+    {{!-- Conn --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    {{!-- <!-- Vendor js --> --}}
+    <script src="{{page.PrincipalURL}}/dash/assets/js/vendor.min.js"></script>
+
+    {{#if page.Charts}}
+        {{!-- <!-- Plugins js --> --}}
+        <script src="{{page.PrincipalURL}}/dash/assets/libs/morris.js06/morris.min.js"></script>
+        <script src="{{page.PrincipalURL}}/dash/assets/libs/raphael/raphael.min.js"></script>
+
+        {{!-- <!-- Dashboard init--> --}}
+        <script src="{{page.PrincipalURL}}/dash/assets/js/pages/dashboard-4.init.js"></script>
+    {{/if}}
+
+    <script src="{{page.PrincipalURL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/js/pages/toastr.init.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="{{page.PrincipalURL}}/dash/assets/libs/moment/min/moment.min.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/libs/x-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+
+    <script src="{{page.PrincipalURL}}/dash/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
+
+    {{!-- <!-- App js --> --}}
+    <script src="{{page.PrincipalURL}}/dash/assets/js/app.min.js"></script>
+
+    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/helpers.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/notification.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
+    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/x-forms-editable.init.js"></script>
+
+</body>
+
+</html>
