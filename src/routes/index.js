@@ -4,21 +4,42 @@ const router = express.Router()
 const { errors } = require('../constants')
 
 const {
+    // saveMessageData,
+    // dashboardUse,
+    dashboardCompanyAccess,
+    // companyTablesCreate,
+    // companyTablesConfigUpdate,
+    // companyTablesConfigDelete,
+    // companyPreloginCreate,
+    // companyPreloginDelete,
+    // companyCreateLogin
+} = require('../api/controllers/managerControllers')
+
+const {
+    saveMessageData,
     dashboardUse,
     dashboardAccess,
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
     companyPreloginCreate,
-    companyPreloginDelete
-} = require('../api/controllers/adminConntrollers')
+    companyPreloginDelete,
+    companyRegisterAccess,
+    companyCreateLogin
+} = require('../api/controllers/adminControllers')
 
 const {
-    onlyRequireDatas
+    onlyRequireDatas,
+    checkLoginAccess,
+    checkLoginCreate
 } = require('../helper/olyRequireDatas')
 
+const {
+    checkMessagesData
+} = require('../helper/checkMessage')
+
 router.get('/', (req, res) => { return res.render('templates/page/home') })
-router.post('/contact', (req, res) => { return res.render('templates/page/home') })
+router.post('/contact', checkMessagesData, saveMessageData)
 
 // authentication
 router.get('/login', (req, res) => {
@@ -35,21 +56,15 @@ router.post('/recover', (req, res) => {
     return res.render('templates/authentication/confirmemailaddress', {email: req.body.emailaddress})
 })
 
-router.get('/auth/register', (req, res) => {
-    return res.render('templates/authentication/register')
-})
-router.post('/auth/register', (req, res) => {
-    return res.render('templates/authentication/register')
-})
+router.get('/auth/register', checkLoginAccess, companyRegisterAccess)
+router.post('/auth/register', checkLoginCreate, companyCreateLogin)
 
 router.get('/auth/logout', (req, res) => {
     return res.render('templates/authentication/logout')
 })
 
 // Manager
-// router.get('/dashboard', (req, res) => {
-//     return res.render('templates/dashboard/manager')
-// })
+router.get('/acc/dashboard/:page', dashboardCompanyAccess)
 
 // Admin
 router.get('/f/a/c/dashboard/:page', onlyRequireDatas, dashboardAccess)

@@ -60,12 +60,11 @@ const requireTablesConfig = async (id) => {
 
 const updateTableConfig = async (data) => {
     try {
+        table_id = ""
 
         if ( !!data.table_id ) table_id = data.table_id
 
         delete data.table_id
-
-        console.log(data)
 
         let response = await adminModelTablesConfig
             .findOneAndUpdate({

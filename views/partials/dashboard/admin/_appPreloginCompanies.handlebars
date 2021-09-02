@@ -56,7 +56,7 @@
                     <div class="col-sm-2">
                         <div class="text-center my-3 my-sm-0">
                             <p class="mb-0 text-muted">
-                                {{#formatDate createdAt}}{{response}}{{/formatDate}}
+                                {{formatDate createdAt}}
                             </p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="col-sm-4">
                         <div class="text-center button-list">
                             <button data-crl="copyLinkPermission" title="Copy link for first access"
-                                value="?refLink={{permission}}"
+                                value="{{../page.PrincipalULR}}/auth/register?refLink={{permission}}"
                                 class="btn btn-xs btn-primary waves-effect waves-light">
                                 <i class="fas fa-link"></i>&nbsp;
                                 Copy Link
@@ -93,108 +93,4 @@
 
 </div>
 
-
-{{!--<div class="col-12 order-2" panel-crlcoin="appPreloginCompanies">
-
-    <div class="card">
-        <div class="card-body">
-
-            <div class="card-widgets">
-                <a data-toggle="collapse" href="#cardCollpasePermisions" role="button" aria-expanded="true"
-                    aria-controls="cardCollpasePermisions" class="btn btn-blue text-light">
-                    <i class="mdi mdi-minus"></i>
-                </a>
-            </div>
-            <h3 class="mb-0">
-                Company Permissions
-            </h3>
-
-            <div id="cardCollpasePermisions" class="collapse pt-3 show" style>
-                <div class="table-responsive">
-                    <table class="table table-centered table-borderless mb-0">
-                        <div class="thead-light">
-                            <tr>
-                                <th>Company Name</th>
-                                <th>Created At</th>
-                                <th class="text-center">Link to Register</th>
-                                <th class="text-center">
-                                    <div class="btn-group" title="Delete all selected">
-                                        <button class="btn btn-danger dropdown-toggle-split"
-                                            data-crl="deleteAllPermission">
-                                            <i class="mdi mdi-delete"></i>&nbsp;
-                                            <span> Delete all selected</span>
-                                        </button>
-                                    </div>
-                                </th>
-                            </tr>
-                        </div>
-                        <tbody>
-                            {{#each preloginData}}
-
-                            <tr>
-                                <td>{{this.name}}</td>
-                                <td>{{this.createdAt}}</td>
-                                <td class="text-center">
-                                    <button data-crl="copyLinkPermission" title="Copy Link"
-                                        value="https://localhost:3000/auth/register?refLink={{permission}}"
-                                        class="btn btn-primary">
-                                        <i class="fas fa-link"></i>&nbsp;
-                                        <span> Copy </span>
-                                    </button>
-                                </td>
-                                <td class="text-center">
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox" id="random{{_id}}"
-                                            data-crl="actionSelectbox" value="{{permission}}">
-                                        <label class="custom-control-label" for="random{{_id}}">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<hr>
-
-<div class="col-xl-8 order-xl-1 order-2">
-
-    <div class="card-box mb-2">
-        <div class="row align-items-center">
-            <div class="col-sm-4">
-                <div class="media">
-                    <img class="d-flex align-self-center mr-3 rounded-circle"
-                        src="../assets/images/companies/amazon.png" alt="Generic placeholder image" height="64">
-                    <div class="media-body">
-                        <h4 class="mt-0 mb-2 font-16">Amazon Inc.</h4>
-                        <p class="mb-1"><b>Location:</b> Seattle, Washington</p>
-                        <p class="mb-0"><b>Category:</b> Ecommerce</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <p class="mb-1 mt-3 mt-sm-0"><i class="mdi mdi-email mr-1"></i> collier@jourrapide.com</p>
-                <p class="mb-0"><i class="mdi mdi-phone-classic mr-1"></i> 828-216-2190</p>
-            </div>
-            <div class="col-sm-2">
-                <div class="text-center mt-3 mt-sm-0">
-                    <div class="badge font-14 bg-soft-info text-info p-1">Hot</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="text-sm-right">
-                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>--}}
+<hr />

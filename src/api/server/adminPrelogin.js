@@ -21,9 +21,30 @@ const createPrelogin = async (data) => {
     }
 };
 
-const requirePrelogin = async () => {
+const requirePrelogin = async (permission) => {
     try {
-        let response = await adminModelCompanyPrelogin
+        let response
+
+        if (!!permission) {
+
+            return response = await adminModelCompanyPrelogin
+                .findOne({
+                    permission: permission
+                })
+                .lean()
+                .then((result) => {
+                    return result
+                })
+                .catch((error) => {
+                    if (error) {
+                        return false
+                    }
+                })
+
+        }
+
+
+        return response = await adminModelCompanyPrelogin
             .find({})
             .sort('-createdAt')
             .lean()
@@ -32,11 +53,11 @@ const requirePrelogin = async () => {
             })
             .catch((error) => {
                 if (error) {
-                    throw "Controllers Error Company 001";
+                    console.log("Error: ", error.message)
+                    return ""
                 }
             });
 
-        return response;
     } catch (e) {
         if (e) {
             return false;

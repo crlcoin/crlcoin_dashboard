@@ -1,18 +1,22 @@
 const {
+    permissionCaracterListSupport
+} = require("../constants")
+
+const {
     requireTablesConfig,
 } = require("../api/server/adminTables")
 
 const {
     requirePrelogin,
-} = require("../api/server/adminPrelogin")
+} = require("../api/server/adminPrelogin");
 
 const onlyRequireDatas = async (req, res, next) => {
     try {
-        if (!req.params.page) return next()
+        if (!req.params.page) next()
 
         let params = req.params.page
 
-        if ( params === "companies" ) {
+        if (params === "companies") {
             let response = await requirePrelogin()
 
             if (!!response && response.length > 0) {
@@ -22,7 +26,7 @@ const onlyRequireDatas = async (req, res, next) => {
             req.preloginData = false
         }
 
-        if ( params === "app" || params === "tables" ) {
+        if (params === "overview" || params === "tables") {
             let response = await requireTablesConfig()
 
             if (!!response && response.length > 0) {
@@ -45,6 +49,127 @@ const onlyRequireDatas = async (req, res, next) => {
     }
 };
 
+const checkLoginAccess = async (req, res, next) => {
+    try {
+
+        if (!req.query.refLink) return res.redirect('/error/404')
+
+        let params = (req.query.refLink).replace(/ /g, '+')
+
+        if (params.replace(permissionCaracterListSupport, '') !== "") {
+            return res.redirect('/error/404')
+        }
+
+        let count = 0
+
+        for (const letter of params) {
+            if (letter === "+" || letter === "@") {
+                count++
+            }
+        }
+
+        if (params.includes('@crlcoin') && count == 3) {
+            let response = await requirePrelogin(params)
+
+            if (response.permission === params) {
+                req.permission = response.permission
+                next()
+            } else {
+                return res.redirect('/error/404')
+            }
+        } else {
+            return res.redirect('/error/404')
+        }
+
+    } catch (error) {
+        if (error) {
+            return res.redirect('/error/404')
+        }
+    }
+}
+
+const checkLoginCreate = async (req, res, next) => {
+    try {
+
+        if (!req.body.permission || !req.body.name || !req.body.emailaddress || !req.body.accpass || !req.body.caccpass || !req.body.terms) {
+            req.permission = false
+            if (!!req.body.permission) {
+                req.responsePermission = req.body.permission
+            }
+            req.responseMessage = 'All fields are required'
+            return next()
+        }
+
+        let params = (req.body.permission).replace(/ /g, '+')
+
+        if (!!params && params.replace(permissionCaracterListSupport, '') !== "") {
+            req.permission = false
+            if (!!req.body.permission) {
+                req.responsePermission = req.body.permission
+            }
+            req.responseMessage = 'Permission denied'
+            return next()
+        }
+
+        let count = 0
+
+        for (const letter of params) {
+            if (letter === "+" || letter === "@") {
+                count++
+            }
+        }
+
+        if (params.includes('@crlcoin') && count === 3) {
+            return await requirePrelogin(params)
+                .then(response => {
+
+                    if (!response) {
+                        req.permission = false
+                        if (!!req.body.permission) {
+                            req.responsePermission = req.body.permission
+                        }
+                        req.responseMessage = 'Permission denied'
+                        return next()
+                    }
+
+                    if (req.body.emailaddress === response.email) {
+                        req.permission = true
+                        res.responseType = response.type
+                        return next()
+                    } else {
+                        req.permission = false
+                        if (!!req.body.permission) {
+                            req.responsePermission = req.body.permission
+                        }
+                        req.responseMessage = 'Check your information'
+                        return next()
+                    }
+
+                })
+                .catch(err => {
+                    if (err) {
+                        console.log(err)
+                        return res.redirect('/error/500')
+                    }
+                })
+        } else {
+            req.permission = false
+            if (!!req.body.permission) {
+                req.responsePermission = req.body.permission
+            }
+            req.responseMessage = 'Permission denied'
+            return next()
+        }
+
+    } catch (error) {
+        if (error) {
+            return res.redirect('/error/500')
+        }
+    }
+}
+
 module.exports = {
-    onlyRequireDatas
+    onlyRequireDatas,
+    checkLoginAccess,
+    checkLoginCreate
 }

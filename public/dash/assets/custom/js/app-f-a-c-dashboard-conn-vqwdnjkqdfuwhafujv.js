@@ -83,7 +83,7 @@ const updateDatas = {
                     notification({ title: "Saved!" }, "success-2");
                     let i = setInterval(function () {
                         clearInterval(i);
-                        location.href = "/f/a/c/dashboard/app";
+                        location.href = "/f/a/c/dashboard/overview";
                     }, 2e3);
                 } else {
                     notification({ title: "Saved!" }, "success-2");
@@ -91,7 +91,6 @@ const updateDatas = {
             })
             .catch(function (e) {
                 if (e) {
-                    console.log(e)
                     notification({ message: e.message }, "error");
                 }
             });

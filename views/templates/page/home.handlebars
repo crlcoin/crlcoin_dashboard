@@ -22,6 +22,9 @@
     {{!-- <!-- Custom  sCss --> --}}
     <link rel="stylesheet" type="text/css" href="/page/css/style.min.css" />
 
+    {{!-- reCAPTCHA --}}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -39,7 +42,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                 <ul class="navbar-nav" id="mySidenav">
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a href="#home" class="btn text-light">
                             Home
                         </a>
@@ -48,7 +51,7 @@
                         <a href="#contact" class="btn text-light">
                             Contact
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a href="/login" class="btn text-light">
                             Login
@@ -138,19 +141,19 @@
 
                     <div class="custom-form p-5 bg-white">
                         <div id="message"></div>
-                        <form method="post" action="contact" name="contact-form" id="contact-form">
+                        <form method="post" action="contact" id="contact-form">
 
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input name="name" id="name" type="text" class="form-control" placeholder="Enter your name...">
+                                        <input name="name" id="name" type="text" required="true" class="form-control" placeholder="Enter your name...">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="emailaddress">Email address</label>
-                                        <input name="emailaddress" id="emailaddress" type="email" class="form-control" placeholder="Enter your email...">
+                                        <input name="emailaddress" id="emailaddress" type="email" required="true" class="form-control" placeholder="Enter your email...">
                                     </div>
                                 </div>
                             </div>
@@ -159,13 +162,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="subject">Subject</label>
-                                        <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject...">
+                                        <input name="subject" id="subject" type="text" class="form-control" required="true" placeholder="Enter Subject...">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="phone-number">Phone</label>
-                                        <input name="phone-number" id="phone-number" type="number" class="form-control" placeholder="Enter Phone number...">
+                                        <label for="phoneNumber">Phone</label>
+                                        <input name="phoneNumber" id="phone-number" type="number" class="form-control" placeholder="Enter Phone number...">
                                     </div>
                                 </div>
                             </div>
@@ -173,15 +176,19 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="comments">Message</label>
-                                        <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Enter your message..."></textarea>
+                                        <label for="sdncomments">Message</label>
+                                        <textarea name="comments" id="comments" rows="4" class="form-control" required="true" placeholder="Enter your message..."></textarea>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                <div class="g-recaptcha" data-sitekey="6LfQaSocAAAAAIIwrj6dHHeqVhCXX1JO0rAAwNZu"></div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-lg-12 text-right">
-                                    <input type="submit" id="submit" name="send" class="submitBnt btn btn-danger" value="Send Message">
+                                    <input type="submit" id="submit" class="submitBnt btn btn-danger" value="Send Message">
                                     <div id="simple-msg"></div>
                                 </div>
                             </div>
@@ -220,14 +227,22 @@
     {{!-- <!-- Back to top --> --}}
     <a href="#" class="back-to-top" id="back-to-top"> <i class="mdi mdi-chevron-up"> </i> </a>
 
+    {{!-- Connection --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     {{!-- <!-- javascript --> --}}
     <script src="/page/js/jquery.min.js"></script>
     <script src="/page/js/bootstrap.bundle.min.js"></script>
     <script src="/page/js/jquery.easing.min.js"></script>
     <script src="/page/js/scrollspy.min.js"></script>
 
+    {{!-- Alert --}}
+    <script src="/page/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
     {{!-- <!-- custom js --> --}}
     <script src="/page/js/app.js"></script>
-</body>
+    <script src="/page/js/notification.js"></script>
+    <script src="/page/js/contact.js"></script>
 
+</body>
 </html>

@@ -16,6 +16,24 @@ const {
   deletePrelogin,
 } = require("../server/adminPrelogin");
 
+const {
+    companyLoginCreate
+} = require("../server/adminLogin");
+
+const {
+    messageCreate
+} = require("../server/adminMessages");
+
+const saveMessageData = async (req, res) => {
+
+    if (!!req.messageData) {
+        await messageCreate(req.messageData)
+        return res.status(201).json({ message: "Message send!" })
+    }
+
+    return res.status(500).json({})
+}
+
 const dashboardUse = async (req, res) => {
     let template = ""
     let id = req.query.id || ""
@@ -104,7 +122,7 @@ const companyTablesConfigUpdate = async (req, res) => {
         if (!!data) {
             let response = await updateTableConfig(data)
                 .then((result) => {
-                    res.status(200).json({});
+                    return res.status(200).json({});
                 })
                 .catch((error) => {
                     if (error) {
@@ -130,7 +148,7 @@ const companyTablesConfigDelete = async (req, res) => {
         if (!!data) {
             let response = await deleteTableConfig(data)
                 .then((result) => {
-                    res.status(200).json({});
+                    return res.status(200).json({});
                 })
                 .catch((error) => {
                     if (error) {
@@ -178,7 +196,7 @@ const companyPreloginDelete = async (req, res) => {
         if (!!data) {
             let response = await deletePrelogin(data)
                 .then((result) => {
-                    res.status(200).json({});
+                    return res.status(200).json({});
                 })
                 .catch((error) => {
                     if (error) {
@@ -197,12 +215,81 @@ const companyPreloginDelete = async (req, res) => {
     }
 };
 
+const companyRegisterAccess = async (req, res) => {
+    try {
+        if (req.permission) {
+            return res.render('templates/authentication/register', {permission: req.permission})
+        }
+        return res.redirect('/error/404')
+    } catch (error) {
+        return res.redirect('/error/500')
+    }
+}
+
+const companyCreateLogin = async (req, res) => {
+    try {
+
+        if (!req.permission) {
+            if (!!req.responseMessage) {
+                return res.render('templates/authentication/register', {
+                    permission: req.responsePermission || "",
+                    message: {
+                        boo: false,
+                        message: req.responseMessage
+                    }
+                })
+            }
+            return res.render('templates/authentication/register', {
+                permission: req.responsePermission || "",
+                message: {
+                    boo: false,
+                    message: 'Unidentified Registration Error'
+                }
+            })
+        }
+
+        let data = req.body || "";
+
+        data.type = res.responseType || "manager"
+
+        console.log("DATA ::: ", data)
+
+        if (!!data) {
+            let response = await companyLoginCreate(data)
+                .then((result) => {
+                    return res.render('templates/authentication/register', {
+                        message: {
+                            boo: true,
+                            message: `${response.name} created successfully!`
+                        }
+                    })
+                })
+                .catch((error) => {
+                    if (error) {
+                        return res.redirect('/error/500');
+                    }
+                });
+
+            return response
+        } else {
+            return res.redirect('/error/500');
+        }
+    } catch (e) {
+        if (e) {
+            return res.redirect('/error/500');
+        }
+    }
+};
+
 module.exports = {
+    saveMessageData,
     dashboardUse,
     dashboardAccess,
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
     companyPreloginCreate,
-    companyPreloginDelete
+    companyPreloginDelete,
+    companyRegisterAccess,
+    companyCreateLogin
 };

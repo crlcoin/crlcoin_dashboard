@@ -7,7 +7,7 @@ module.exports = {
             unique: true,
             require: true
         },
-        name: {
+        companyName: {
             type: String,
             require: true
         },

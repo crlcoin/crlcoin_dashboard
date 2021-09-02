@@ -9,9 +9,9 @@
 
                 <li class="menu-title">App</li>
 
-                {{#currentPage page.title "App" "true"}}
+                {{#currentPage page.title "Overview" "true"}}
                     <li data-crl="appTables">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="ti-layout-grid3"></i>
                             <span>Overview</span>
                         </a>
@@ -20,7 +20,7 @@
 
                 {{#currentPage page.title "Tables" "true"}}
                     <li data-crl="appTables">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="mdi mdi-file-table-box-multiple"></i>
                             <span>Tables</span>
                         </a>
@@ -29,7 +29,7 @@
 
                 {{#currentPage page.title "Charts" "true"}}
                     <li data-crl="appCharts">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="mdi mdi-chart-arc"></i>
                             <span>Charts</span>
                         </a>
@@ -38,7 +38,7 @@
 
                 {{#currentPage page.title "Companies" "true"}}
                     <li data-crl="appCompanies">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="mdi mdi-office-building"></i>
                             <span> Companies </span>
                         </a>
@@ -47,9 +47,22 @@
 
                 {{#currentPage page.title "Tickets" "true"}}
                     <li data-crl="appTickets">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i data-feather="clipboard"></i>
                             <span> Tickets </span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                <div class="dropdown-divider"></div>
+
+                <li class="menu-title">Landing Page</li>
+
+                {{#currentPage page.title "Messages" "true"}}
+                    <li data-crl="landingPageMessages">
+                        <a href="/f/a/c/dashboard/{{response}}">
+                            <i class="mdi mdi-message-reply-text"></i>
+                            <span> Messages </span>
                         </a>
                     </li>
                 {{/currentPage}}
@@ -60,7 +73,7 @@
 
                 {{#currentPage page.title "Account" "true"}}
                     <li data-crl="managerAccount">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="fe-user"></i>
                             <span> My Account </span>
                         </a>
@@ -69,7 +82,7 @@
 
                 {{!-- {{#currentPage page.title "Settings" "true"}}
                     <li data-crl="managerSettings">
-                        <a href="{{response}}">
+                        <a href="/f/a/c/dashboard/{{response}}">
                             <i class="fe-settings"></i>
                             <span> Settings </span>
                         </a>

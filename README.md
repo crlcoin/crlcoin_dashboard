@@ -5,8 +5,9 @@
 Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos crientes.
 
 ### Página inicial
-- [x] <i><b>Home page</b></i> CRLcoin Technology Group Dashboard
-- [ ] Área de contato
+- [x] Home page CRLcoin Technology Group Dashboard
+- [x] Área de contato
+- [x] Google Captcha
 ---
 ### Páginas de acesso
 - [ ] Entrar
@@ -16,16 +17,32 @@ Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos 
 ### Ambiente do usuário
 - [ ] Visualização de suas tabelas
 - [ ] Download .CSV
+- [ ] Modificar dados da conta
 ---
 ### Ambiente do administrador
->Usuários
-- [ ] Criação
-- [ ] Modificação
-- [ ] Remoção
+>Pré Cadastro de Usuários
+- [x] Criação
+- [x] Remoção
 
 >Tabelas
-- [ ] Criação
-- [ ] Modificação
-- [ ] Remoção
+- [x] Criação
+- [x] Modificação
+- [x] Remoção
+- [ ] Usar
 
-[Voltar ao top](#)<br>
+>Gráficos
+- [ ] Vincular gráfico a coluna
+- [ ] Editar cores gráfico
+
+>Tickets
+- [ ] Criar
+- [ ] Modificar
+- [ ] visualizar
+
+>Mensagens
+- [ ] visualizar mensagens enviadas da landing page
+
+>Conta adm
+- [ ] Modificar
+
+[Voltar ao top](#)

@@ -1,7 +1,7 @@
 const {
   databaseReadAndWriteDashboard,
   databaseReadAndWriteManagerLogins,
-  databaseReadDashboardTablesDatasAndPrelogins,
+  databaseReadCompanyTablesDatas,
   databaseReadAndWriteContactmeMessage,
 } = require("../config");
 
@@ -23,7 +23,7 @@ const mongoConfig = {
 const mongoose = require("mongoose");
 
 const connectUser = mongoose.createConnection(
-  databaseReadDashboardTablesDatasAndPrelogins,
+  databaseReadCompanyTablesDatas,
   mongoConfig
 );
 
