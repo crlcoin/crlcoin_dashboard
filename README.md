@@ -11,7 +11,7 @@ Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos 
 ---
 ### Páginas de acesso
 - [ ] Entrar
-- [ ] Registrar
+- [x] Registrar
 - [ ] Recuperar acesso
 ---
 ### Ambiente do usuário
@@ -32,17 +32,13 @@ Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos 
 
 >Gráficos
 - [ ] Vincular gráfico a coluna
-- [ ] Editar cores gráfico
 
->Tickets
+>Helpers
 - [ ] Criar
 - [ ] Modificar
 - [ ] visualizar
 
 >Mensagens
-- [ ] visualizar mensagens enviadas da landing page
-
->Conta adm
-- [ ] Modificar
+- [x] visualizar/responder/deletar mensagens enviadas da landing page
 
 [Voltar ao top](#)
