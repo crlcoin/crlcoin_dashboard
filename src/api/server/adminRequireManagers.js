@@ -43,7 +43,6 @@ const requireManagers = async (data) => {
 
     } catch (error) {
         if (error) {
-            console.log(error)
             return "Require Company Error"
         }
     }

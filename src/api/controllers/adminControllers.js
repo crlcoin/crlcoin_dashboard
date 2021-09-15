@@ -328,8 +328,6 @@ const companyDeleteLogin = async (req, res) => {
     try {
         let data = req.body.data || "";
 
-        console.log( "HERERE" )
-
         if (!!data) {
             let response = await deleteCompany(data)
                 .then((result) => {
@@ -346,7 +344,6 @@ const companyDeleteLogin = async (req, res) => {
             return res.status(500);
         }
     } catch (error) {
-        console.log("companyDeleteLogin", error)
         return res.redirect('/error/500')
     }
 }

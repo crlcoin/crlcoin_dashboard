@@ -21,7 +21,8 @@ module.exports = {
         },
         type: {
             type: String,
-            require: true
+            require: true,
+            default: "manager"
         },
         phone_number: {
             type: String
