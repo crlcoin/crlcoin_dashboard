@@ -1,8 +1,8 @@
 
 module.exports = {
     PrincipalULR: 'http://localhost:3000',
-    PagesList: ["Overview", "Tables", "Charts", "Companies", "Tickets", "Account", "Messages"],
-    managerPagesList: ["Overview", "Tables", "Tickets", "Account"],
+    PagesList: ["Overview", "Tables", "Companies", "Help", "Account", "Messages"],
+    managerPagesList: ["Overview", "Tables", "Help", "Account"],
     ActionsList: ["use", "edit"],
 
     permissionCaracterListSimple: /[^a-z0-9]/gi,
@@ -40,15 +40,11 @@ module.exports = {
             permission: [ "create", "update", "delete" ]
         },
         {
-            data: "charts",
-            permission: [ "create", "update", "delete" ]
-        },
-        {
             data: "companies",
             permission: [ "create", "update", "delete" ]
         },
         {
-            data: "tickets",
+            data: "help",
             permission: [ "create", "update", "delete" ]
         },
         {

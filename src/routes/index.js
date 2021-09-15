@@ -4,28 +4,27 @@ const router = express.Router()
 const { errors } = require('../constants')
 
 const {
-    // saveMessageData,
-    // dashboardUse,
     dashboardCompanyAccess,
-    // companyTablesCreate,
-    // companyTablesConfigUpdate,
-    // companyTablesConfigDelete,
-    // companyPreloginCreate,
-    // companyPreloginDelete,
-    // companyCreateLogin
 } = require('../api/controllers/managerControllers')
 
 const {
     saveMessageData,
-    dashboardUse,
+    deleteMessage,
+    updateMessageStatus,
+
     dashboardAccess,
+    dashboardUse,
+
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
+
     companyPreloginCreate,
     companyPreloginDelete,
+
     companyRegisterAccess,
-    companyCreateLogin
+    companyCreateLogin,
+    companyDeleteLogin,
 } = require('../api/controllers/adminControllers')
 
 const {
@@ -49,15 +48,15 @@ router.post('/login', (req, res) => {
     return res.render('templates/authentication/login')
 })
 
+router.get('/auth/register', checkLoginAccess, companyRegisterAccess)
+router.post('/auth/register', checkLoginCreate, companyCreateLogin)
+
 router.get('/recover', (req, res) => {
     return res.render('templates/authentication/recover')
 })
 router.post('/recover', (req, res) => {
     return res.render('templates/authentication/confirmemailaddress', {email: req.body.emailaddress})
 })
-
-router.get('/auth/register', checkLoginAccess, companyRegisterAccess)
-router.post('/auth/register', checkLoginCreate, companyCreateLogin)
 
 router.get('/auth/logout', (req, res) => {
     return res.render('templates/authentication/logout')
@@ -76,6 +75,11 @@ router.post('/f/a/c/dashboard/delete/tables', companyTablesConfigDelete)
 
 router.post('/f/a/c/dashboard/create/companies', companyPreloginCreate)
 router.post('/f/a/c/dashboard/delete/companies', companyPreloginDelete)
+
+router.post('/f/a/c/dashboard/delete/companies-register', companyDeleteLogin)
+
+router.post('/f/a/c/dashboard/delete/message', deleteMessage)
+router.post('/f/a/c/dashboard/update/message-status', updateMessageStatus)
 
 // Errors
 router.get('/error/:code', (req, res) => {

@@ -23,11 +23,10 @@ const createPrelogin = async (data) => {
 
 const requirePrelogin = async (permission) => {
     try {
-        let response
 
         if (!!permission) {
 
-            return response = await adminModelCompanyPrelogin
+            return await adminModelCompanyPrelogin
                 .findOne({
                     permission: permission
                 })
@@ -44,7 +43,7 @@ const requirePrelogin = async (permission) => {
         }
 
 
-        return response = await adminModelCompanyPrelogin
+        return await adminModelCompanyPrelogin
             .find({})
             .sort('-createdAt')
             .lean()

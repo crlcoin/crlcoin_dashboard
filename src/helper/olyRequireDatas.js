@@ -10,13 +10,41 @@ const {
     requirePrelogin,
 } = require("../api/server/adminPrelogin");
 
+const {
+    requireManagers
+} = require('../api/server/adminRequireManagers')
+
+const {
+    requireMessages
+} = require('../api/server/adminMessages')
+
 const onlyRequireDatas = async (req, res, next) => {
     try {
         if (!req.params.page) next()
 
         let params = req.params.page
 
+        if (params === "messages") {
+            let response = await requireMessages()
+
+            if (!!response && response.length > 0) {
+                req.contactMe = response
+            }
+        } else {
+            req.contactMe = false
+        }
+
         if (params === "companies") {
+            let response = await requireManagers()
+
+            if (!!response && response.length > 0) {
+                req.companies = response
+            }
+        } else {
+            req.companies = false
+        }
+
+        if (params === "overview" || params === "companies") {
             let response = await requirePrelogin()
 
             if (!!response && response.length > 0) {
@@ -91,7 +119,7 @@ const checkLoginAccess = async (req, res, next) => {
 const checkLoginCreate = async (req, res, next) => {
     try {
 
-        if (!req.body.permission || !req.body.name || !req.body.emailaddress || !req.body.accpass || !req.body.caccpass || !req.body.terms) {
+        if (!req.body.permission || !req.body.name || !req.body.emailaddress || !req.body.newPassword || !req.body.confirmNewPassword || !req.body.terms) {
             req.permission = false
             if (!!req.body.permission) {
                 req.responsePermission = req.body.permission

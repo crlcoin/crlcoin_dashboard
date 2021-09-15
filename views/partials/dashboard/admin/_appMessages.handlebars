@@ -1,0 +1,90 @@
+{{#if contactMeMessages}}
+
+<div class="col-lg-8">
+
+    <div id="accordion" class="mb-3">
+
+        <div class="card">
+            <div class="card-box m-0 box-shadow">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="inputFindCompany" class="sr-only">Find by name/mail</label>
+                                <input type="search" class="form-control" data-crl="inputFindCompany" filter-type='register' id="inputFindCompany" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5 class="m-0 text-right">
+                            <button class="btn btn-danger" data-crl="deleteAllMessages">
+                                <i class="mdi mdi-trash-can"></i>
+                            </button>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{#each contactMeMessages}}
+
+        <div class="card mb-1 bg-white" filter-type='register' data-crl-filters="{{name}} {{email}}">
+            <div class="card-box m-0" id="heading{{_id}}" value="{{_id}}" data-crl="changeMessageStatus" data-status="{{status}}">
+
+                <div class="float-right custom-control custom-switch">
+                    <input class="custom-control-input" type="checkbox" id="random{{_id}}" data-crl="actionSelectbox" value="@message-{{_id}}">
+                    <label class="custom-control-label" for="random{{_id}}">
+                    </label>
+                </div>
+
+                <a class="collapsed" data-toggle="collapse" href="#collapse{{_id}}" aria-expanded="false">
+
+                    <h4 class="m-0">
+
+                        <span>
+                            <i class="status-circle mdi
+                                {{isEqualAndReturn status "created" "mdi-email-multiple"}}
+                                {{isEqualAndReturn status "opened" "mdi-email-open-multiple-outline"}}
+                                mr-1 text-blue"></i>
+                            {{#if isCompany}}
+                            <i class="mdi mdi-office-building text-success"></i>
+                            {{/if}}
+                            <span class="h5 text-muted">
+                            &nbsp;{{formatDate createdAt "2"}}
+                            </span>
+                        </span>
+
+                    </h4>
+                    <h4 class="m-0 mt-3">
+                        Subject: {{subject}}
+                    </h4>
+                    <h5 class="font-13 text-muted m-0 mt-1">
+                        From: {{name}}<br>
+                        E-mail: {{email}}<br>
+                        Phone: {{phone_number}}
+                    </h5>
+
+                </a>
+
+            </div>
+
+            <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}" data-parent="#accordion" style="">
+                <div class="card-body m-0">
+                    Message: <br>
+                    {{message}}
+                </div>
+                <div class="card-body">
+                    <a href="mailto:{{email}}" class="btn btn-blue">
+                        <i class="mdi mdi-reply"></i> Reply
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+
+</div>
+
+{{/if}}

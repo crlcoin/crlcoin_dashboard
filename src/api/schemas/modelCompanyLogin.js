@@ -7,7 +7,7 @@ module.exports = {
             unique: true,
             require: true
         },
-        companyName: {
+        name: {
             type: String,
             require: true
         },
@@ -15,7 +15,7 @@ module.exports = {
             type: String,
             require: true
         },
-        mpassword: {
+        password: {
             type: String,
             require: true
         },

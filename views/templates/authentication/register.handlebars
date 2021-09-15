@@ -48,26 +48,34 @@
                             </div>
 
                             {{#if message}}
-                                {{#if message.boo}}
-                                    <div class="alert alert-success">
-                                        <i class="mdi mdi-close-circle-multiple"></i>
-                                        {{message.message}}
-                                    </div>
-                                {{else}}
-                                    <div class="alert alert-danger">
-                                        {{message.message}}
-                                    </div>
-                                {{/if}}
+
+                            {{#if message.boo}}
+                            <div class="alert alert-success">
+                                <i class="mdi mdi-close-circle"></i>
+                                {{message.message}}
+                            </div>
+
+                            <div class="text-center b-3">
+                                <a href="/login" class="btn btn-success">
+                                    Go To Login
+                                </a>
+                            </div>
+                            {{else}}
+                            <div class="alert alert-danger">
+                                {{message.message}}
+                            </div>
                             {{/if}}
 
-                            <form action="/auth/register" method="POST">
+                            {{/if}}
+
+                            <form action="/auth/register" method="POST" class="text-white" {{#if message.boo}}style="display:none;"{{/if}}>
 
                                 <input type="hidden" name="permission" value="{{permission}}">
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Company Name</label>
-                                    <input class="form-control" type="text" id="name" name="name"
-                                        required="true" placeholder="Enter company name">
+                                    <input class="form-control" type="text" id="name" name="name" required="true"
+                                        placeholder="Enter company name">
                                 </div>
 
                                 <div class="mb-3">
@@ -78,9 +86,11 @@
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
+                                    (<span class="text-white fw-bold" id="alert-min-digits"> Minimum 8 digits </span>)
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" autocomplete="off"
-                                            name="accpass" required="true" minlength="8" placeholder="Enter your password">
+                                            name="newPassword" required="true" minlength="8"
+                                            placeholder="Enter your password">
                                         <div class="input-group-text" data-password="false">
                                             <span class="password-eye"></span>
                                         </div>
@@ -91,7 +101,8 @@
                                     <label for="cpassword" class="form-label">Confirm Password</label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="cpassword" class="form-control" autocomplete="off"
-                                            name="caccpass" required="true" minlength="8" placeholder="Confirm your password">
+                                            name="confirmNewPassword" required="true" minlength="8"
+                                            placeholder="Confirm your password">
                                         <div class="input-group-text" data-password="false">
                                             <span class="password-eye"></span>
                                         </div>
@@ -101,13 +112,14 @@
                                 <div class="mb-3">
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="terms" id="checkbox-signup" required="true">
-                                            <label class="custom-control-label" for="checkbox-signup">
+                                            <input type="checkbox" class="custom-control-input" name="terms"
+                                                id="checkbox-signup" required="true">
+                                            <a class="custom-control-label text-light" for="checkbox-signup">
                                                 I accept
-                                                <a href="javascript: void(0);" class="text-light">
+                                                <a href="javascript: void(0);" class="text-info fw-bold">
                                                     Terms and Conditions
                                                 </a>
-                                            </label>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -138,22 +150,7 @@
 
     {{!-- <!-- App js --> --}}
     <script src="/page/js/app.min.js"></script>
-
-    <script type="text/javascript">
-        !(function() {
-            let getPassInput = document.getElementById('password')
-            let getConfirmPassInput = document.getElementById('cpassword')
-            let getButtonSubmit = document.getElementById('button-submit')
-
-            getConfirmPassInput.addEventListener('input', function() {
-                if (getConfirmPassInput.value.length > 7 && getConfirmPassInput.value === getPassInput.value) {
-                    getButtonSubmit.removeAttribute('disabled')
-                } else {
-                    getButtonSubmit.setAttribute('disabled', true)
-                }
-            })
-        })()
-    </script>
+    <script src="/page/js/appSrc.js"></script>
 
 </body>
 

@@ -10,7 +10,7 @@ module.exports = {
         if (response && !!navbar && navbar === "true") {
             response = `javascript:void(0);`
         } else if (!!navbar && navbar === "true") {
-            response = `${pageContent.toLowerCase()}`
+            response = `/f/a/c/dashboard/${pageContent.toLowerCase()}`
         }
         if (!!options && options.fn) {
             return options.fn({ response: response })
@@ -56,11 +56,23 @@ module.exports = {
     },
 
     formatDate: (...args) => {
-        args.splice(args.length - 1, 1)
+        args.pop()
+        let response = ""
 
-        let date = args[0].toString().split(" ")
-        let { [1]: Month, [2]: Day, [3]: Year } = date
-        let response = `${Month} ${Day}, ${Year}`
+        if (args[0]) {
+            let date = args[0].toString().split(" ")
+            let { [1]: Month, [2]: Day, [3]: Year } = date
+            response = `${Month} ${Day}, ${Year}`
+        }
+
+        if (args[1]) {
+            let date = args[0].toString().split(" ")
+            let { [4]: fullHour } = date
+            let hour = fullHour.split(":")
+            // let prefix = hour[0] < 12 ? "AM" : "PM"
+
+            response += ` - ${hour[0]} : ${hour[1]}`
+        }
 
         return response ? response : ""
     }

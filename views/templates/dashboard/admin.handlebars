@@ -9,31 +9,38 @@
     <meta content="CRLcoin Technology Group" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     {{!-- <!-- App favicon --> --}}
-    <link rel="shortcut icon" href="{{page.PrincipalURL}}/dash/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{page.URL}}/dash/assets/images/favicon.ico">
 
     {{!-- <!-- App css --> --}}
-    <link href="{{page.PrincipalURL}}/dash/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"
-        id="bs-default-stylesheet" />
-    <link href="{{page.PrincipalURL}}/dash/assets/css/app.min.css" rel="stylesheet" type="text/css"
-        id="app-default-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <link href="{{page.PrincipalURL}}/dash/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css"
-        id="bs-dark-stylesheet" />
-    <link href="{{page.PrincipalURL}}/dash/assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
-        id="app-dark-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
-    <link href="{{page.PrincipalURL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.css" rel="stylesheet"
-        type="text/css" />
-    <link href="{{page.PrincipalURL}}/dash/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet"
-        type="text/css" />
+    <link href="{{page.URL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{page.URL}}/dash/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="{{page.PrincipalURL}}/dash/assets/libs/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js">
+    <link href="{{page.URL}}/dash/assets/libs/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js">
 
     {{!-- icons --}}
-    <link href="{{page.PrincipalURL}}/dash/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{page.URL}}/dash/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     {{!-- Custom --}}
-    <link href="{{page.PrincipalURL}}/dash/assets/custom/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="{{page.URL}}/dash/assets/custom/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="application/json" id='link-conn-reference'>
+        {
+            "dashboardDeleteCompaniesRegister": "{{page.URL}}/f/a/c/dashboard/delete/companies-register",
+            "dashboardCreateCompaniesPrelogin": "{{page.URL}}/f/a/c/dashboard/create/companies",
+            "dashboardDeleteCompaniesPrelogin": "{{page.URL}}/f/a/c/dashboard/delete/companies",
+            "dashboardCreateTablesConfig": "{{page.URL}}/f/a/c/dashboard/create/tables",
+            "dashboardUpdateTablesConfig": "{{page.URL}}/f/a/c/dashboard/update/tables",
+            "dashboardDeleteTablesConfig": "{{page.URL}}/f/a/c/dashboard/delete/tables",
+            "dashboardDeleteMessage": "{{page.URL}}/f/a/c/dashboard/delete/message",
+            "dashboardDeleteMessageStatus": "/f/a/c/dashboard/update/message-status"
+        }
+    </script>
 
 </head>
 
@@ -101,15 +108,6 @@
 
                     <div class="row">
 
-                        {{!-- Charts --}}
-                        {{#if page.Charts}}
-                        {{>dashboard/admin/_appCharts}}
-                        {{/if}}
-
-                    </div>
-
-                    <div class="row">
-
                         {{!-- Companies --}}
                         {{#if page.Companies}}
                         {{>dashboard/admin/_appCompanies}}
@@ -119,13 +117,26 @@
                         {{>dashboard/admin/_appPreloginCompanies}}
                         {{/if}}
 
+                        {{#if companiesData}}
+                        {{>dashboard/admin/_appCompaniesList}}
+                        {{/if}}
+
                     </div>
 
                     <div class="row">
 
-                        {{!-- Tickets --}}
-                        {{#if page.Tickets}}
-                        {{>dashboard/admin/_appTickets}}
+                        {{!-- Help --}}
+                        {{#if page.Help}}
+                        {{>dashboard/admin/_appHelp}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Messages --}}
+                        {{#if page.Messages}}
+                        {{>dashboard/admin/_appMessages}}
                         {{/if}}
 
                     </div>
@@ -135,15 +146,6 @@
                     {{#if page.Account}}
                         {{>dashboard/admin/_managerAccount}}
                     {{/if}}
-                    </div>
-
-                    <div class="row">
-
-                        {{!-- Settings --}}
-                        {{!-- {{#if page.title.Settings}}
-                        {{>dashboard/admin/_managerSettings}}
-                        {{/if}}--}}
-
                     </div>
 
                 </div>
@@ -170,34 +172,34 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     {{!-- <!-- Vendor js --> --}}
-    <script src="{{page.PrincipalURL}}/dash/assets/js/vendor.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/js/vendor.min.js"></script>
 
     {{#if page.Charts}}
         {{!-- <!-- Plugins js --> --}}
-        <script src="{{page.PrincipalURL}}/dash/assets/libs/morris.js06/morris.min.js"></script>
-        <script src="{{page.PrincipalURL}}/dash/assets/libs/raphael/raphael.min.js"></script>
+        <script src="{{page.URL}}/dash/assets/libs/morris.js06/morris.min.js"></script>
+        <script src="{{page.URL}}/dash/assets/libs/raphael/raphael.min.js"></script>
 
         {{!-- <!-- Dashboard init--> --}}
-        <script src="{{page.PrincipalURL}}/dash/assets/js/pages/dashboard-4.init.js"></script>
+        <script src="{{page.URL}}/dash/assets/js/pages/dashboard-4.init.js"></script>
     {{/if}}
 
-    <script src="{{page.PrincipalURL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/js/pages/toastr.init.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/js/pages/toastr.init.js"></script>
+    <script src="{{page.URL}}/dash/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
 
-    <script src="{{page.PrincipalURL}}/dash/assets/libs/moment/min/moment.min.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/libs/x-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+    {{!-- <script src="{{page.URL}}/dash/assets/libs/moment/min/moment.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/libs/x-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
 
-    <script src="{{page.PrincipalURL}}/dash/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script> --}}
 
     {{!-- <!-- App js --> --}}
-    <script src="{{page.PrincipalURL}}/dash/assets/js/app.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/js/app.min.js"></script>
 
-    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/helpers.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/notification.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
-    <script src="{{page.PrincipalURL}}/dash/assets/custom/js/x-forms-editable.init.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/helpers.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/notification.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
+    {{!-- <script src="{{page.URL}}/dash/assets/custom/js/x-forms-editable.init.js"></script> --}}
 
 </body>
 

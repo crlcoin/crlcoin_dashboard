@@ -3,6 +3,7 @@ if (!process.env.NODE_ENV) {
 }
 
 module.exports = {
+    SESSION_SECRET: process.env.SESSI_SECRET,
     CAPTCHA_SECRET: process.env.GGL_SECRET,
     SITE_URL: process.env.SITE_URL,
     PORT: process.env.PORT,

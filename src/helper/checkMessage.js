@@ -38,7 +38,8 @@ const checkMessagesData = async (req, res, next) => {
     }
 
     if (!!req.body.phone) {
-        newObject.phone = (req.body.phone).replace(/[^+0-9]/, '')
+        let phoneNumber = (req.body.phone).replace(/[^+0-9]/, '')
+        newObject.phone_number = phoneNumber
     }
 
     if (!req.body.message) {

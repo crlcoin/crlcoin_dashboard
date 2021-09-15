@@ -1,20 +1,58 @@
 
 let deleteAllPermissionSelected = {
 
-    handlers: [],
+    result: [],
 
     subscribe(fn) {
-        this.handlers.push(fn)
+        this.result.push(fn)
     },
     unsubscribe(fn) {
-        this.handlers = this.handlers
+        this.result = this.result
         .filter(function(subscriber) {
             if (subscriber !== fn)
                 return subscriber
         });
     },
     getAll() {
-        return this.handlers
+        return this.result
+    }
+}
+
+let deleteAllRegisterSelected = {
+
+    result: [],
+
+    subscribe(fn) {
+        this.result.push(fn)
+    },
+    unsubscribe(fn) {
+        this.result = this.result
+        .filter(function(subscriber) {
+            if (subscriber !== fn)
+                return subscriber
+        });
+    },
+    getAll() {
+        return this.result
+    }
+}
+
+let deleteAllMessageSelected = {
+
+    result: [],
+
+    subscribe(fn) {
+        this.result.push(fn)
+    },
+    unsubscribe(fn) {
+        this.result = this.result
+        .filter(function(subscriber) {
+            if (subscriber !== fn)
+                return subscriber
+        });
+    },
+    getAll() {
+        return this.result
     }
 }
 
@@ -23,7 +61,7 @@ const appDashboardClickFunctions = {
     // Tables
     refreshCreateTable: function(element) {
 
-        if (element.getAttribute('data-crl-edit') && !!location) {
+        if (!!element && element.getAttribute('data-crl-edit') && !!location) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "All columns will be reset!",
@@ -173,11 +211,23 @@ const appDashboardClickFunctions = {
     },
 
     actionSelectbox: function(element) {
-        if (element.checked) {
-            deleteAllPermissionSelected.subscribe(element.getAttribute('value'))
+        const attributeValue = element.getAttribute('value')
+
+        if (attributeValue.includes('@crlcoin')) {
+            element.checked
+                ? deleteAllPermissionSelected.subscribe(attributeValue)
+                : deleteAllPermissionSelected.unsubscribe(attributeValue)
+        } else if (attributeValue.includes('@message-')) {
+            let value = attributeValue.replace('@message-', '')
+            element.checked
+                ? deleteAllMessageSelected.subscribe(value)
+                : deleteAllMessageSelected.unsubscribe(value)
         } else {
-            deleteAllPermissionSelected.unsubscribe(element.getAttribute('value'))
+            element.checked
+                ? deleteAllRegisterSelected.subscribe(attributeValue)
+                : deleteAllRegisterSelected.unsubscribe(attributeValue)
         }
+
         return
     }
 
@@ -231,9 +281,11 @@ const appDashboardInputFunctions = {
     inputFindCompany: function(element) {
         let term
         element.addEventListener('input', function() {
-            term = element.value
+            term = element.value.toLowerCase()
+            let filterType = element.getAttribute('filter-type')
 
-            document.querySelectorAll(`[data-crl-filters]`).forEach(function(item) {
+            document.querySelectorAll(`[filter-type=${filterType}]`).forEach(function(item, index) {
+                if (!index) return
                 let itemAttribute = item.getAttribute('data-crl-filters').toLowerCase()
                 if (!!itemAttribute.includes(term)) {
                     item.style.display = "block"

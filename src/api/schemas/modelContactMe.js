@@ -21,6 +21,16 @@ module.exports = {
         phone_number: {
             type: String
         },
+        status: {
+            type: String,
+            require: true,
+            default: "created"
+        },
+        isCompany: {
+            type: Boolean,
+            require: true,
+            default: false
+        },
         createdAt: {
             type: Date,
             default: Date.now

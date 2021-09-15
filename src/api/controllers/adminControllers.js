@@ -17,11 +17,14 @@ const {
 } = require("../server/adminPrelogin");
 
 const {
-    companyLoginCreate
-} = require("../server/adminLogin");
+    registerNewCompany,
+    deleteCompany
+} = require("../server/adminLogins");
 
 const {
-    messageCreate
+    messageCreate,
+    messageDelete,
+    messageUpdate
 } = require("../server/adminMessages");
 
 const saveMessageData = async (req, res) => {
@@ -29,6 +32,37 @@ const saveMessageData = async (req, res) => {
     if (!!req.messageData) {
         await messageCreate(req.messageData)
         return res.status(201).json({ message: "Message send!" })
+    }
+
+    return res.status(500).json({})
+}
+
+const deleteMessage = async (req, res) => {
+
+    let messages = req.body.data
+
+    if (!!messages) {
+        await messageDelete(messages)
+        return res.status(200).json({ message: "Message Deleted" })
+    }
+
+    return res.status(500).json({})
+}
+
+const updateMessageStatus = async (req, res) => {
+
+    let reference = req.body.data
+
+    if (!!reference) {
+        return await messageUpdate(reference)
+            .then((response) => {
+                return res.status(200).json({status: response ? true : false})
+            })
+            .catch((err) => {
+                if (err) {
+                    return res.status(500).json({})
+                }
+            })
     }
 
     return res.status(500).json({})
@@ -56,7 +90,7 @@ const dashboardUse = async (req, res) => {
                 page: {
                     [template]: true,
                     title: template,
-                    PrincipalULR: PrincipalULR
+                    URL: PrincipalULR
                 },
                 tableConfig: response
             })
@@ -83,10 +117,12 @@ const dashboardAccess = (req, res) => {
             page: {
                 [template]: true,
                 title: template,
-                PrincipalULR: PrincipalULR
+                URL: PrincipalULR
             },
             preloginData: req.preloginData,
-            tablesConfig: req.tablesConfig
+            companiesData: req.companies,
+            tablesConfig: req.tablesConfig,
+            contactMeMessages: req.contactMe
         })
     }
 
@@ -252,17 +288,24 @@ const companyCreateLogin = async (req, res) => {
 
         data.type = res.responseType || "manager"
 
-        console.log("DATA ::: ", data)
-
         if (!!data) {
-            let response = await companyLoginCreate(data)
-                .then((result) => {
-                    return res.render('templates/authentication/register', {
-                        message: {
-                            boo: true,
-                            message: `${response.name} created successfully!`
-                        }
-                    })
+            let response = await registerNewCompany(data)
+                .then((response) => {
+                    if (response.status) {
+                        return res.render('templates/authentication/register', {
+                            message: {
+                                boo: true,
+                                message: `${response.companyName} created successfully!`
+                            }
+                        })
+                    } else {
+                        return res.render('templates/authentication/register', {
+                            message: {
+                                boo: false,
+                                message: `${response.message}`
+                            }
+                        })
+                    }
                 })
                 .catch((error) => {
                     if (error) {
@@ -279,17 +322,51 @@ const companyCreateLogin = async (req, res) => {
             return res.redirect('/error/500');
         }
     }
-};
+}
+
+const companyDeleteLogin = async (req, res) => {
+    try {
+        let data = req.body.data || "";
+
+        console.log( "HERERE" )
+
+        if (!!data) {
+            let response = await deleteCompany(data)
+                .then((result) => {
+                    return res.status(200).json({});
+                })
+                .catch((error) => {
+                    if (error) {
+                        return res.status(500);
+                    }
+                });
+
+            return response
+        } else {
+            return res.status(500);
+        }
+    } catch (error) {
+        console.log("companyDeleteLogin", error)
+        return res.redirect('/error/500')
+    }
+}
 
 module.exports = {
     saveMessageData,
+    deleteMessage,
+    updateMessageStatus,
+
     dashboardUse,
     dashboardAccess,
+
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
+
     companyPreloginCreate,
     companyPreloginDelete,
+
     companyRegisterAccess,
-    companyCreateLogin
+    companyCreateLogin,
+    companyDeleteLogin
 };

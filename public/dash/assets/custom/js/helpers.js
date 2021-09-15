@@ -1,5 +1,5 @@
 
-const helpers = {
+helpers = {
 
     randomValues: "Z1mYr8MNOXsEFGt2uvHIJKLwno3p0abhi4UVWjefABCPQRSTDx9q5gkyl6cdz7",
 

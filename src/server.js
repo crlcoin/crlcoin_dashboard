@@ -1,14 +1,19 @@
-const { PORT } = require('./config')
+const { PORT, SESSION_SECRET } = require('./config')
 const express = require('express')
 const handlebars = require('express-handlebars')
 const path = require('path')
+const session = require('express-session')
 const app = express()
 const routes = require('./routes')
 const handlebarsHelpers = require('./helper/handlebars')
 
-// Redirect
+// Session
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+}))
 
-// Config
 app.use( express.json() )
 app.use( express.urlencoded({ extended: false }) )
 app.use( express.static( path.join(__dirname, '../public/') ) )
@@ -19,7 +24,8 @@ app.engine( 'handlebars', handlebars({
 }) )
 app.set( 'view engine', 'handlebars' )
 
-// Routes
 app.use(routes)
 
-app.listen(PORT, () => { console.info( `Server ON ::: ${PORT}` ) })
+app.listen(PORT, () => {
+    console.log( `Server ON ::: ${PORT}` )
+})

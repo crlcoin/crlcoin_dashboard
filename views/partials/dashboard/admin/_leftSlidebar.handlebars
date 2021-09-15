@@ -11,7 +11,7 @@
 
                 {{#currentPage page.title "Overview" "true"}}
                     <li data-crl="appTables">
-                        <a href="/f/a/c/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="ti-layout-grid3"></i>
                             <span>Overview</span>
                         </a>
@@ -20,36 +20,27 @@
 
                 {{#currentPage page.title "Tables" "true"}}
                     <li data-crl="appTables">
-                        <a href="/f/a/c/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="mdi mdi-file-table-box-multiple"></i>
                             <span>Tables</span>
                         </a>
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Charts" "true"}}
-                    <li data-crl="appCharts">
-                        <a href="/f/a/c/dashboard/{{response}}">
-                            <i class="mdi mdi-chart-arc"></i>
-                            <span>Charts</span>
-                        </a>
-                    </li>
-                {{/currentPage}}
-
                 {{#currentPage page.title "Companies" "true"}}
                     <li data-crl="appCompanies">
-                        <a href="/f/a/c/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="mdi mdi-office-building"></i>
                             <span> Companies </span>
                         </a>
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Tickets" "true"}}
+                {{#currentPage page.title "Help" "true"}}
                     <li data-crl="appTickets">
-                        <a href="/f/a/c/dashboard/{{response}}">
-                            <i data-feather="clipboard"></i>
-                            <span> Tickets </span>
+                        <a href="{{response}}">
+                            <i class="mdi mdi-help-circle"></i>
+                            <span> Help </span>
                         </a>
                     </li>
                 {{/currentPage}}
@@ -60,7 +51,7 @@
 
                 {{#currentPage page.title "Messages" "true"}}
                     <li data-crl="landingPageMessages">
-                        <a href="/f/a/c/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="mdi mdi-message-reply-text"></i>
                             <span> Messages </span>
                         </a>
@@ -73,21 +64,12 @@
 
                 {{#currentPage page.title "Account" "true"}}
                     <li data-crl="managerAccount">
-                        <a href="/f/a/c/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="fe-user"></i>
                             <span> My Account </span>
                         </a>
                     </li>
                 {{/currentPage}}
-
-                {{!-- {{#currentPage page.title "Settings" "true"}}
-                    <li data-crl="managerSettings">
-                        <a href="/f/a/c/dashboard/{{response}}">
-                            <i class="fe-settings"></i>
-                            <span> Settings </span>
-                        </a>
-                    </li>
-                {{/currentPage}} --}}
 
                 <li data-crl="managerLogout">
                     <a href="/logout">
