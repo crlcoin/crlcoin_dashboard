@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const { errors } = require('../constants')
+const {
+    home,
+    errorPage
+} = require('../api/controllers/landingPage')
 
 const {
     dashboardCompanyAccess,
@@ -37,7 +40,7 @@ const {
     checkMessagesData
 } = require('../helper/checkMessage')
 
-router.get('/', (req, res) => { return res.render('templates/page/home') })
+router.get('/', home)
 router.post('/contact', checkMessagesData, saveMessageData)
 
 // authentication
@@ -82,18 +85,7 @@ router.post('/f/a/c/dashboard/delete/message', deleteMessage)
 router.post('/f/a/c/dashboard/update/message-status', updateMessageStatus)
 
 // Errors
-router.get('/error/:code', (req, res) => {
-    let response
-    if (!!req.params.code && !!errors[req.params.code]) {
-        response = errors[req.params.code]
-    } else {
-        response = errors['404']
-    }
-    return res.status(response.status).render('templates/error/error', {code: response.status, message: response.message})
-})
-
-router.all('*', (req, res) => {
-    return res.status(404).render('templates/error/error', {code: errors['404'].status, message: errors['404'].message})
-})
+router.get('/error/:code', errorPage)
+router.all('*', errorPage)
 
 module.exports = router
