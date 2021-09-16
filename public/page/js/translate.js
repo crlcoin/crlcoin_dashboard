@@ -19,9 +19,14 @@ function translate(lang) {
         for (const part of form) {
 
             let partValue = part.getAttribute('data-translate-form-part')
+            let label = part.querySelector('[data-translate-form-label]')
+            let input = part.querySelector('[data-translate-form-input]')
 
-            part.querySelector('[data-translate-form-label]').innerText = currentWords[partValue].title
-            part.querySelector('[data-translate-form-input]').placeholder = currentWords[partValue].placeholder
+            if (!!label)
+                label.innerText = currentWords[partValue].title
+
+            if (!!input)
+                input.placeholder = currentWords[partValue].placeholder
 
         }
 
