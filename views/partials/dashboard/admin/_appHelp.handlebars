@@ -1,6 +1,97 @@
-
 <div class="col-12 order-1">
 
-    
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="text-center">
+                <i class="h1 mdi mdi-comment-multiple-outline text-muted"></i>
+                <h3 class="mb-3">Frequently Asked Questions</h3>
+                <button class="btn btn-primary waves-effect waves-light mt-2 collapsed" type="button"
+                    data-toggle="collapse" data-target="#collapseNewHelper" aria-expanded="false"
+                    aria-controls="collapseNewHelper">
+                    <i class="mdi mdi-book-plus-multiple-outline mr-1"></i>
+                    Add new question
+                </button>
+            </div>
+        </div>
+
+        <div class="col-11 col-md-10 col-lg-9 pt-2">
+            <div class="collapse card" id="collapseNewHelper">
+                <form action="/f/a/c/dashboard/create/helper" method="POST" class="card-body bg-pattern bg-dark rounded">
+
+                    <div class="form-group mb-3">
+                        <label for="inputQuestion" class="text-light">Question</label>
+                        <input type="text" id="inputQuestion" name="question" class="form-control">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="response-question-textarea" class="text-light">Response</label>
+                        <textarea class="form-control" name="response" id="response-question-textarea" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success float-right m-1">
+                        Save question
+                    </button>
+                    <button class="btn btn-danger waves-effect waves-light collapsed float-right m-1" type="button"
+                        data-toggle="collapse" data-target="#collapseNewHelper" aria-expanded="false"
+                        aria-controls="collapseNewHelper">
+                        Cancel
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3 mb-5">
+
+        <div class="col-11 col-md-10 col-lg-9">
+            <div class="accordion custom-accordion shadow-lg" id="custom-accordion-one">
+
+                {{!-- Question/Answer --}}
+                {{#each helpers}}
+                <form action="/f/a/c/dashboard/update/helper" method="POST" class="card mb-0">
+                    <input type="hidden" name="reference" value="{{_id}}">
+                    <div class="card-header bg-primary">
+
+                        <a class="m-0 position-relative text-light custom-accordion-title d-block collapsed" 
+                            id="heading{{_id}}" data-toggle="collapse" href="#collapse{{_id}}" aria-expanded="true"
+                            aria-controls="collapse{{_id}}">
+                            <i class="mdi mdi-help-network"></i>
+                            &nbsp;
+                            {{question}}
+                            <i class="mdi mdi-chevron-down accordion-arrow"></i>
+                        </a>
+
+                    </div>
+
+                    <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}"
+                        data-parent="#custom-accordion-one">
+
+                        <input type="hidden" value="{{question}}" data-input-reference="title-{{_id}}" name="question">
+                        <div class="card-body py-1" contenteditable="true" data-reference="title-{{_id}}" data-crl="helperTitle">
+                            {{question}}
+                        </div>
+
+                        <input type="hidden" value="{{answer}}" name="response" data-input-reference="response-{{_id}}">
+                        <div contenteditable="true" data-crl="helperResponse" data-reference="response-{{_id}}" class="card-body">
+                            {{answer}}
+                        </div>
+
+                        <div class="card-body">
+                            <button type="button" class="btn btn-danger mr-1" data-crl="deleteHelper" value="{{_id}}">
+                                <i class="mdi mdi-trash-can"></i>
+                                Delete
+                            </button>
+                            <button type="submit" disabled="true" data-submit-reference="response-{{_id}}" class="btn btn-success mr-1">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                {{/each}}
+
+            </div>
+        </div>
+    </div>
 
 </div>

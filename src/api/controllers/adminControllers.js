@@ -27,6 +27,42 @@ const {
     messageUpdate
 } = require("../server/adminMessages");
 
+const {
+    registerNewHelper,
+    updateHelper,
+    deleteHelper
+} = require('../server/adminHelpers')
+
+const newHelper = async (req, res) => {
+
+    if (!!req.body) {
+        await registerNewHelper(req.body)
+        return res.redirect('/f/a/c/dashboard/help')
+    }
+
+    return res.redirect('/error/500')
+}
+
+const updateHelp = async (req, res) => {
+
+    if (!!req.body) {
+        await updateHelper(req.body)
+        return res.redirect('/f/a/c/dashboard/help')
+    }
+
+    return res.redirect('/error/500')
+}
+
+const deleteHelp = async (req, res) => {
+
+    if (!!req.body) {
+        await deleteHelper(req.body)
+        return res.status(200).json({status: true})
+    }
+
+    return res.redirect('/error/500')
+}
+
 const saveMessageData = async (req, res) => {
 
     if (!!req.messageData) {
@@ -122,7 +158,8 @@ const dashboardAccess = (req, res) => {
             preloginData: req.preloginData,
             companiesData: req.companies,
             tablesConfig: req.tablesConfig,
-            contactMeMessages: req.contactMe
+            contactMeMessages: req.contactMe,
+            helpers: req.helpers
         })
     }
 
@@ -365,5 +402,9 @@ module.exports = {
 
     companyRegisterAccess,
     companyCreateLogin,
-    companyDeleteLogin
+    companyDeleteLogin,
+
+    newHelper,
+    updateHelp,
+    deleteHelp
 };
