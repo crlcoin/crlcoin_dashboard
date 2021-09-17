@@ -28,6 +28,10 @@ const {
     companyRegisterAccess,
     companyCreateLogin,
     companyDeleteLogin,
+
+    newHelper,
+    updateHelp,
+    deleteHelp
 } = require('../api/controllers/adminControllers')
 
 const {
@@ -78,6 +82,10 @@ router.post('/f/a/c/dashboard/delete/tables', companyTablesConfigDelete)
 
 router.post('/f/a/c/dashboard/create/companies', companyPreloginCreate)
 router.post('/f/a/c/dashboard/delete/companies', companyPreloginDelete)
+
+router.post('/f/a/c/dashboard/create/helper', newHelper)
+router.post('/f/a/c/dashboard/update/helper', updateHelp)
+router.post('/f/a/c/dashboard/delete/helper', deleteHelp)
 
 router.post('/f/a/c/dashboard/delete/companies-register', companyDeleteLogin)
 

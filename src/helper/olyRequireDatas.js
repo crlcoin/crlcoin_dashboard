@@ -18,6 +18,10 @@ const {
     requireMessages
 } = require('../api/server/adminMessages')
 
+const {
+    requireHelpers
+} = require('../api/server/adminHelpers')
+
 const onlyRequireDatas = async (req, res, next) => {
     try {
         if (!req.params.page) next()
@@ -42,6 +46,16 @@ const onlyRequireDatas = async (req, res, next) => {
             }
         } else {
             req.companies = false
+        }
+
+        if (params === "help") {
+            let response = await requireHelpers()
+
+            if (!!response && response.length > 0) {
+                req.helpers = response
+            }
+        } else {
+            req.helpers = false
         }
 
         if (params === "overview" || params === "companies") {

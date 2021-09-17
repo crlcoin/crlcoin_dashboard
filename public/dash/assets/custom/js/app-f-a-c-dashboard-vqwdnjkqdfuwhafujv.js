@@ -294,6 +294,26 @@ const appDashboardInputFunctions = {
                 }
             })
         });
+    },
+
+    helperTitle: function(element) {
+        let reference = element.getAttribute('data-reference')
+        let inputReference = document.querySelector(`[data-input-reference=${reference}]`)
+        let submitButton = document.querySelector(`[data-submit-reference=${reference.replace('title', 'response')}]`)
+        element.addEventListener('input', function() {
+            inputReference.value = element.innerText
+            submitButton.removeAttribute('disabled')
+        })
+    },
+
+    helperResponse: function(element) {
+        let reference = element.getAttribute('data-reference')
+        let inputReference = document.querySelector(`[data-input-reference=${reference}]`)
+        let submitButton = document.querySelector(`[data-submit-reference=${reference}]`)
+        element.addEventListener('input', function() {
+            inputReference.value = element.innerText
+            submitButton.removeAttribute('disabled')
+        })
     }
 
 }

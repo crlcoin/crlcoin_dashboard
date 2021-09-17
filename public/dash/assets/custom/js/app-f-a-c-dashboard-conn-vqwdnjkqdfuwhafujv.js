@@ -6,7 +6,8 @@ const {
     dashboardUpdateTablesConfig,
     dashboardDeleteTablesConfig,
     dashboardDeleteMessage,
-    dashboardDeleteMessageStatus
+    dashboardDeleteMessageStatus,
+    dashboardDeleteHelper
 } = JSON.parse(document.getElementById('link-conn-reference').innerText)
 
 const saveDatas = {
@@ -233,6 +234,33 @@ const removeDatas = {
                 }
             });
     },
+
+    helpers: async function (data) {
+        if (!data) {
+            return notification({ message: "No data selected to remove" }, "warning");
+        }
+
+        await axios
+            .post( dashboardDeleteHelper, {
+                data: data,
+            })
+            .then(function (result) {
+                if (!!location) {
+                    notification({ title: "Deleted!" }, "success-2");
+                    let i = setInterval(function () {
+                        clearInterval(i);
+                        location.reload();
+                    }, 2e3);
+                } else {
+                    notification({ title: "Deleted!" }, "success");
+                }
+            })
+            .catch(function (e) {
+                if (e) {
+                    notification({ message: e.message }, "error");
+                }
+            });
+    },
 };
 
 const appDashboardConnectFunctions = {
@@ -381,6 +409,28 @@ const appDashboardConnectFunctions = {
                 }
             });
         }
+
+        return;
+    },
+
+    deleteHelper: function (element) {
+        const reference = element.getAttribute('value')
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(function (t) {
+            if (t.value && !t.dismiss) {
+                removeDatas.helpers(reference);
+                t.value &&
+                    Swal.fire("Deleted!", "Your datas has been deleted.", "success");
+            }
+        });
 
         return;
     },
