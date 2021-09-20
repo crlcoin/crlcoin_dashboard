@@ -9,29 +9,29 @@
 
                 <li class="menu-title">App</li>
 
-                {{#currentPage page.title "Overview" "true"}}
+                {{#currentPage page.title "Overview" "true" "true"}}
                     <li data-crl="appTables">
-                        <a href="/acc/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="ti-layout-grid3"></i>
                             <span>Overview</span>
                         </a>
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Tables" "true"}}
+                {{#currentPage page.title "Tables" "true"  "true"}}
                     <li data-crl="appTables">
-                        <a href="/acc/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="mdi mdi-file-table-box-multiple"></i>
                             <span>Tables</span>
                         </a>
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Tickets" "true"}}
+                {{#currentPage page.title "Help" "true"  "true"}}
                     <li data-crl="appTickets">
-                        <a href="/acc/dashboard/{{response}}">
-                            <i data-feather="clipboard"></i>
-                            <span> Tickets </span>
+                        <a href="{{response}}">
+                            <i class="mdi mdi-help-circle"></i>
+                            <span> Help </span>
                         </a>
                     </li>
                 {{/currentPage}}
@@ -40,9 +40,9 @@
 
                 <li class="menu-title">Manager</li>
 
-                {{#currentPage page.title "Account" "true"}}
+                {{#currentPage page.title "Account" "true"  "true"}}
                     <li data-crl="managerAccount">
-                        <a href="/acc/dashboard/{{response}}">
+                        <a href="{{response}}">
                             <i class="fe-user"></i>
                             <span> My Account </span>
                         </a>

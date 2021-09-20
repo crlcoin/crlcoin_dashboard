@@ -9,7 +9,7 @@
     <meta content="CRLcoin Technology Group" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     {{!-- <!-- App favicon --> --}}
-    <link rel="shortcut icon" href="/page/assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="/page/images/favicon.ico" />
 
     {{!-- <!-- App css --> --}}
     <link href="/page/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -90,9 +90,9 @@
 
                     <div class="row">
 
-                        {{!-- Tickets --}}
-                        {{#if page.Tickets}}
-                        {{>dashboard/manager/_tickets}}
+                        {{!-- Help --}}
+                        {{#if page.Help}}
+                        {{>dashboard/manager/_appHelp}}
                         {{/if}}
 
                     </div>
@@ -135,7 +135,7 @@
     <script src="/page/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
 
     {{!-- <!-- App js --> --}}
-    <script src="{{page.PrincipalURL}}/page/assets/js/app.min.js"></script>
+    <script src="{{page.URL}}/page/assets/js/app.min.js"></script>
 
 </body>
 

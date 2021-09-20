@@ -98,9 +98,7 @@ const accessAccount = async (data) => {
 
         if (!!user && appCheckPasswardHash(data.password, user.password)) {
 
-            
-
-            return user
+            return filterLoginData(user)
 
         } else {
             return false
@@ -136,9 +134,7 @@ const appCheckPasswardHash = (pass, hash) => {
     try {
         if (!!pass && pass.length > 7) {
 
-            const compare = bcrypt.compareSync(pass, hash)
-
-            return compare
+            return bcrypt.compareSync(pass, hash)
 
         } else {
             return false
@@ -153,9 +149,7 @@ const appCheckPassward = (password, confirmPassword) => {
     try {
         if (password === confirmPassword && password.length > 7) {
 
-            const hash = bcrypt.hashSync(password, 14)
-
-            return hash
+            return bcrypt.hashSync(password, 14)
 
         } else {
             return false
@@ -200,8 +194,31 @@ const newObject = async (data) => {
 
 }
 
+const filterLoginData = (data) => {
+    let { type, app_id, name, email } = data
+
+    let splitEmail = email.split('@')
+
+    let firstPart = splitEmail[0]
+    let secondPart = splitEmail[1].split('.')
+    let finalPart = secondPart.slice(1)
+
+    secondPart = secondPart[0]
+
+    if (finalPart.length > 1)
+        finalPart[0] = '***'
+
+    finalPart = finalPart.join('.')
+
+    let newEmail = `${firstPart[0] || ''}${firstPart[1] || ''}${firstPart[2] || ''}****`
+        newEmail += `@${secondPart[0] || ''}****.${finalPart}`
+
+    return { type, app_id, name, email: newEmail }
+}
+
 module.exports = {
     checkExistence,
     registerNewCompany,
-    deleteCompany
+    deleteCompany,
+    accessAccount
 }

@@ -9,7 +9,7 @@
 
                 <li class="menu-title">App</li>
 
-                {{#currentPage page.title "Overview" "true"}}
+                {{#currentPage page.title "Overview" "true" 0}}
                     <li data-crl="appTables">
                         <a href="{{response}}">
                             <i class="ti-layout-grid3"></i>
@@ -18,7 +18,7 @@
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Tables" "true"}}
+                {{#currentPage page.title "Tables" "true" 0}}
                     <li data-crl="appTables">
                         <a href="{{response}}">
                             <i class="mdi mdi-file-table-box-multiple"></i>
@@ -27,7 +27,7 @@
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Companies" "true"}}
+                {{#currentPage page.title "Companies" "true" 0}}
                     <li data-crl="appCompanies">
                         <a href="{{response}}">
                             <i class="mdi mdi-office-building"></i>
@@ -36,7 +36,7 @@
                     </li>
                 {{/currentPage}}
 
-                {{#currentPage page.title "Help" "true"}}
+                {{#currentPage page.title "Help" "true" 0}}
                     <li data-crl="appTickets">
                         <a href="{{response}}">
                             <i class="mdi mdi-help-circle"></i>
@@ -49,7 +49,7 @@
 
                 <li class="menu-title">Landing Page</li>
 
-                {{#currentPage page.title "Messages" "true"}}
+                {{#currentPage page.title "Messages" "true" 0}}
                     <li data-crl="landingPageMessages">
                         <a href="{{response}}">
                             <i class="mdi mdi-message-reply-text"></i>
@@ -62,7 +62,7 @@
 
                 <li class="menu-title">Manager</li>
 
-                {{#currentPage page.title "Account" "true"}}
+                {{#currentPage page.title "Account" "true" 0}}
                     <li data-crl="managerAccount">
                         <a href="{{response}}">
                             <i class="fe-user"></i>

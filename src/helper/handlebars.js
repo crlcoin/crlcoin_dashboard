@@ -1,6 +1,6 @@
 module.exports = {
 
-    currentPage: (page, pageContent, navbar, options) => {
+    currentPage: (page, pageContent, navbar, isAcc, options) => {
         let response = false
 
         if (isNaN(page) && isNaN(pageContent) && page == pageContent) {
@@ -10,7 +10,10 @@ module.exports = {
         if (response && !!navbar && navbar === "true") {
             response = `javascript:void(0);`
         } else if (!!navbar && navbar === "true") {
-            response = `/f/a/c/dashboard/${pageContent.toLowerCase()}`
+            if (!!isAcc)
+                response = `/acc/dashboard/${pageContent.toLowerCase()}`
+            else
+                response = `/f/a/c/dashboard/${pageContent.toLowerCase()}`
         }
         if (!!options && options.fn) {
             return options.fn({ response: response })

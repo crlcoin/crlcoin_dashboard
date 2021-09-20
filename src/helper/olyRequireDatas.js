@@ -91,7 +91,7 @@ const onlyRequireDatas = async (req, res, next) => {
     }
 };
 
-const checkLoginAccess = async (req, res, next) => {
+const checkRegisterAccess = async (req, res, next) => {
     try {
 
         if (!req.query.refLink) return res.redirect('/error/404')
@@ -130,7 +130,7 @@ const checkLoginAccess = async (req, res, next) => {
     }
 }
 
-const checkLoginCreate = async (req, res, next) => {
+const checkRegisterCreate = async (req, res, next) => {
     try {
 
         if (!req.body.permission || !req.body.name || !req.body.emailaddress || !req.body.newPassword || !req.body.confirmNewPassword || !req.body.terms) {
@@ -212,6 +212,6 @@ const checkLoginCreate = async (req, res, next) => {
 
 module.exports = {
     onlyRequireDatas,
-    checkLoginAccess,
-    checkLoginCreate
+    checkRegisterAccess,
+    checkRegisterCreate
 }

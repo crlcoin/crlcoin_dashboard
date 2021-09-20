@@ -46,6 +46,12 @@
 
                                 <form action="/login" method="POST">
 
+                                    {{#if error}}
+                                    <div class="alert alert-danger mb-3 fw-bold">
+                                        {{error}}
+                                    </div>
+                                    {{/if}}
+
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Email address</label>
                                         <input class="form-control" type="email" id="emailaddress" name="emailaddress" autocomplete="off" required="true" placeholder="Enter your email">

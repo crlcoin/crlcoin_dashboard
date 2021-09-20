@@ -7,6 +7,8 @@ const {
 } = require('../api/controllers/landingPage')
 
 const {
+    pageLoginAccess,
+    accountCheckLoginAccess,
     dashboardCompanyAccess,
 } = require('../api/controllers/managerControllers')
 
@@ -36,27 +38,28 @@ const {
 
 const {
     onlyRequireDatas,
-    checkLoginAccess,
-    checkLoginCreate
+    checkRegisterAccess,
+    checkRegisterCreate
 } = require('../helper/olyRequireDatas')
 
 const {
     checkMessagesData
 } = require('../helper/checkMessage')
 
+const {
+    adminCredentials,
+    managerCredentials
+} = require('../helper/checkAccessCredentials')
+
 router.get('/', home)
 router.post('/contact', checkMessagesData, saveMessageData)
 
 // authentication
-router.get('/login', (req, res) => {
-    return res.render('templates/authentication/login')
-})
-router.post('/login', (req, res) => {
-    return res.render('templates/authentication/login')
-})
+router.get('/login', pageLoginAccess)
+router.post('/login', accountCheckLoginAccess)
 
-router.get('/auth/register', checkLoginAccess, companyRegisterAccess)
-router.post('/auth/register', checkLoginCreate, companyCreateLogin)
+router.get('/auth/register', checkRegisterAccess, companyRegisterAccess)
+router.post('/auth/register', checkRegisterCreate, companyCreateLogin)
 
 router.get('/recover', (req, res) => {
     return res.render('templates/authentication/recover')
@@ -70,12 +73,12 @@ router.get('/auth/logout', (req, res) => {
 })
 
 // Manager
-router.get('/acc/dashboard/:page', dashboardCompanyAccess)
+router.get('/acc/dashboard/:page', managerCredentials, dashboardCompanyAccess)
 
 // Admin
-router.get('/f/a/c/dashboard/:page', onlyRequireDatas, dashboardAccess)
-
+router.get('/f/a/c/dashboard/:page', adminCredentials, onlyRequireDatas, dashboardAccess)
 router.get('/f/a/e/dashboard/use/:page', dashboardUse)
+
 router.post('/f/a/c/dashboard/create/tables', companyTablesCreate)
 router.post('/f/a/c/dashboard/update/tables', companyTablesConfigUpdate)
 router.post('/f/a/c/dashboard/delete/tables', companyTablesConfigDelete)
