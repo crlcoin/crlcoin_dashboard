@@ -245,13 +245,20 @@ const companyPreloginCreate = async (req, res) => {
         let data = req.body.data || "";
 
         if (!!data) {
-            let response = await createPrelogin(data);
+            return await createPrelogin(data)
+                .then((result) => {
 
-            if (response) {
-                return res.status(200).json({});
-            } else {
-                return res.status(500);
-            }
+                    if (result) {
+                        return res.status(201).json({});
+                    } else {
+                        return res.status(500).json({})
+                    }
+
+                })
+                .catch((err) => {
+                    return res.status(500);
+                })
+
         } else {
             return res.status(500);
         }

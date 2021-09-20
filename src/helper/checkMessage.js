@@ -1,12 +1,8 @@
-const fetch = require('node-fetch')
-
 const {
     listOfAllowedCharactersEmail,
 } = require('../constants')
 
-const {
-    CAPTCHA_SECRET
-} = require('../config')
+const checkReChaptcha = require('./checkReCAPTCHA')
 
 function checkEmail(email) {
     email = email.replace( listOfAllowedCharactersEmail, '')
@@ -52,27 +48,15 @@ const checkMessagesData = async (req, res, next) => {
         return res.status(400).json({ message: "'reCAPTCHA' is required." })
     }
 
-    await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${CAPTCHA_SECRET}&response=${req.body.recaptcha}`, {
-            method: 'POST'
-        })
-        .then((response) => {
-            return response.json()
-        })
-        .then((response) => {
-            if (response.success === true) {
-                req.messageData = newObject
-                return next()
-            } else if (response.success = false) {
-                return res.status(400).json({ message: "'reCAPTCHA' failed verification." })
-            } else {
-                return res.status(500).json({})
-            }
-        })
-        .catch((err) => {
-            if (err) {
-                return res.status(500).json({})
-            }
-        })
+    let captcha = await checkReChaptcha(req.body.recaptcha)
+
+    if (captcha) {
+        req.messageData = newObject
+        return next()
+    } else {
+        return res.status(400).json({ message: "Captcha Error" })
+    }
+
 }
 
 module.exports = {

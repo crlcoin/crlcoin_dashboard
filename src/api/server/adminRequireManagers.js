@@ -14,7 +14,7 @@ const requireManagers = async (data) => {
                 .find({})
                 .lean()
                 .then((result) => {
-                    result = result.filter(companyData => removePassword(companyData))
+                    result = result.filter(companyData => removeFields(companyData))
                     return result
                 })
                 .catch((error) => {
@@ -31,6 +31,7 @@ const requireManagers = async (data) => {
                 .find({})
                 .lean()
                 .then((result) => {
+                    result = result.filter(companyData => removeFields(companyData))
                     return result
                 })
                 .catach((error) => {
@@ -49,7 +50,7 @@ const requireManagers = async (data) => {
 
 }
 
-const removePassword = (data) => {
+const removeFields = (data) => {
     delete data["password"]
     return data
 }

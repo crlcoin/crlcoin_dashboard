@@ -18,7 +18,7 @@
             getAlertMinDigits.classList.remove('text-success')
             getAlertMinDigits.classList.add('text-danger')
         }
-        if (passValue.length > 7 && confirmPassValue === passValue) {
+        if (passLength > 7 && confirmPassValue === passValue) {
             getButtonSubmit.removeAttribute('disabled')
         } else {
             getButtonSubmit.setAttribute('disabled', true)

@@ -2,18 +2,17 @@ const adminModelCompanyPrelogin = require("../model/Admin/registerModelCompanyPr
 
 const createPrelogin = async (data) => {
   try {
-        let response = await adminModelCompanyPrelogin
+        return await adminModelCompanyPrelogin
             .create(data)
             .then((result) => {
-                return result.name;
+                return true
             })
             .catch((error) => {
                 if (error) {
-                    throw "Controllers Error Company 001";
+                    return false
                 }
-            });
+            })
 
-        return response;
     } catch (e) {
         if (e) {
             return false;
@@ -41,7 +40,6 @@ const requirePrelogin = async (permission) => {
                 })
 
         }
-
 
         return await adminModelCompanyPrelogin
             .find({})

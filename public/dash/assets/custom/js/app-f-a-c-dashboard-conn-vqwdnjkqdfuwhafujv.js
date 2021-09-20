@@ -63,7 +63,8 @@ const saveDatas = {
             })
             .catch(function (e) {
                 if (e) {
-                    notification({ message: e.message }, "error");
+                    console.log(e)
+                    notification({ message: `${e.message}\nLikely error: This email already exists in the database` }, "error");
                 }
             });
     },

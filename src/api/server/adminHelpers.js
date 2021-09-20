@@ -66,7 +66,7 @@ const updateHelper = async (data) =>{
     }
 }
 
-const requireHelpers = async (id) =>{
+const requireHelpers = async () =>{
     try {
 
         let response = await adminModelHelpers

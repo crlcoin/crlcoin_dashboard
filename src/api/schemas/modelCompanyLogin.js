@@ -13,6 +13,7 @@ module.exports = {
         },
         email: {
             type: String,
+            unique: true,
             require: true
         },
         password: {
@@ -23,6 +24,12 @@ module.exports = {
             type: String,
             require: true,
             default: "manager"
+        },
+        accCode: {
+            type: String
+        },
+        codeExpire: {
+            type: String
         },
         phone_number: {
             type: String
