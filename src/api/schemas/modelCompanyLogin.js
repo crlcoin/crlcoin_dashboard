@@ -18,21 +18,24 @@ module.exports = {
         },
         password: {
             type: String,
-            require: true
+            require: true,
+            select: false
         },
         type: {
             type: String,
             require: true,
             default: "manager"
         },
-        accCode: {
-            type: String
+        resetCode: {
+            type: String,
+            select: false
         },
         codeExpire: {
-            type: String
+            type: String,
+            select: false
         },
         phone_number: {
-            type: String
+            type: String,
         },
         createdAt: {
             type: Date,

@@ -17,7 +17,7 @@
     "dotenv": "^10.0.0"
   },
   "scripts": {
-    "test": "nodemon test/index.js",
+    "test": "node test/index.js",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },

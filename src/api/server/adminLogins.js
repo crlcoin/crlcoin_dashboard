@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs')
+const crypto = require('crypto')
+const mailer = require('../../modules/mailer')
 const adminModelLogin = require("../model/Admin/registerModelCompanyLogin")
 
 const {
     deletePrelogin
 } = require('./adminPrelogin')
 
-const {
-    permissionCaracterListSimple
-} = require('../../constants')
+const constants = require('../../constants')
 
 const {
     adminEmail
@@ -96,7 +96,7 @@ const accessAccount = async (data) => {
                 return false
             })
 
-        if (!!user && appCheckPasswardHash(data.password, user.password)) {
+        if (!!user && appCheckPasswordHash(data.password, user.password)) {
 
             return filterLoginData(user)
 
@@ -113,24 +113,53 @@ const accessAccount = async (data) => {
 
 }
 
-const updatePassword = async (data) => {
+const resetPassword = async (data) => {
     try {
-        
-    } catch (error) {
-        if (err) {
+
+        const user = await adminModelLogin.findOne({email: data})
+
+        if (!user)
             return false
-        }
+
+        const token = crypto.randomBytes(21).toString('hex')
+
+        const now = new Date()
+        now.setHours(now.getHours() + 1)
+
+        await adminModelLogin.findByIdAndUpdate(user._id, {
+            '$set': {
+                resetCode: token,
+                codeExpire: now
+            }
+        })
+
+        mailer.sendMail({
+            to: data,
+            from: 'no-reply@crlcoin.com.br',
+            subject: 'Reset Password',
+            template: 'recoverpass',
+            context: { token }
+        }, (err) => {
+            if (err)
+                console.log(err)
+
+            return true
+        })
+
+    } catch (error) {
+        if (error)
+            return false
     }
 }
 
 const appRandomIdGenerator = (name) => {
     let result = ""
-    result = name.replace(permissionCaracterListSimple, "")
+    result = name.replace(constants.permissionCaracterListSimple, "")
     result += Date.now()
     return result
 }
 
-const appCheckPasswardHash = (pass, hash) => {
+const appCheckPasswordHash = (pass, hash) => {
     try {
         if (!!pass && pass.length > 7) {
 
@@ -145,7 +174,7 @@ const appCheckPasswardHash = (pass, hash) => {
     }
 }
 
-const appCheckPassward = (password, confirmPassword) => {
+const appCheckPassword = (password, confirmPassword) => {
     try {
         if (password === confirmPassword && password.length > 7) {
 
@@ -188,37 +217,24 @@ const newObject = async (data) => {
         app_id: appRandomIdGenerator(data.name),
         name: data.name,
         email: data.emailaddress,
-        password: appCheckPassward(data.newPassword, data.confirmNewPassword),
+        password: appCheckPassword(data.newPassword, data.confirmNewPassword),
         type: await appCheckAccountType(data.emailaddress)
     }
 
 }
 
 const filterLoginData = (data) => {
-    let { type, app_id, name, email } = data
+    let { type, app_id } = data
 
-    let splitEmail = email.split('@')
+    type = constants[type] || 'err'
 
-    let firstPart = splitEmail[0]
-    let secondPart = splitEmail[1].split('.')
-    let finalPart = secondPart.slice(1)
-
-    secondPart = secondPart[0]
-
-    if (finalPart.length > 1)
-        finalPart[0] = '***'
-
-    finalPart = finalPart.join('.')
-
-    let newEmail = `${firstPart[0] || ''}${firstPart[1] || ''}${firstPart[2] || ''}****`
-        newEmail += `@${secondPart[0] || ''}****.${finalPart}`
-
-    return { type, app_id, name, email: newEmail }
+    return { type: type, public_id: app_id }
 }
 
 module.exports = {
     checkExistence,
     registerNewCompany,
     deleteCompany,
-    accessAccount
+    accessAccount,
+    resetPassword
 }

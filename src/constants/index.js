@@ -16,6 +16,9 @@ module.exports = {
     connectionTypeUser: "CompanyAcc",
     connectionTypeContact: "ContactMe",
 
+    account: 'wqxrffdqlofcvegppqe',
+    manager: 'ffduhjdpcompkn',
+
     db_connect_success: "DB :: Conectato",
     db_connect_error: "500 Internal Server Error :: 1",
 
@@ -23,6 +26,10 @@ module.exports = {
         "400": {
             status: 400,
             message: "The request cannot be fulfilled due to bad syntax",
+        },
+        "401": {
+            status: 401,
+            message: "Unauthorized"
         },
         "404": {
             status: 404,
@@ -37,19 +44,19 @@ module.exports = {
     accessPagesList: [
         {
             data: "tables",
-            permission: [ "create", "update", "delete" ]
+            permission: ["create", "update", "delete"]
         },
         {
             data: "companies",
-            permission: [ "create", "update", "delete" ]
+            permission: ["create", "update", "delete"]
         },
         {
             data: "help",
-            permission: [ "create", "update", "delete" ]
+            permission: ["create", "update", "delete"]
         },
         {
             data: "account",
-            permission: [ "create", "update", "delete" ]
+            permission: ["create", "update", "delete"]
         }
     ]
 }

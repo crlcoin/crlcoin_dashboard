@@ -10,8 +10,8 @@ const handlebarsHelpers = require('./helper/handlebars')
 // Session
 app.use(session({
     secret: SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }))
 
 app.use( express.json() )

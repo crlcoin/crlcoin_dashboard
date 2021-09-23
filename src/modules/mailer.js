@@ -1,6 +1,6 @@
 const path = require('path')
 const nodemailer = require('nodemailer')
-const handlebars = require('nodemailer-express-handlebars')
+const hbs = require('nodemailer-express-handlebars')
 
 const {
     mailer_HOST,
@@ -18,9 +18,12 @@ const transport = nodemailer.createTransport({
     }
 })
 
-transport.use('compile', handlebars({
-    viewEngine: 'handlebars',
-    viewPath: path.resolve('./src/resources/mail/'),
+transport.use('compile', hbs({
+    viewEngine: {
+        extname: '.html',
+        layoutsDir: __dirname + '/../resources/mail/'
+    },
+    viewPath: __dirname + '/../resources/mail/',
     extName: '.html'
 }))
 

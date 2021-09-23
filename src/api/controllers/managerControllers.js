@@ -3,12 +3,15 @@ const {
 } = require("../server/manager/managerTables");
 
 const {
-    accessAccount
+    accessAccount,
+    resetPassword
 } = require('../server/adminLogins')
 
 const {
     PrincipalULR,
-    managerPagesList
+    managerPagesList,
+    account,
+    manager
 } = require("../../constants")
 
 const dashboardCompanyAccess = (req, res) => {
@@ -51,17 +54,57 @@ const accountCheckLoginAccess = async (req, res) => {
 
     if (!!credential) {
         req.session.credential = credential
-        if (credential.type === 'manager')
+        if (credential.type === manager)
             return res.redirect('/acc/dashboard/overview')
-        else if (credential.type === 'account')
+        else if (credential.type === account)
             return res.redirect('/f/a/c/dashboard/overview')
     }
 
     return res.render('templates/authentication/login', {error: "Access Denied"})
 }
 
+const accountCheckLoginAndDestroySession = (req, res) => {
+    if (req.session.credential) {
+        req.session.destroy()
+    }
+    return res.render('templates/authentication/logout')
+}
+
+const pageRecoverPassword = (req, res) => {
+    return res.render('templates/authentication/recover')
+}
+
+const createResetPasswordPermission = async (req, res) => {
+    const { emailaddress } = req.body
+
+    try {
+
+        const use = await resetPassword(emailaddress)
+
+        return res.redirect('/recover')
+
+    } catch (error) {
+        if (err)
+            return res.redirect('/error/400')
+    }
+}
+
+const registerNewPassword = async (req, res) => {
+
+}
+
+const createRegisterNewPassword = async (req, res) => {
+
+}
+
 module.exports = {
     pageLoginAccess,
     accountCheckLoginAccess,
-    dashboardCompanyAccess
+    dashboardCompanyAccess,
+    accountCheckLoginAndDestroySession,
+
+    pageRecoverPassword,
+    createResetPasswordPermission,
+    registerNewPassword,
+    createRegisterNewPassword
 }

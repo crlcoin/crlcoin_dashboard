@@ -10,6 +10,11 @@ const {
     pageLoginAccess,
     accountCheckLoginAccess,
     dashboardCompanyAccess,
+    accountCheckLoginAndDestroySession,
+    pageRecoverPassword,
+    createResetPasswordPermission,
+    registerNewPassword,
+    createRegisterNewPassword
 } = require('../api/controllers/managerControllers')
 
 const {
@@ -61,22 +66,19 @@ router.post('/login', accountCheckLoginAccess)
 router.get('/auth/register', checkRegisterAccess, companyRegisterAccess)
 router.post('/auth/register', checkRegisterCreate, companyCreateLogin)
 
-router.get('/recover', (req, res) => {
-    return res.render('templates/authentication/recover')
-})
-router.post('/recover', (req, res) => {
-    return res.render('templates/authentication/confirmemailaddress', {email: req.body.emailaddress})
-})
+router.get('/recover', pageRecoverPassword)
+router.post('/recover', createResetPasswordPermission)
 
-router.get('/auth/logout', (req, res) => {
-    return res.render('templates/authentication/logout')
-})
+router.get('/auth/register-new-pass', registerNewPassword)
+router.post('/auth/register-new-pass', createRegisterNewPassword)
+
+router.get('/logout', accountCheckLoginAndDestroySession)
 
 // Manager
 router.get('/acc/dashboard/:page', managerCredentials, dashboardCompanyAccess)
 
 // Admin
-router.get('/f/a/c/dashboard/:page', adminCredentials, onlyRequireDatas, dashboardAccess)
+router.get('/f/a/c/dashboard/:page', onlyRequireDatas, dashboardAccess)
 router.get('/f/a/e/dashboard/use/:page', dashboardUse)
 
 router.post('/f/a/c/dashboard/create/tables', companyTablesCreate)
