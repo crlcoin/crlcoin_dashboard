@@ -68,9 +68,11 @@
 
                             {{/if}}
 
-                            <form action="/auth/register" method="POST" class="text-white" {{#if message.boo}}style="display:none;"{{/if}}>
+                            <form action="/auth/register" method="POST" class="text-white" id="register-form" {{#if message.boo}}style="display:none;"{{/if}}>
 
                                 <input type="hidden" name="permission" value="{{permission}}">
+
+                                <div class="mb-2 text-danger" id="display-errors"></div>
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Company Name</label>
@@ -86,7 +88,6 @@
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    (<span class="text-white fw-bold" id="alert-min-digits"> Min 8 </span>)
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" autocomplete="off"
                                             name="newPassword" required="true" minlength="8"

@@ -69,8 +69,8 @@ router.post('/auth/register', checkRegisterCreate, companyCreateLogin)
 router.get('/recover', pageRecoverPassword)
 router.post('/recover', createResetPasswordPermission)
 
-router.get('/auth/register-new-pass', registerNewPassword)
-router.post('/auth/register-new-pass', createRegisterNewPassword)
+router.get('/auth/recover', registerNewPassword)
+router.post('/auth/recover', createRegisterNewPassword)
 
 router.get('/logout', accountCheckLoginAndDestroySession)
 

@@ -134,14 +134,15 @@ const resetPassword = async (data) => {
         })
 
         mailer.sendMail({
-            to: data,
+            to: user.email,
             from: 'no-reply@crlcoin.com.br',
             subject: 'Reset Password',
             template: 'recoverpass',
             context: { token }
         }, (err) => {
-            if (err)
-                console.log(err)
+            if (err) {
+                return false
+            }
 
             return true
         })

@@ -1,37 +1,62 @@
+const form = document.getElementById('register-form')
+const companyName = document.getElementById('name')
+const email = document.getElementById('emailaddress')
+const password = document.getElementById('password')
+const confirmPassword = document.getElementById('cpassword')
+const check = document.getElementById('checkbox-signup')
+const submit = document.getElementById('button-submit')
+const errors = document.getElementById('display-errors')
 
-!(function () {
-    let getPassInput = document.getElementById('password')
-    let getConfirmPassInput = document.getElementById('cpassword')
-    let getButtonSubmit = document.getElementById('button-submit')
+const messages = {
+    name: 'Company Name is required',
+    email: 'Email is required',
+    length: 'Min 8 length',
+    password: 'Passwords must be the same',
+    check: 'Accept the Terms and Conditions'
+}
 
-    getPassInput.addEventListener('input', function () {
-        let confirmPassValue = getConfirmPassInput.value
-        let passValue = getPassInput.value
-        let passLength = (getPassInput.value).length
-        let getAlertMinDigits = document.getElementById('alert-min-digits')
-        if (passLength > 7) {
-            getAlertMinDigits.classList.remove('text-white')
-            getAlertMinDigits.classList.remove('text-danger')
-            getAlertMinDigits.classList.add('text-success')
-        } else {
-            getAlertMinDigits.classList.remove('text-white')
-            getAlertMinDigits.classList.remove('text-success')
-            getAlertMinDigits.classList.add('text-danger')
-        }
-        if (passLength > 7 && confirmPassValue === passValue) {
-            getButtonSubmit.removeAttribute('disabled')
-        } else {
-            getButtonSubmit.setAttribute('disabled', true)
-        }
-    })
+function showError(req) {
+    return errors.innerText = messages[req]
+}
 
-    getConfirmPassInput.addEventListener('input', function () {
-        let confirmPassValue = getConfirmPassInput.value
-        let passValue = getPassInput.value
-        if (confirmPassValue.length > 7 && confirmPassValue === passValue) {
-            getButtonSubmit.removeAttribute('disabled')
-        } else {
-            getButtonSubmit.setAttribute('disabled', true)
-        }
-    })
-})()
+function hiddenError() {
+    return errors.innerText = ''
+}
+
+function submitFalse() {
+    submit.setAttribute('disabled', true)
+    submit.classList.remove('btn-success')
+    submit.classList.add('btn-primary')
+    return
+}
+
+function submitTrue() {
+    submit.removeAttribute('disabled')
+    submit.classList.remove('btn-primary')
+    submit.classList.add('btn-success')
+    return
+}
+
+function checkInputs() {
+    submitFalse()
+
+    if (companyName.value === '')
+        return showError('name')
+
+    if (email.value === '')
+        return showError('email')
+
+    if (password.value.length < 8)
+        return showError('length')
+
+    if (password.value !== confirmPassword.value)
+        return showError('password')
+
+    if (!check.checked)
+        return showError('check')
+
+    hiddenError()
+    submitTrue()
+}
+
+form.addEventListener('input', checkInputs)

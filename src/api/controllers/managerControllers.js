@@ -79,18 +79,19 @@ const createResetPasswordPermission = async (req, res) => {
 
     try {
 
-        const use = await resetPassword(emailaddress)
-
-        return res.redirect('/recover')
+        await resetPassword(emailaddress)
+        return res.render('templates/authentication/confirmemailaddress', {email: emailaddress})
 
     } catch (error) {
-        if (err)
+        if (error) {
             return res.redirect('/error/400')
+        }
+
     }
 }
 
 const registerNewPassword = async (req, res) => {
-
+    return res.render('templates/authentication/recoverCreatePass')
 }
 
 const createRegisterNewPassword = async (req, res) => {

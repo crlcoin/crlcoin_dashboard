@@ -45,20 +45,27 @@
                                     </p>
                                 </div>
 
-                                <form action="/recover" method="POST">
+                                <form action="/auth/recover" method="POST" id="form">
+
+                                    <div class="mb-2 text-danger" id="error"></div>
 
                                     <div class="mb-3">
-                                        <label for="fpassword" class="form-label">New Password</label>
-                                        <input class="form-control" name="fpassword" type="password" id="fpassword" required="true" placeholder="Enter your password">
+                                        <label for="password" class="form-label  text-light">
+                                            New Password
+                                        </label>
+                                        <input class="form-control" name="password" type="password" id="password" required="true" placeholder="Enter your password">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="spassword" class="form-label">Confirm Password</label>
-                                        <input class="form-control" name="spassword" type="password" id="spassword" required="true" placeholder="Confirm your password">
+                                        <label for="confirmpassword" class="form-label text-light">Confirm Password</label>
+                                        <input class="form-control" name="confirmpassword" type="password" id="confirmpassword" required="true" placeholder="Confirm your password">
+                                        <input type="hidden" value="{{token}}" name="confirmaccess">
                                     </div>
 
                                     <div class="text-center d-grid">
-                                        <button class="btn btn-primary" type="submit"> Set New Password </button>
+                                        <button class="btn btn-primary" disabled="true" type="submit" id="submit">
+                                            Save New Password
+                                        </button>
                                     </div>
 
                                 </form>
@@ -81,6 +88,7 @@
 
         {{!-- <!-- App js --> --}}
         <script src="/page/js/app.min.js"></script>
+        <script src="/page/js/appSrcRc.js"></script>
 
     </body>
 </html>
