@@ -4,7 +4,9 @@ const {
 
 const {
     accessAccount,
-    resetPassword
+    resetPassword,
+    checkResetPasswordToken,
+    createNewPassword
 } = require('../server/adminLogins')
 
 const {
@@ -91,11 +93,30 @@ const createResetPasswordPermission = async (req, res) => {
 }
 
 const registerNewPassword = async (req, res) => {
-    return res.render('templates/authentication/recoverCreatePass')
+
+    const { rc_tk } = req.query
+
+    if (!rc_tk || !rc_tk.replace(/[^a-z0-9]/gi, ''))
+        return res.redirect('/error/404')
+
+    let token = await checkResetPasswordToken({token: rc_tk})
+
+    if (!token)
+        return res.redirect('/error/404')
+
+    return res.render('templates/authentication/recoverCreatePass', {token})
+
 }
 
 const createRegisterNewPassword = async (req, res) => {
+    const data = req.body
 
+    let result = await createNewPassword(data)
+
+    if(result.status)
+        return res.redirect('/login')
+
+    return res.render('templates/authentication/recoverCreatePass', {token: data.token, message: result.message})
 }
 
 module.exports = {

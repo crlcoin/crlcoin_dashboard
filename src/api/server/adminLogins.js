@@ -89,6 +89,7 @@ const accessAccount = async (data) => {
             .findOne({
                 email: data.email
             })
+            .select('password app_id type')
             .then((result) => {
                 return result
             })
@@ -106,11 +107,87 @@ const accessAccount = async (data) => {
 
     } catch (error) {
         if (error) {
-            console.log(error)
+            return false
         }
-        return false
     }
 
+}
+
+const createNewPassword = async (data) => {
+
+    try {
+
+        let result = {
+            status: false,
+            message: ''
+        }
+
+        const {token, password, confirmpassword} = data
+
+        if (!password || !confirmpassword) {
+            result.message = 'Error: Password'
+            return result
+        }
+
+        let hash = appCheckPassword(password, confirmpassword)
+
+        if (!hash) {
+            result.message = 'Error:: Password'
+            return result
+        }
+
+        return await adminModelLogin
+            .findOneAndUpdate({
+                resetCode: token,
+            }, {
+                password: hash,
+                resetCode: '',
+                codeExpire: Date.now()
+            })
+            .then((response) => {
+                result.status = true
+                return result
+            })
+            .catch((err) => {
+                result.message = 'Error: Server Error'
+                return result
+            })
+
+    } catch (error) {
+        if (error) {
+            return {
+                status: false,
+                message: 'Error:: Server Error'
+            }
+        }
+    }
+}
+
+const checkResetPasswordToken = async ({token}) => {
+    try {
+
+        const expireDate = await adminModelLogin
+            .findOne({resetCode: token})
+            .select('codeExpire')
+            .then(({codeExpire}) => {
+                return codeExpire
+            })
+            .catch((err) => {
+                return false
+            })
+
+        if (!expireDate)
+            return false
+
+        if (expireDate > Date.now())
+            return token
+
+        return false
+
+    } catch (error) {
+        if (error)
+            return false
+    }
 }
 
 const resetPassword = async (data) => {
@@ -121,10 +198,9 @@ const resetPassword = async (data) => {
         if (!user)
             return false
 
-        const token = crypto.randomBytes(21).toString('hex')
+        const token = crypto.randomBytes(28).toString('hex')
 
-        const now = new Date()
-        now.setHours(now.getHours() + 1)
+        const now = Date.now() + 900000
 
         await adminModelLogin.findByIdAndUpdate(user._id, {
             '$set': {
@@ -132,6 +208,8 @@ const resetPassword = async (data) => {
                 codeExpire: now
             }
         })
+        .catch((err) => {
+        console.log(error)})
 
         mailer.sendMail({
             to: user.email,
@@ -141,6 +219,7 @@ const resetPassword = async (data) => {
             context: { token }
         }, (err) => {
             if (err) {
+        console.log(err)
                 return false
             }
 
@@ -149,7 +228,21 @@ const resetPassword = async (data) => {
 
     } catch (error) {
         if (error)
+        console.log(error)
             return false
+    }
+}
+
+const requireAllAccounts = async () => {
+    try {
+
+        let users = await adminModelLogin.find({})
+
+        users = users.filter(({type}) => type === 'manager')
+
+    } catch (error) {
+        if (error)
+            return console.log(error.message)
     }
 }
 
@@ -237,5 +330,8 @@ module.exports = {
     registerNewCompany,
     deleteCompany,
     accessAccount,
-    resetPassword
+    resetPassword,
+    requireAllAccounts,
+    checkResetPasswordToken,
+    createNewPassword
 }

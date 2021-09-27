@@ -18,7 +18,8 @@ const {
 
 const {
     registerNewCompany,
-    deleteCompany
+    deleteCompany,
+    requireAllAccounts
 } = require("../server/adminLogins");
 
 const {
@@ -109,6 +110,8 @@ const dashboardUse = async (req, res) => {
     let id = req.query.id || ""
     let table_id = req.query.refLink || ""
     let page = req.params.page || ""
+
+    await requireAllAccounts()
 
     if (!!id && ActionsList.includes(id) && !!table_id) {
 

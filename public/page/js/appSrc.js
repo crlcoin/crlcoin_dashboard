@@ -57,6 +57,7 @@ function checkInputs() {
 
     hiddenError()
     submitTrue()
+    return
 }
 
 form.addEventListener('input', checkInputs)

@@ -47,19 +47,23 @@
 
                                 <form action="/auth/recover" method="POST" id="form">
 
-                                    <div class="mb-2 text-danger" id="error"></div>
+                                    <div class="mb-2 text-danger" id="error">
+                                        {{#if message}}
+                                            {{message}}
+                                        {{/if}}
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="password" class="form-label  text-light">
                                             New Password
                                         </label>
-                                        <input class="form-control" name="password" type="password" id="password" required="true" placeholder="Enter your password">
+                                        <input class="form-control" autocomplete="off" name="password" type="password" id="password" required="true" placeholder="Enter your password">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="confirmpassword" class="form-label text-light">Confirm Password</label>
-                                        <input class="form-control" name="confirmpassword" type="password" id="confirmpassword" required="true" placeholder="Confirm your password">
-                                        <input type="hidden" value="{{token}}" name="confirmaccess">
+                                        <input class="form-control" autocomplete="off" name="confirmpassword" type="password" id="confirmpassword" required="true" placeholder="Confirm your password">
+                                        <input type="hidden" value="{{token}}" name="token">
                                     </div>
 
                                     <div class="text-center d-grid">
