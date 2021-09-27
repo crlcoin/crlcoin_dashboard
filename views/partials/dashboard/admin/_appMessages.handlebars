@@ -28,7 +28,7 @@
 
         {{#each contactMeMessages}}
 
-        <div class="card mb-1 bg-white" filter-type='register' data-crl-filters="{{subject}} {{name}} {{email}}">
+        <div class="card mb-1 bg-white" filter-type='register' data-crl-filters="{{subject}} {{name}} {{email}} {{message}}">
             <div class="card-box m-0" id="heading{{_id}}" value="{{_id}}" data-crl="changeMessageStatus" data-status="{{status}}">
 
                 <div class="float-right custom-control custom-switch">
@@ -70,7 +70,7 @@
 
             <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}" data-parent="#accordion" style="">
                 <div class="card-body m-0">
-                    Message: <br>
+                    <b>Message:</b> <br>
                     {{message}}
                 </div>
                 <div class="card-body">
