@@ -10,7 +10,11 @@ module.exports = {
             type: String,
             require: true
         },
-        modelReference: {
+        tableId: {
+            type: String,
+            require: true
+        },
+        tableConfig: {
             type: String,
             require: true
         },

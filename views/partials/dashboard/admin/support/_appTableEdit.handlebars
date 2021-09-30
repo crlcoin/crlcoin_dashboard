@@ -33,8 +33,9 @@
 
                         <div class="mb-3">
                             <label for="tableFunction" class="form-label text-light">Table Function</label>
-                            <textarea class="form-control" id="tableFunction" rows="3" value="{{functions}}"
-                                placeholder='if(col("status") === "finished", "Response A", "Response B" )'>{{functions}}</textarea>
+                            <textarea class="form-control custom-letter" id="tableFunction"
+                                rows="5" data-crl="tableFunction" value="{{functions}}"
+                                placeholder='<column require>: <column response>: SE(value == <Compare>, <Response True>, <Response False>);'>{{functions}}</textarea>
                         </div>
 
                         <div class="my-3">
@@ -69,6 +70,7 @@
                                         required="true">
                                     <datalist id="datalistOptions">
                                         <option value="date">
+                                        <option value="file">
                                         <option value="function">
                                         <option value="id">
                                         <option value="link">
@@ -89,13 +91,6 @@
                                     <input type="text" class="form-control custom-letter" id="columnOptions" value="{{options}}"
                                         data-crl="columnOptions" placeholder="Opt 1;Opt 2;Opt 3;Opt 4,Opt 5,Opt 7;">
                                     <span class="columnOptionsPreview"></span>
-                                </div>
-
-                                <div class="mb-3 col-12 pre-hidden {{isEqualAndReturn type "function" "pre-show"}}"
-                                    data-crl="columnFunction">
-                                    <label for="columnFunction" class="form-label">Column Function</label>
-                                    <textarea class="form-control custom-letter" id="columnFunction" rows="3"
-                                        placeholder='if(parentRow("status") === "start", "Response A", "Response B" )'>{{functions}}</textarea>
                                 </div>
 
                             </div>

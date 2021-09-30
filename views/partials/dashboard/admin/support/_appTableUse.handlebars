@@ -1,0 +1,100 @@
+{{#if companyTableData}}
+
+{{else}}
+{{#with tableConfig}}
+
+<div class="col-12">
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card-box">
+                <div class="responsive-table-plugin">
+                    <div class="row">
+                        <div class="col-12 d-flex flex-wrap align-items-center">
+                            <h4>
+                                {{name}}
+                            </h4>
+                            <button type="button" class="btn btn-blue ml-auto" data-table="new-row">
+                                <i class="mdi mdi-plus"></i>
+                                Add Row
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <div class="table-rep-plugin fixed-solution" data-pattern="priority-columns">
+                            <div class="table-responsive" data-pattern="priority-columns">
+                                <div style="width: auto; top: -1px; padding-bottom: 250px;" class="pt-3">
+
+                                    <table id="table-company-data" data-function="{{functions}}" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="max-width: 70px;">
+                                                    <div class="bg-success text-light text-center p-2"
+                                                        data-toggle="tooltip" data-placement="right" title=""
+                                                        style="max-width: 70px!important;"
+                                                        data-original-title="Save" aria-describedby="tooltip401869">
+                                                        <i class="mdi mdi-content-save-settings-outline"></i>
+                                                    </div>
+                                                </th>
+                                                <th style="max-width: 70px;">
+                                                    <div class="bg-danger text-light text-center p-2"
+                                                        data-toggle="tooltip" data-placement="right" title=""
+                                                        style="max-width: 70px!important;"
+                                                        data-original-title="Delete" aria-describedby="tooltip401869">
+                                                        <i class="mdi mdi-trash-can"></i>
+                                                    </div>
+                                                </th>
+                                                {{#each columns}}
+                                                <th data-priority="1"
+                                                    style="max-width: 420px; vertical-align: middle;">
+                                                    {{name}}
+                                                </th>
+                                                {{/each}}
+                                            </tr>
+                                        </thead>
+                                        <tbody class="px-2"></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<table style="display: none;">
+    <tbody>
+        <tr class="position-relative" data-table-row='table-row-base'>
+                <th class="border-left border-bottom text-center"
+                    data-type="action-button">
+                    <button data-table="save-row" disabled="true" type="button"title="Save row"
+                        class="btn bg-success text-light p-2">
+                        <i class="mdi mdi-content-save-settings-outline"></i>
+                    </button>
+                </th>
+                <th class="border-left border-bottom text-center"
+                    data-type="action-button">
+                    <button data-table="delete-row" type="button" title="Delete row"
+                        class="btn bg-danger text-light p-2">
+                        <i class="mdi mdi-trash-can"></i>
+                    </button>
+                </th>
+            {{#each columns}}
+                <th class="border-left border-bottom position-relative" contenteditable="true"
+                    style="vertical-align: middle;"
+                    data-column="{{name}}" data-type="{{type}}" data-options="{{options}}"></th>
+            {{/each}}
+        </tr>
+    </tbody>
+</table>
+
+{{/with}}
+
+{{/if}}

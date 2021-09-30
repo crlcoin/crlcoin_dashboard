@@ -105,6 +105,11 @@
                         {{>dashboard/admin/support/_appTableEdit}}
                         {{/if}}
 
+                        {{!-- Use Tables --}}
+                        {{#if page.useTables}}
+                        {{>dashboard/admin/support/_appTableUse}}
+                        {{/if}}
+
                     </div>
 
                     <div class="row">
@@ -188,11 +193,6 @@
     <script src="{{page.URL}}/dash/assets/js/pages/toastr.init.js"></script>
     <script src="{{page.URL}}/dash/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
 
-    {{!-- <script src="{{page.URL}}/dash/assets/libs/moment/min/moment.min.js"></script>
-    <script src="{{page.URL}}/dash/assets/libs/x-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
-
-    <script src="{{page.URL}}/dash/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script> --}}
-
     {{!-- <!-- App js --> --}}
     <script src="{{page.URL}}/dash/assets/js/app.min.js"></script>
 
@@ -200,7 +200,9 @@
     <script src="{{page.URL}}/dash/assets/custom/js/notification.js"></script>
     <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
     <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
-    {{!-- <script src="{{page.URL}}/dash/assets/custom/js/x-forms-editable.init.js"></script> --}}
+
+    <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-lib-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+    <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
 
 </body>
 

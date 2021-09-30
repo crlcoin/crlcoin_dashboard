@@ -70,6 +70,11 @@ const onlyRequireDatas = async (req, res, next) => {
 
         if (params === "overview" || params === "tables") {
             let response = await requireTablesConfig()
+            let managerResponse = await requireManagers()
+
+            if (!!managerResponse && managerResponse.length > 0) {
+                req.simpleComapniesData = managerResponse
+            }
 
             if (!!response && response.length > 0) {
 

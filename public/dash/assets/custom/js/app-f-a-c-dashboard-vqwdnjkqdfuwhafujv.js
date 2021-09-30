@@ -56,6 +56,48 @@ let deleteAllMessageSelected = {
     }
 }
 
+let listColumnsName = {
+
+    result: [],
+    reset() {
+        this.result = []
+    },
+    subscribe(fn) {
+        this.result.push(fn)
+    },
+    unsubscribe(fn) {
+        this.result = this.result
+        .filter(function(subscriber) {
+            if (subscriber !== fn)
+                return subscriber
+        })
+    },
+    attPanel() {
+        return this.result
+    }
+}
+
+let listColumnsFunction = {
+
+    result: [],
+    reset() {
+        this.result = []
+    },
+    subscribe(fn) {
+        this.result.push(fn)
+    },
+    unsubscribe(fn) {
+        this.result = this.result
+        .filter(function(subscriber) {
+            if (subscriber !== fn)
+                return subscriber
+        })
+    },
+    attPanel() {
+        return this.result
+    }
+}
+
 const appDashboardClickFunctions = {
 
     // Tables
@@ -88,7 +130,7 @@ const appDashboardClickFunctions = {
             } else {
                 element.querySelector('.columnOptionsPreview').innerText = ""
                 element.querySelector('[data-crl=columnOptions]').classList.remove('pre-show')
-                element.querySelector('[data-crl=columnFunction]').classList.remove('pre-show')
+                // element.querySelector('[data-crl=columnFunction]').classList.remove('pre-show')
             }
         })
         getFormNewTable.reset()
@@ -121,12 +163,12 @@ const appDashboardClickFunctions = {
         })
         getElementAndClone.querySelector('.columnOptionsPreview').innerText = ""
         getElementAndClone.querySelector('[data-crl=columnOptions]').classList.remove('pre-show')
-        getElementAndClone.querySelector('[data-crl=columnFunction]').classList.remove('pre-show')
+        // getElementAndClone.querySelector('[data-crl=columnFunction]').classList.remove('pre-show')
 
         getElementAndClone.querySelector('[data-crl=removeColumn]').addEventListener("click", function() {
             appDashboardClickFunctions.removeColumn(this)
         })
-        appDashboardInputFunctions.columnOptionsList(getElementAndClone.querySelector('[data-crl=columnOptionsList]'))
+        // appDashboardInputFunctions.columnOptionsList(getElementAndClone.querySelector('[data-crl=columnOptionsList]'))
         appDashboardInputFunctions.columnOptions(getElementAndClone.querySelector('#columnOptions'))
 
         getColunsAchor.appendChild(getElementAndClone)
@@ -247,22 +289,28 @@ const appDashboardInputFunctions = {
         return
     },
 
-    columnOptionsList: function(element) {
-        let options = element.parentNode.parentNode.querySelector('[data-crl=columnOptions]')
-        let functions = element.parentNode.parentNode.querySelector('[data-crl=columnFunction]')
+    "column-form": function() {
+        let listOption = ["id", "link", "number", "options", "percent", "text"]
+        let table = document.getElementById('formNewTable')
 
-        element.addEventListener('input', function() {
-            if (!!this.value && this.value === "options") {
-                options.classList.add("pre-show")
-                functions.classList.remove("pre-show")
-            } else if (!!this.value && this.value === "function") {
-                options.classList.remove("pre-show")
-                functions.classList.add("pre-show")
-            } else if (this.value !== "function" && this.value !== "options") {
-                options.classList.remove("pre-show")
-                functions.classList.remove("pre-show")
-            }
-        })
+        function attColumnsList() {
+
+            let columns = table.querySelectorAll('[data-crl="columnName"]')
+
+            listColumnsName.reset()
+            listColumnsFunction.reset()
+            columns.forEach((el) => {
+                let type = el.parentNode.parentNode.querySelector('#columnOptionsList')
+                if (listOption.includes(type.value))
+                    listColumnsName.subscribe(el.value)
+                if ("function" === type.value)
+                    listColumnsFunction.subscribe(el.value)
+            })
+
+        }
+
+        table.addEventListener('input', attColumnsList)
+        table.addEventListener('click', attColumnsList)
 
         return
     },
@@ -318,6 +366,92 @@ const appDashboardInputFunctions = {
 
 }
 
+const appDashboardFunctions = {
+
+    tableFunction: function(element) {
+
+        element.addEventListener('focus', function() {
+            attTableFunctionDisplay()
+            element.parentNode.querySelector('.options-popup').style.display = 'block'
+        })
+
+        element.addEventListener('focusout', function() {
+            element.parentNode.querySelector('.options-popup').style.display = 'none'
+        })
+
+    }
+
+}
+
+const attTableFunctionDisplay = function() {
+    let tableFunction = document.getElementById('tableFunction')
+
+    let createPopup = tableFunction.parentNode.querySelector('.options-popup')
+
+    if (!createPopup) {
+        createPopup = document.createElement('div')
+        createPopup.className = 'options-popup list-group bg-dark rounded shadow-lg'
+        createPopup.style.position = 'absolute'
+        createPopup.style.top = `100%`
+        createPopup.style.zIndex = '1'
+        createPopup.style.display = 'none'
+    }
+
+    createPopup.innerText = ""
+
+    let options = listColumnsFunction.attPanel()
+
+    options.forEach((option) => {
+
+        let li = document.createElement('div')
+            li.className = 'list-group-item d-flex justify-content-between align-items-center py-1'
+            li.innerText = option
+            li.innerHTML += '&nbsp;<span class="badge badge-primary badge-pill">Function</span>'
+            li.title = 'This column can receive the result of a function'
+            li.style.cursor = 'default'
+
+        createPopup.appendChild(li)
+    })
+
+    options = listColumnsName.attPanel()
+
+    options.forEach((option) => {
+
+        let li = document.createElement('div')
+            li.className = 'list-group-item d-flex justify-content-between align-items-center py-1'
+            li.innerText = option
+            li.innerHTML += '&nbsp;<span class="badge badge-success badge-pill">Column</span>'
+            li.title = 'This column can return its value to be used in a function'
+            li.style.cursor = 'default'
+
+        createPopup.appendChild(li)
+    })
+
+    tableFunction.after(createPopup)
+
+    return
+}
+
+!(function() {
+
+    let getButtons = document.querySelectorAll('[data-crl=use-table]')
+    let form = document.getElementById('dashboardUseTablesForm')
+
+    getButtons.forEach(function(button) {
+
+        let href = button.getAttribute('data-href')
+        let reflink = button.getAttribute('data-refLink')
+        let inputReflink = form.querySelector('[name=refLink]')
+
+        button.addEventListener('click', function() {
+            form.action = href
+            inputReflink.value = reflink
+        })
+
+    })
+
+})()
+
 function createColumnOptions(element, anchor) {
     let matches = { " ; ": ";", "; ": ";", " ;": ";", ";;": ";", " , ": ";", ", ": ";", " ,": ";", ",,": ";", ",": ";", "  ": " " }
 
@@ -364,6 +498,9 @@ function createColumnOptions(element, anchor) {
             element.addEventListener('click', function() {
                 appDashboardClickFunctions[fn](element)
             })
+        }
+        if (!!appDashboardFunctions[fn]) {
+            appDashboardFunctions[fn](element)
         }
     })
 

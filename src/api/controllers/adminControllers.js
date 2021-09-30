@@ -8,7 +8,9 @@ const {
     createTablesConfig,
     deleteTableConfig,
     requireTablesConfig,
-    updateTableConfig
+    updateTableConfig,
+
+    requireTablesDatas
 } = require('../server/adminTables');
 
 const {
@@ -18,8 +20,7 @@ const {
 
 const {
     registerNewCompany,
-    deleteCompany,
-    requireAllAccounts
+    deleteCompany
 } = require("../server/adminLogins");
 
 const {
@@ -110,8 +111,8 @@ const dashboardUse = async (req, res) => {
     let id = req.query.id || ""
     let table_id = req.query.refLink || ""
     let page = req.params.page || ""
-
-    await requireAllAccounts()
+    let _id = req.query.app_id || ""
+    let companyTableDatas
 
     if (!!id && ActionsList.includes(id) && !!table_id) {
 
@@ -123,15 +124,21 @@ const dashboardUse = async (req, res) => {
             })
         }
 
+        if (!!_id) {
+            companyTableDatas = await requireTablesDatas(table_id, _id)
+        }
+
         if (!!template) {
             let response = await requireTablesConfig(table_id);
+
             return res.render('templates/dashboard/admin', {
                 page: {
                     [template]: true,
-                    title: template,
+                    title: page.toUpperCase(),
                     URL: PrincipalULR
                 },
-                tableConfig: response
+                tableConfig: response,
+                companyTableData: companyTableDatas
             })
         }
 
@@ -160,6 +167,7 @@ const dashboardAccess = (req, res) => {
             },
             preloginData: req.preloginData,
             companiesData: req.companies,
+            simpleComapniesData: req.simpleComapniesData,
             tablesConfig: req.tablesConfig,
             contactMeMessages: req.contactMe,
             helpers: req.helpers

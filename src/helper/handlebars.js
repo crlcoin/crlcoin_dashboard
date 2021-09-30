@@ -72,7 +72,6 @@ module.exports = {
             let date = args[0].toString().split(" ")
             let { [4]: fullHour } = date
             let hour = fullHour.split(":")
-            // let prefix = hour[0] < 12 ? "AM" : "PM"
 
             response += ` - ${hour[0]} : ${hour[1]}`
         }

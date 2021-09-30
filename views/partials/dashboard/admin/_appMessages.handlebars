@@ -11,7 +11,9 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label for="inputFindCompany" class="sr-only">Find by name/mail</label>
-                                <input type="search" class="form-control" data-crl="inputFindCompany" filter-type='register' id="inputFindCompany" placeholder="Search...">
+                                <input type="search" class="form-control"
+                                    data-crl="inputFindCompany" filter-type='register'
+                                    id="inputFindCompany" placeholder="Search...">
                             </div>
                         </div>
                     </div>
@@ -28,11 +30,14 @@
 
         {{#each contactMeMessages}}
 
-        <div class="card mb-1 bg-white" filter-type='register' data-crl-filters="{{subject}} {{name}} {{email}} {{message}}">
-            <div class="card-box m-0" id="heading{{_id}}" value="{{_id}}" data-crl="changeMessageStatus" data-status="{{status}}">
+        <div class="card mb-1 bg-white" filter-type='register'
+            data-crl-filters="{{subject}} {{name}} {{email}} {{message}}">
+            <div class="card-box m-0" id="heading{{_id}}" value="{{_id}}"
+                data-crl="changeMessageStatus" data-status="{{status}}">
 
                 <div class="float-right custom-control custom-switch">
-                    <input class="custom-control-input" type="checkbox" id="random{{_id}}" data-crl="actionSelectbox" value="@message-{{_id}}">
+                    <input class="custom-control-input" type="checkbox"
+                        id="random{{_id}}" data-crl="actionSelectbox" value="@message-{{_id}}">
                     <label class="custom-control-label" for="random{{_id}}">
                     </label>
                 </div>
@@ -68,7 +73,8 @@
 
             </div>
 
-            <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}" data-parent="#accordion" style="">
+            <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}"
+                data-parent="#accordion" style="">
                 <div class="card-body m-0">
                     <b>Message:</b> <br>
                     {{message}}

@@ -1,4 +1,5 @@
 const adminModelTablesConfig = require("../model/Admin/registerModelTablesConfig");
+const adminModelTablesDatas = require("../model/Admin/registerModelTablesData");
 
 const createTablesConfig = async (data) => {
     try {
@@ -23,11 +24,11 @@ const createTablesConfig = async (data) => {
 
 const requireTablesConfig = async (id) => {
     try {
-        let search = {}
         if (!!id) {
-            search.table_id = id
             return response = await adminModelTablesConfig
-                .findOne(search)
+                .findOne({
+                    table_id: id
+                })
                 .lean()
                 .then((result) => {
                     return result;
@@ -103,9 +104,33 @@ const deleteTableConfig = async (table_id) => {
     }
 };
 
+const requireTablesDatas = async(table_id, _id) => {
+    try {
+
+        return await adminModelTablesDatas
+            .findOne({
+                table_id: table_id,
+                companyId: _id
+            })
+            .then((response) => {
+                if (!response)
+                    return false
+                return response
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    } catch (error) {
+        if (error)
+            console.log(error)
+    }
+}
+
 module.exports = {
     createTablesConfig,
     requireTablesConfig,
     updateTableConfig,
-    deleteTableConfig
+    deleteTableConfig,
+    requireTablesDatas
 };

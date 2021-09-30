@@ -460,13 +460,7 @@ function checkTablesConfigInput() {
             options:
                 !!TYPES[i].value && TYPES[i].value === "options" && !!OPTIONS[i].value
                     ? OPTIONS[i].value.split(";")
-                    : [],
-            functions:
-                !!TYPES[i].value &&
-                    TYPES[i].value === "function" &&
-                    !!FUNCTIONS[i].value
-                    ? FUNCTIONS[i].value
-                    : "",
+                    : []
         };
 
         if (Array.isArray(newObjt) && newObjt.length > 0) {

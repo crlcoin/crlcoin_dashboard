@@ -34,10 +34,11 @@
                                 placeholder="Support" required="true">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3 position-relative">
                             <label for="tableFunction" class="form-label text-light">Table Function</label>
-                            <textarea class="form-control" id="tableFunction" rows="3"
-                                placeholder='if(col("status") === "finished", "Response A", "Response B" )'></textarea>
+                            <textarea class="form-control custom-letter" id="tableFunction"
+                                rows="5" data-crl="tableFunction"
+                                placeholder='<column require>: <column response>: SE(value == <Compare>, <Response True>, <Response False>);'></textarea>
                         </div>
 
                         <div class="my-3">
@@ -60,7 +61,7 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="columnName" class="form-label">Column Name</label>
                                     <input type="text" class="form-control" id="columnName" placeholder="Status"
-                                        required="true">
+                                        required="true" data-crl="columnName">
                                 </div>
 
                                 <div class="mb-3 col-12 col-md-6">
@@ -69,6 +70,7 @@
                                         data-crl="columnOptionsList" placeholder="Type to search..." required="true">
                                     <datalist id="datalistOptions">
                                         <option value="date">
+                                        <option value="file">
                                         <option value="function">
                                         <option value="id">
                                         <option value="link">
@@ -90,11 +92,11 @@
                                     <span class="columnOptionsPreview"></span>
                                 </div>
 
-                                <div class="mb-3 col-12 pre-hidden" data-crl="columnFunction">
+                                {{!-- <div class="mb-3 col-12 pre-hidden" data-crl="columnFunction">
                                     <label for="columnFunction" class="form-label">Column Function</label>
                                     <textarea class="form-control custom-letter" id="columnFunction" rows="3"
                                         placeholder='if(parentRow("status") === "start", "Response A", "Response B" )'></textarea>
-                                </div>
+                                </div> --}}
 
                             </div>
 
