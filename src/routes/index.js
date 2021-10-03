@@ -18,8 +18,7 @@ const {
     registerNewPassword,
     createRegisterNewPassword,
 
-    accountUpdatePassword,
-    accountAdmUpdatePassword
+    accountUpdatePassword
 } = require('../api/controllers/managerControllers')
 
 const {

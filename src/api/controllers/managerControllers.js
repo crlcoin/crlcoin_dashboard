@@ -1,10 +1,14 @@
 const {
-    companyTables
+    requireTablesDatas
 } = require("../server/manager/managerTables");
 
 const {
     requireOneAccount
 } = require("../server/manager/managerAccount");
+
+const {
+    requireHelpers
+} = require("../server/manager/managerHelpers");
 
 const {
     accessAccount,
@@ -25,7 +29,8 @@ const {
 const dashboardCompanyAccess = async (req, res) => {
     let template = ""
     let manager
-    let table
+    let companyTable
+    let helpers
 
     if (!!req.params.page) {
         managerPagesList.forEach(page => {
@@ -37,6 +42,24 @@ const dashboardCompanyAccess = async (req, res) => {
 
     manager = await requireOneAccount(req.session.credential.public_id)
 
+    if (template.toLowerCase() === "help") {
+        await requireHelpers()
+            .then((result) => {
+                if (!!result && result.length > 0)
+                    helpers = result
+                else
+                    helpers = false
+            })
+            .catch((err) => {
+                if (err)
+                    console.log()
+                helpers = false
+            })
+    }
+
+    if (template.toLowerCase() == "tables")
+        companyTable = await requireTablesDatas(req.session.credential.public_id)
+
     if (!!template) {
         return res.render('templates/dashboard/manager', {
             company: manager,
@@ -45,7 +68,13 @@ const dashboardCompanyAccess = async (req, res) => {
                 title: template,
                 URL: PrincipalULR
             },
-            tableColumns: 'tableData'
+            tableStatus: !!companyTable,
+            dataReference: !!companyTable ? companyTable._id : "",
+            tableReference: !!companyTable ? companyTable.tableId : "",
+            companyReference: !!companyTable ? companyTable.companyId : "",
+            tableConfig: !!companyTable ? companyTable.tableConfig : "",
+            tableData: !!companyTable ? companyTable.tableData : "",
+            helpers:  !!helpers ? helpers : ""
         })
     }
 
@@ -68,7 +97,7 @@ const accountCheckLoginAccess = async (req, res) => {
     if (!!credential) {
         req.session.credential = credential
         if (credential.type === manager)
-            return res.redirect('/acc/dashboard/overview')
+            return res.redirect('/acc/dashboard/tables')
         else if (credential.type === account)
             return res.redirect('/f/a/c/dashboard/overview')
     }

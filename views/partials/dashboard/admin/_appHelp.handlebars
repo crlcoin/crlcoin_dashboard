@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="col-11 col-md-10 col-lg-9 pt-2">
+        <div class="col-11 col-md-10 col-lg-9 col-xl-8 pt-2">
             <div class="collapse card" id="collapseNewHelper">
                 <form action="/f/a/c/dashboard/create/helper" method="POST" class="card-body bg-pattern bg-dark rounded">
 
@@ -43,54 +43,64 @@
     </div>
 
     <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-11 col-md-10 col-lg-9 col-xl-8 m-0">
+            <div class="accordion custom-accordion bg-white rounded shadow-lg" id="custom-accordion-one">
 
-        <div class="col-11 col-md-10 col-lg-9">
-            <div class="accordion custom-accordion shadow-lg" id="custom-accordion-one">
+            {{#each helpers}}
 
-                {{!-- Question/Answer --}}
-                {{#each helpers}}
-                <form action="/f/a/c/dashboard/update/helper" method="POST" class="card mb-0">
-                    <input type="hidden" name="reference" value="{{_id}}">
-                    <div class="card-header bg-primary">
+            <form action="/f/a/c/dashboard/update/helper" method="POST" class="card m-0">
+                <input type="hidden" name="reference" value="{{_id}}">
+                <a class="card-header custom-accordion-title collapsed position-relative text-light bg-primary"
+                    id="heading{{_id}}" href="#collapse{{_id}}"
+                    data-toggle="collapse" aria-expanded="true" aria-controls="collapse{{_id}}">
+                    <i class="mdi mdi-help-network"></i>
+                    &nbsp;
+                    {{question}}
+                    <i class="mdi mdi-chevron-down accordion-arrow mr-2"></i>
+                </a>
+                <div class="collapse py-3 px-3" id="collapse{{_id}}"
+                    aria-labelledby="heading{{_id}}" data-parent="#custom-accordion-one">
 
-                        <a class="m-0 position-relative text-light custom-accordion-title d-block collapsed" 
-                            id="heading{{_id}}" data-toggle="collapse" href="#collapse{{_id}}" aria-expanded="true"
-                            aria-controls="collapse{{_id}}">
-                            <i class="mdi mdi-help-network"></i>
-                            &nbsp;
+                    <div class="form-group">
+                        <label for="title-{{_id}}" class="h5 text-muted">QUESTION:</label>
+                        <input type="hidden" name="question" value="{{question}}"
+                            data-input-reference="title-{{_id}}">
+                        <div id="title-{{_id}}" class="form-control" contenteditable="true"
+                            data-reference="title-{{_id}}" data-crl="helperTitle">
                             {{question}}
-                            <i class="mdi mdi-chevron-down accordion-arrow"></i>
-                        </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="response-{{_id}}" class="h5 text-muted">RESPONSE:</label>
+                        <input type="hidden" name="response" value="{{answer}}"
+                            data-input-reference="response-{{_id}}">
+                        <pre id="response-{{_id}}" class="form-control overflow-auto text-dark" contenteditable="true"
+                            data-crl="helperResponse" data-reference="response-{{_id}}"
+                            style="height: 140px;">{{#formatText answer}}{{response}}{{/formatText}}</pre>
+                    </div>
+
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-danger waves-effect waves-light"
+                            data-crl="deleteHelper" value="{{_id}}">
+                            <i class="mdi mdi-trash-can"></i>
+                            Delete
+                        </button>
+                        <button type="submit" class="btn btn-success waves-effect waves-dark"
+                            disabled="true" data-submit-reference="response-{{_id}}">
+                            Save changes
+                        </button>
 
                     </div>
 
-                    <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}"
-                        data-parent="#custom-accordion-one">
+                </div>
+            </form>
 
-                        <input type="hidden" value="{{question}}" data-input-reference="title-{{_id}}" name="question">
-                        <div class="card-body py-1" contenteditable="true" data-reference="title-{{_id}}" data-crl="helperTitle">
-                            {{question}}
-                        </div>
-
-                        <input type="hidden" value="{{answer}}" name="response" data-input-reference="response-{{_id}}">
-                        <div contenteditable="true" data-crl="helperResponse" data-reference="response-{{_id}}" class="card-body">
-                            {{answer}}
-                        </div>
-
-                        <div class="card-body">
-                            <button type="button" class="btn btn-danger mr-1" data-crl="deleteHelper" value="{{_id}}">
-                                <i class="mdi mdi-trash-can"></i>
-                                Delete
-                            </button>
-                            <button type="submit" disabled="true" data-submit-reference="response-{{_id}}" class="btn btn-success mr-1">
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                {{/each}}
+            {{/each}}
 
             </div>
+
         </div>
     </div>
 

@@ -85,6 +85,14 @@ module.exports = {
         delete args[0]._id
         delete args[0].__v
         return JSON.stringify(args[0])
+    },
+
+    formatText: (...args) => {
+        let string = args[0]
+        string = JSON.stringify(string).replace(/<|>/g, '')
+        string = string.replace(/\\r\\n|\\n/g, '<br>')
+        string = string.slice(1, string.length - 1);
+        return string
     }
 
 }

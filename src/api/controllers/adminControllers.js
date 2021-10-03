@@ -215,7 +215,7 @@ const dashboardAccess = async (req, res) => {
             company: manager || '',
             preloginData: req.preloginData,
             companiesData: req.companies,
-            simpleComapniesData: req.simpleComapniesData,
+            simpleCompaniesData: req.simpleCompaniesData,
             tablesConfig: req.tablesConfig,
             contactMeMessages: req.contactMe,
             helpers: req.helpers

@@ -73,7 +73,7 @@ const onlyRequireDatas = async (req, res, next) => {
             let managerResponse = await requireManagers()
 
             if (!!managerResponse && managerResponse.length > 0) {
-                req.simpleComapniesData = managerResponse
+                req.simpleCompaniesData = managerResponse
             }
 
             if (!!response && response.length > 0) {

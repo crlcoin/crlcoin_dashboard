@@ -10,7 +10,7 @@ const checkLogin = async (req, res, next) => {
         return next()
 
     if (!!credential.public_id && constants.manager === credential.type )
-        return res.redirect('/acc/dashboard/overview')
+        return res.redirect('/acc/dashboard/tables')
 
     if (!!credential.public_id && constants.account === credential.type )
         return res.redirect('/f/a/c/dashboard/overview')
