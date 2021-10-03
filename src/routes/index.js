@@ -92,24 +92,24 @@ router.get('/f/a/e/dashboard/use/:page', adminCredentials, dashboardUse)
 
 router.post('/f/a/c/dashboard/account/change-password', adminCredentials, accountUpdatePassword)
 
-router.post('/f/a/c/dashboard/create/tables', companyTablesCreate)
-router.post('/f/a/c/dashboard/update/tables', companyTablesConfigUpdate)
-router.post('/f/a/c/dashboard/delete/tables', companyTablesConfigDelete)
+router.post('/f/a/c/dashboard/create/tables', adminCredentials, companyTablesCreate)
+router.post('/f/a/c/dashboard/update/tables', adminCredentials, companyTablesConfigUpdate)
+router.post('/f/a/c/dashboard/delete/tables', adminCredentials, companyTablesConfigDelete)
 
-router.post('/f/a/c/dashboard/create/table-data', companyTablesDataCreate)
-router.post('/f/a/c/dashboard/update/table-data', companyTablesDataUpdate)
+router.post('/f/a/c/dashboard/create/table-data', adminCredentials, companyTablesDataCreate)
+router.post('/f/a/c/dashboard/update/table-data', adminCredentials, companyTablesDataUpdate)
 
-router.post('/f/a/c/dashboard/create/companies', companyPreloginCreate)
-router.post('/f/a/c/dashboard/delete/companies', companyPreloginDelete)
+router.post('/f/a/c/dashboard/create/companies', adminCredentials, companyPreloginCreate)
+router.post('/f/a/c/dashboard/delete/companies', adminCredentials, companyPreloginDelete)
 
-router.post('/f/a/c/dashboard/create/helper', newHelper)
-router.post('/f/a/c/dashboard/update/helper', updateHelp)
-router.post('/f/a/c/dashboard/delete/helper', deleteHelp)
+router.post('/f/a/c/dashboard/create/helper', adminCredentials, newHelper)
+router.post('/f/a/c/dashboard/update/helper', adminCredentials, updateHelp)
+router.post('/f/a/c/dashboard/delete/helper', adminCredentials, deleteHelp)
 
-router.post('/f/a/c/dashboard/delete/companies-register', companyDeleteLogin)
+router.post('/f/a/c/dashboard/delete/companies-register', adminCredentials, companyDeleteLogin)
 
-router.post('/f/a/c/dashboard/delete/message', deleteMessage)
-router.post('/f/a/c/dashboard/update/message-status', updateMessageStatus)
+router.post('/f/a/c/dashboard/delete/message', adminCredentials, deleteMessage)
+router.post('/f/a/c/dashboard/update/message-status', adminCredentials, updateMessageStatus)
 
 // Errors
 router.get('/error/:code', errorPage)
