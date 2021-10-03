@@ -2,9 +2,28 @@
 const managersAccount = require('../api/model/Admin/registerModelCompanyLogin')
 const constants = require('../constants')
 
+const checkLogin = async (req, res, next) => {
+
+    let credential = req.session.credential
+
+    if (!credential)
+        return next()
+
+    if (!!credential.public_id && constants.manager === credential.type )
+        return res.redirect('/acc/dashboard/overview')
+
+    if (!!credential.public_id && constants.account === credential.type )
+        return res.redirect('/f/a/c/dashboard/overview')
+
+    return next()
+
+}
+
 const adminCredentials = async (req, res, next) => {
 
     let credential = req.session.credential
+
+    if (!credential) return res.redirect('/error/404')
 
     let accessType = await check(credential.public_id)
 
@@ -43,7 +62,7 @@ const check = async (id) => {
 
         return await managersAccount
             .findOne({
-                app_id: id
+                _id: id
             })
             .then((response) => {
                 if (response)
@@ -65,5 +84,6 @@ const check = async (id) => {
 
 module.exports = {
     adminCredentials,
-    managerCredentials
+    managerCredentials,
+    checkLogin
 }

@@ -8,13 +8,18 @@ const {
 
 const {
     pageLoginAccess,
-    accountCheckLoginAccess,
+
     dashboardCompanyAccess,
+    accountCheckLoginAccess,
     accountCheckLoginAndDestroySession,
+
     pageRecoverPassword,
     createResetPasswordPermission,
     registerNewPassword,
-    createRegisterNewPassword
+    createRegisterNewPassword,
+
+    accountUpdatePassword,
+    accountAdmUpdatePassword
 } = require('../api/controllers/managerControllers')
 
 const {
@@ -28,6 +33,9 @@ const {
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
+
+    companyTablesDataCreate,
+    companyTablesDataUpdate,
 
     companyPreloginCreate,
     companyPreloginDelete,
@@ -53,16 +61,14 @@ const {
 
 const {
     adminCredentials,
-    managerCredentials
+    managerCredentials,
+    checkLogin
 } = require('../helper/checkAccessCredentials')
 
 router.get('/', home)
 router.post('/contact', checkMessagesData, saveMessageData)
 
 // authentication
-router.get('/login', pageLoginAccess)
-router.post('/login', accountCheckLoginAccess)
-
 router.get('/auth/register', checkRegisterAccess, companyRegisterAccess)
 router.post('/auth/register', checkRegisterCreate, companyCreateLogin)
 
@@ -74,16 +80,25 @@ router.post('/auth/recover', createRegisterNewPassword)
 
 router.get('/logout', accountCheckLoginAndDestroySession)
 
+router.get('/login', checkLogin, pageLoginAccess)
+router.post('/login', accountCheckLoginAccess)
+
 // Manager
 router.get('/acc/dashboard/:page', managerCredentials, dashboardCompanyAccess)
+router.post('/acc/dashboard/account/change-password', managerCredentials, accountUpdatePassword)
 
 // Admin
-router.get('/f/a/c/dashboard/:page', onlyRequireDatas, dashboardAccess)
-router.get('/f/a/e/dashboard/use/:page', dashboardUse)
+router.get('/f/a/c/dashboard/:page', adminCredentials, onlyRequireDatas, dashboardAccess)
+router.get('/f/a/e/dashboard/use/:page', adminCredentials, dashboardUse)
+
+router.post('/f/a/c/dashboard/account/change-password', adminCredentials, accountUpdatePassword)
 
 router.post('/f/a/c/dashboard/create/tables', companyTablesCreate)
 router.post('/f/a/c/dashboard/update/tables', companyTablesConfigUpdate)
 router.post('/f/a/c/dashboard/delete/tables', companyTablesConfigDelete)
+
+router.post('/f/a/c/dashboard/create/table-data', companyTablesDataCreate)
+router.post('/f/a/c/dashboard/update/table-data', companyTablesDataUpdate)
 
 router.post('/f/a/c/dashboard/create/companies', companyPreloginCreate)
 router.post('/f/a/c/dashboard/delete/companies', companyPreloginDelete)

@@ -15,7 +15,7 @@ module.exports = {
             require: true
         },
         tableConfig: {
-            type: String,
+            type: Object,
             require: true
         },
         tableData: {

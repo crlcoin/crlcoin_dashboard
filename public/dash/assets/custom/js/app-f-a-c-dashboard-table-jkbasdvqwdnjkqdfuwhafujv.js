@@ -52,26 +52,6 @@ function createOptionsPoups(element, options) {
 
 const setFunctions = {
 
-    // number(element) {
-    //     element.addEventListener('input', function(event) {
-            // let value = element.innerText
-            // let check = value.replace(/[^a-dA-DEf-zF-Z]/g, '')
-
-            // if (!!check) {
-            //     element.style.backgroundColor = '#ff0f39'
-            //     element.style.color = '#f8f8f8'
-            //     element.setAttribute('title', `Inválido: ${check.split('')}`)
-            // } else {
-            //     element.style.backgroundColor = 'initial'
-            //     element.style.color = 'initial'
-            //     element.removeAttribute('title')
-            // }
-
-            // element.innerText = element.innerText
-
-    //     })
-    // },
-
     options(element) {
         let options = element.getAttribute('data-options').split(',')
         createOptionsPoups(element, options)
@@ -113,7 +93,7 @@ const setColumnStyle = {
 
 }
 
-function columnFunctions(element){
+function columnFunctions(element, data){
     let getAllColumns = element.querySelectorAll('th')
 
     getAllColumns.forEach((column) => {
@@ -138,40 +118,98 @@ function addRowFunctions(row, objt) {
     return
 }
 
-function saveRowData(row) {
-    console.log(row)
+function saveTableData(table) {
+
+    let config = table.getAttribute('data-table-config')
+    let ref = table.getAttribute('data-table-data-ref')
+    let rId = table.getAttribute('data-table-r')
+    let cId = table.getAttribute('data-table-c')
+    let rows = table.querySelectorAll('[data-table-row=table-row-input]')
+    let tableData = []
+    let objt = {}
+
+    rows.forEach((row, index) => {
+        let columns = row.querySelectorAll('[data-column]')
+        columns.forEach((col) => {
+
+            if (!!tableData[index])
+                tableData[index].push(col.innerText)
+            else
+                tableData[index] = [col.innerText]
+
+        })
+    })
+
+    if (!!ref)
+        objt.ref = ref
+
+    objt.r = rId
+    objt.c = cId
+    objt.config = JSON.parse(config)
+    objt.data = tableData
+
+    return axiosSaveTableData( table.getAttribute('data-table-u'), objt )
+}
+
+function addRowData(row, data) {
+    let columns = row.querySelectorAll('[data-column]')
+
+    columns.forEach(function(el, index) {
+        el.innerText = data[index]
+    })
+
     return
 }
 
+function createNewRow(saveButton, table, data) {
+
+    let tableBody = table.querySelector('tbody')
+    let getTableRowReference = document.querySelector('[data-table-row=table-row-base').cloneNode(true)
+    let deleteButton = getTableRowReference.querySelector('[data-table=delete-row]')
+
+    getTableRowReference.setAttribute( 'data-table-row', 'table-row-input')
+    deleteButton.addEventListener('click', function() {
+        getTableRowReference.remove()
+        setRowDataId(tableBody.querySelectorAll('tr'))
+    })
+
+    tableBody.appendChild( getTableRowReference )
+
+    addRowFunctions(getTableRowReference, {saveButton})
+    setRowDataId(tableBody.querySelectorAll('tr'))
+
+    if (!!data)
+        addRowData(getTableRowReference, data)
+
+    columnFunctions(getTableRowReference)
+}
+
 window.addEventListener('load', function() {
+    let dataExi = document.querySelector('[data-table-exi]')
+    let saveButton = document.querySelector('[data-table=save-table-data]')
     let table = document.getElementById('table-company-data')
+
+    saveButton.addEventListener('click', function() {
+        saveTableData(table)
+    })
     table.addEventListener('input', function() {
         execScriptTable(table.getAttribute('data-function'))
     })
 
     document.querySelector('[data-table=new-row]').addEventListener('click', function() {
-
-        let tableBody = table.querySelector('tbody')
-        let getTableRowReference = document.querySelector('[data-table-row=table-row-base').cloneNode(true)
-        let saveButton = getTableRowReference.querySelector('[data-table=save-row]')
-        let deleteButton = getTableRowReference.querySelector('[data-table=delete-row]')
-        let row = saveButton.parentNode.parentNode
-
-        getTableRowReference.setAttribute( 'data-table-row', 'table-row-input')
-        saveButton.addEventListener('click', function() {
-            saveRowData(row)
-        })
-        deleteButton.addEventListener('click', function() {
-            getTableRowReference.remove()
-            setRowDataId(tableBody.querySelectorAll('tr'))
-        })
-
-        tableBody.appendChild( getTableRowReference )
-
-        addRowFunctions(row, {saveButton: saveButton})
-        setRowDataId(tableBody.querySelectorAll('tr'))
-
-        columnFunctions(getTableRowReference)
+        createNewRow(saveButton, table)
     })
+
+    if (!!dataExi) {
+        let data = dataExi.getAttribute('data-table-exi').split('{;}')
+
+        data.forEach(function(e) {
+
+            if (!!e)
+                createNewRow(saveButton, table, e.split('{:}'))
+
+        })
+
+    }
 
 })

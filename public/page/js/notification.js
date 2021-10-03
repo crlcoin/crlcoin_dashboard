@@ -10,7 +10,7 @@ function notification(data, type, reloadPage) {
     } else if (type == "success") {
         Swal.fire({
             title: data.title || "Successfully!",
-            text: data.message || "Email has sent successfully",
+            text: data.message || '',
             type: "success",
             confirmButtonClass: "btn btn-confirm mt-2"
         })

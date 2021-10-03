@@ -1,4 +1,4 @@
-const { PORT, SESSION_SECRET } = require('./config')
+const { PORT, SESSION_SECRET, IS_PRODUCTION } = require('./config')
 const express = require('express')
 const handlebars = require('express-handlebars')
 const path = require('path')
@@ -9,9 +9,14 @@ const handlebarsHelpers = require('./helper/handlebars')
 
 // Session
 app.use(session({
+    name: "wbssid",
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        secure: IS_PRODUCTION,
+        maxAge: 1000 * 60 * 60 * 24,
+    }
 }))
 
 app.use( express.json() )

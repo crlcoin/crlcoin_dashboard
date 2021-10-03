@@ -77,6 +77,14 @@ module.exports = {
         }
 
         return response ? response : ""
+    },
+
+    toString: (...args) => {
+        delete args[0].createdAt
+        delete args[0].usedBy
+        delete args[0]._id
+        delete args[0].__v
+        return JSON.stringify(args[0])
     }
 
 }

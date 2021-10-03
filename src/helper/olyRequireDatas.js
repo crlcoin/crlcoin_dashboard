@@ -79,6 +79,8 @@ const onlyRequireDatas = async (req, res, next) => {
             if (!!response && response.length > 0) {
 
                 response.forEach((table) => {
+                    if (table.usedBy === -1)
+                        table.usedBy = 0
                     table.columnsCount = table.columns.length
                 })
 

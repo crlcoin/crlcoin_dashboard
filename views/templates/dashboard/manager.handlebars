@@ -72,28 +72,28 @@
 
                     <div class="row">
 
-                        {{!-- Overview --}}
-                        {{#if page.Overview}}
-                        {{>dashboard/manager/_app}}
-                        {{/if}}
+                    {{!-- Overview --}}
+                    {{#if page.Overview}}
+                    {{>dashboard/manager/_app}}
+                    {{/if}}
 
                     </div>
 
                     <div class="row">
 
-                        {{!-- Tables --}}
-                        {{#if page.Tables}}
-                        {{>dashboard/manager/_appTables}}
-                        {{/if}}
+                    {{!-- Tables --}}
+                    {{#if page.Tables}}
+                    {{>dashboard/manager/_appTables}}
+                    {{/if}}
 
                     </div>
 
                     <div class="row">
 
-                        {{!-- Help --}}
-                        {{#if page.Help}}
-                        {{>dashboard/manager/_appHelp}}
-                        {{/if}}
+                    {{!-- Help --}}
+                    {{#if page.Help}}
+                    {{>dashboard/manager/_appHelp}}
+                    {{/if}}
 
                     </div>
 
@@ -124,18 +124,25 @@
 
     </div>
 
+    {{!-- Connect --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     {{!-- <!-- Vendor js --> --}}
     <script src="/page/assets/js/vendor.min.js"></script>
 
     {{!-- <!-- Dashboard init--> --}}
-    <script src="/page/assets/js/pages/dashboard-4.init.js"></script>
+    {{!-- <script src="/page/assets/js/pages/dashboard-4.init.js"></script> --}}
 
     <script src="/page/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
     <script src="/page/assets/js/pages/toastr.init.js"></script>
     <script src="/page/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
 
     {{!-- <!-- App js --> --}}
-    <script src="{{page.URL}}/page/assets/js/app.min.js"></script>
+    <script src="/page/assets/js/app.min.js"></script>
+    <script src="/page/js/notification.js"></script>
+    {{#if page.Account}}
+        <script src="/page/assets/custom/js/app-change-password-9be3621a90afd27c593036f2cbf622.js"></script>
+    {{/if}}
 
 </body>
 

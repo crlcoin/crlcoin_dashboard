@@ -85,25 +85,23 @@ const deleteCompany = async (app_id) => {
 const accessAccount = async (data) => {
     try {
 
-        let user = await adminModelLogin
+        return await adminModelLogin
             .findOne({
                 email: data.email
             })
             .select('password app_id type')
             .then((result) => {
-                return result
+                if (result && appCheckPasswordHash(data.password, result.password)) {
+                    delete result.password
+                    result = filterLoginData(result)
+                    return result
+                } else {
+                    return false
+                }
             })
             .catch((error) => {
                 return false
             })
-
-        if (!!user && appCheckPasswordHash(data.password, user.password)) {
-
-            return filterLoginData(user)
-
-        } else {
-            return false
-        }
 
     } catch (error) {
         if (error) {
@@ -209,7 +207,10 @@ const resetPassword = async (data) => {
             }
         })
         .catch((err) => {
-        console.log(error)})
+            if (err)
+                console.log(err)
+            return false
+        })
 
         mailer.sendMail({
             to: user.email,
@@ -219,7 +220,7 @@ const resetPassword = async (data) => {
             context: { token }
         }, (err) => {
             if (err) {
-        console.log(err)
+                console.log(err)
                 return false
             }
 
@@ -228,8 +229,87 @@ const resetPassword = async (data) => {
 
     } catch (error) {
         if (error)
-        console.log(error)
+            console.log(error)
             return false
+    }
+}
+
+const updateAccountPassword = async (data) => {
+    try {
+
+        const { currentEmail, currentPassword, newPassword, confirmPassword } = data
+
+        return await adminModelLogin
+            .findOne({
+                email: currentEmail
+            })
+            .select('_id password')
+            .then(async (result) => {
+                if (!result)
+                    return false
+
+                let check = appCheckPasswordHash(currentPassword, result.password)
+                if (check) {
+                    return await updateCurrentPassword(result._id, newPassword, confirmPassword)
+                } else {
+                    return false
+                }
+            })
+            .catch((error) => {
+                if (error)
+                    console.log(error)
+                return false
+            })
+
+    } catch (error) {
+        if (error)
+            console.log(error)
+        return false
+    }
+}
+
+const updateCurrentPassword = async (id, password, confirmpassword) => {
+    try {
+
+        let result = {
+            status: false,
+            message: ''
+        }
+
+        if (!password || !confirmpassword) {
+            result.message = 'Error: Password'
+            return result
+        }
+
+        let hash = appCheckPassword(password, confirmpassword)
+
+        if (!hash) {
+            result.message = 'Error:: Password'
+            return result
+        }
+
+        return await adminModelLogin
+            .findOneAndUpdate({
+                _id: id,
+            }, {
+                password: hash
+            })
+            .then((response) => {
+                if (!response)
+                    return result
+
+                result.status = true
+                return result
+            })
+            .catch((err) => {
+                result.message = 'Error: Server Error'
+                return result
+            })
+
+    } catch (error) {
+        if (error)
+            console.log(error)
+        return false
     }
 }
 
@@ -318,11 +398,11 @@ const newObject = async (data) => {
 }
 
 const filterLoginData = (data) => {
-    let { type, app_id } = data
+    let { type, _id } = data
 
     type = constants[type] || 'err'
 
-    return { type: type, public_id: app_id }
+    return { type: type, public_id: _id }
 }
 
 module.exports = {
@@ -333,5 +413,7 @@ module.exports = {
     resetPassword,
     requireAllAccounts,
     checkResetPasswordToken,
-    createNewPassword
+    createNewPassword,
+
+    updateAccountPassword
 }

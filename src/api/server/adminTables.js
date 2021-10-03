@@ -6,6 +6,9 @@ const createTablesConfig = async (data) => {
         let response = await adminModelTablesConfig
             .create(data)
             .then((result) => {
+                if (!result)
+                    return false
+
                 return result.name;
             })
             .catch((error) => {
@@ -59,6 +62,23 @@ const requireTablesConfig = async (id) => {
     }
 };
 
+const updateTableCount = async (id) => {
+    try {
+
+        return await adminModelTablesConfig
+            .findOneAndUpdate({table_id: id}, {
+                $inc : {
+                    usedBy: 1
+                }
+            })
+
+    } catch (e) {
+        if (e) {
+            return
+        }
+    }
+}
+
 const updateTableConfig = async (data) => {
     try {
         table_id = ""
@@ -104,12 +124,54 @@ const deleteTableConfig = async (table_id) => {
     }
 };
 
+const createTablesDatas = async(data) => {
+    try {
+
+        return await adminModelTablesDatas
+            .create(data)
+            .then((response) => {
+                if (!response)
+                    return false
+
+                updateTableCount(data.tableId)
+                return response
+            })
+            .catch((error) => {
+                return error
+            })
+
+    } catch (error) {
+        if (error)
+            return error
+    }
+}
+
+const updateTablesDatas = async(id, data) => {
+    try {
+
+        return await adminModelTablesDatas
+            .findByIdAndUpdate(id, data)
+            .then((response) => {
+                if (!response)
+                    return false
+                return response
+            })
+            .catch((error) => {
+                return false
+            })
+
+    } catch (error) {
+        if (error)
+            return false
+    }
+}
+
 const requireTablesDatas = async(table_id, _id) => {
     try {
 
         return await adminModelTablesDatas
             .findOne({
-                table_id: table_id,
+                tableId: table_id,
                 companyId: _id
             })
             .then((response) => {
@@ -132,5 +194,8 @@ module.exports = {
     requireTablesConfig,
     updateTableConfig,
     deleteTableConfig,
-    requireTablesDatas
+
+    createTablesDatas,
+    updateTablesDatas,
+    requireTablesDatas,
 };

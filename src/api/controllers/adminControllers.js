@@ -1,3 +1,8 @@
+
+const {
+    requireOneAccount
+} = require("../server/manager/managerAccount");
+
 const {
     PrincipalULR,
     PagesList,
@@ -10,7 +15,9 @@ const {
     requireTablesConfig,
     updateTableConfig,
 
-    requireTablesDatas
+    requireTablesDatas,
+    createTablesDatas,
+    updateTablesDatas
 } = require('../server/adminTables');
 
 const {
@@ -113,6 +120,8 @@ const dashboardUse = async (req, res) => {
     let page = req.params.page || ""
     let _id = req.query.app_id || ""
     let companyTableDatas
+    let tableData
+    let reference
 
     if (!!id && ActionsList.includes(id) && !!table_id) {
 
@@ -129,7 +138,15 @@ const dashboardUse = async (req, res) => {
         }
 
         if (!!template) {
-            let response = await requireTablesConfig(table_id);
+            let response
+
+            if (!!companyTableDatas && !!companyTableDatas.tableConfig) {
+                reference = companyTableDatas._id
+                response = companyTableDatas.tableConfig
+                tableData = companyTableDatas.tableData
+            } else {
+                response = await requireTablesConfig(table_id);
+            }
 
             return res.render('templates/dashboard/admin', {
                 page: {
@@ -137,8 +154,11 @@ const dashboardUse = async (req, res) => {
                     title: page.toUpperCase(),
                     URL: PrincipalULR
                 },
+                tableId: table_id,
+                companyId: _id,
                 tableConfig: response,
-                companyTableData: companyTableDatas
+                tableReference: reference,
+                companyTableData: tableData || ''
             })
         }
 
@@ -147,8 +167,33 @@ const dashboardUse = async (req, res) => {
     return res.redirect('/error/404')
 }
 
-const dashboardAccess = (req, res) => {
+const companyTablesDataCreate = async (req, res) => {
+    const {r, c, config, data} = req.body
+    let response = ''
+
+    if (!!r && !!c, !!config && !!data)
+        response = await createTablesDatas({tableId: r, companyId: c, tableConfig: config, tableData: data})
+
+    if (!!response)
+        return res.status(201).json({status: true, message: "Table Data Saved!"})
+    return res.status(400).json({status: false, message: "Error"})
+}
+
+const companyTablesDataUpdate = async (req, res) => {
+    const {ref, r, c, config, data} = req.body
+    let response = ''
+
+    if (!!ref, !!r && !!c, !!config && !!data)
+        response = await updateTablesDatas(ref, {tableId: r, companyId: c, tableConfig: config, tableData: data})
+
+    if (!!response)
+        return res.status(201).json({status: true, message: "Table Data Saved!"})
+    return res.status(400).json({status: false, message: "Error"})
+}
+
+const dashboardAccess = async (req, res) => {
     let template = ""
+    let manager
 
     if (!!req.params.page) {
         PagesList.forEach(page => {
@@ -158,6 +203,8 @@ const dashboardAccess = (req, res) => {
         })
     }
 
+    manager = await requireOneAccount(req.session.credential.public_id)
+
     if (!!template) {
         return res.render('templates/dashboard/admin', {
             page: {
@@ -165,6 +212,7 @@ const dashboardAccess = (req, res) => {
                 title: template,
                 URL: PrincipalULR
             },
+            company: manager || '',
             preloginData: req.preloginData,
             companiesData: req.companies,
             simpleComapniesData: req.simpleComapniesData,
@@ -414,6 +462,9 @@ module.exports = {
     companyTablesCreate,
     companyTablesConfigUpdate,
     companyTablesConfigDelete,
+
+    companyTablesDataCreate,
+    companyTablesDataUpdate,
 
     companyPreloginCreate,
     companyPreloginDelete,

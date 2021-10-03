@@ -201,8 +201,15 @@
     <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
     <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
 
-    <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-lib-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
-    <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+    {{#if page.useTables}}
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-conn-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-lib-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+    {{/if}}
+
+    {{#if page.Account}}
+        <script type="text/javascript" src="/dash/assets/custom/js/app-change-password-9be3621a90afd27c593036f2cbf622.js"></script>
+    {{/if}}
 
 </body>
 

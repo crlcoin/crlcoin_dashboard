@@ -305,6 +305,11 @@ const appDashboardInputFunctions = {
                     listColumnsName.subscribe(el.value)
                 if ("function" === type.value)
                     listColumnsFunction.subscribe(el.value)
+                if ("options" === type.value) {
+                    el.parentNode.parentNode.querySelector('[data-crl=columnOptions]').classList.add('pre-show')
+                } else {
+                    el.parentNode.parentNode.querySelector('[data-crl=columnOptions]').classList.remove('pre-show')
+                }
             })
 
         }

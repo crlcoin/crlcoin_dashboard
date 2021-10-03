@@ -3,10 +3,16 @@ const {
 } = require("../server/manager/managerTables");
 
 const {
+    requireOneAccount
+} = require("../server/manager/managerAccount");
+
+const {
     accessAccount,
     resetPassword,
     checkResetPasswordToken,
-    createNewPassword
+    createNewPassword,
+
+    updateAccountPassword
 } = require('../server/adminLogins')
 
 const {
@@ -16,8 +22,10 @@ const {
     manager
 } = require("../../constants")
 
-const dashboardCompanyAccess = (req, res) => {
+const dashboardCompanyAccess = async (req, res) => {
     let template = ""
+    let manager
+    let table
 
     if (!!req.params.page) {
         managerPagesList.forEach(page => {
@@ -27,14 +35,17 @@ const dashboardCompanyAccess = (req, res) => {
         })
     }
 
+    manager = await requireOneAccount(req.session.credential.public_id)
+
     if (!!template) {
         return res.render('templates/dashboard/manager', {
-            company: req.companySimpleData,
+            company: manager,
             page: {
                 [template]: true,
                 title: template,
                 URL: PrincipalULR
-            }
+            },
+            tableColumns: 'tableData'
         })
     }
 
@@ -67,6 +78,7 @@ const accountCheckLoginAccess = async (req, res) => {
 
 const accountCheckLoginAndDestroySession = (req, res) => {
     if (req.session.credential) {
+        delete req.session.credential
         req.session.destroy()
     }
     return res.render('templates/authentication/logout')
@@ -119,6 +131,40 @@ const createRegisterNewPassword = async (req, res) => {
     return res.render('templates/authentication/recoverCreatePass', {token: data.token, message: result.message})
 }
 
+const accountUpdatePassword = async (req, res) => {
+    let response
+    const {
+        referenceData,
+        currentEmail,
+        currentPassword,
+        newPassword,
+        confirmPassword
+    } = req.body
+
+    if (req.session.credential.public_id === referenceData) {
+
+        response = await updateAccountPassword({
+            referenceData: referenceData,
+            currentEmail: currentEmail,
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        })
+
+    }
+
+    if (!!response && response.status) {
+        if (req.session.credential) {
+            delete req.session.credential
+            req.session.destroy()
+        }
+
+        return res.status(200).json({status: true})
+    }
+
+    return res.status(400).json({status: false})
+}
+
 module.exports = {
     pageLoginAccess,
     accountCheckLoginAccess,
@@ -128,5 +174,7 @@ module.exports = {
     pageRecoverPassword,
     createResetPasswordPermission,
     registerNewPassword,
-    createRegisterNewPassword
+    createRegisterNewPassword,
+
+    accountUpdatePassword
 }
