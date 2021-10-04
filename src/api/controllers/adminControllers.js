@@ -4,7 +4,6 @@ const {
 } = require("../server/manager/managerAccount");
 
 const {
-    PrincipalULR,
     PagesList,
     ActionsList,
 } = require('../../constants')
@@ -151,8 +150,7 @@ const dashboardUse = async (req, res) => {
             return res.render('templates/dashboard/admin', {
                 page: {
                     [template]: true,
-                    title: page.toUpperCase(),
-                    URL: PrincipalULR
+                    title: page.toUpperCase()
                 },
                 tableId: table_id,
                 companyId: _id,
@@ -209,8 +207,7 @@ const dashboardAccess = async (req, res) => {
         return res.render('templates/dashboard/admin', {
             page: {
                 [template]: true,
-                title: template,
-                URL: PrincipalULR
+                title: template
             },
             company: manager || '',
             preloginData: req.preloginData,

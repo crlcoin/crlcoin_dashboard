@@ -20,7 +20,6 @@ const {
 } = require('../server/adminLogins')
 
 const {
-    PrincipalULR,
     managerPagesList,
     account,
     manager
@@ -65,8 +64,7 @@ const dashboardCompanyAccess = async (req, res) => {
             company: manager,
             page: {
                 [template]: true,
-                title: template,
-                URL: PrincipalULR
+                title: template
             },
             tableStatus: !!companyTable,
             dataReference: !!companyTable ? companyTable._id : "",
