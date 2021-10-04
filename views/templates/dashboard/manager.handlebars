@@ -131,7 +131,11 @@
     <script src="/page/assets/js/vendor.min.js"></script>
 
     {{!-- <!-- Dashboard init--> --}}
-    {{!-- <script src="/page/assets/js/pages/dashboard-4.init.js"></script> --}}
+    {{#if page.Tables}}
+        <script src="/page/libs/morris.js06/morris.min.js"></script>
+        <script src="/page/libs/raphael/raphael.min.js"></script>
+        <script src="/page/assets/js/pages/chart.init.js"></script>
+    {{/if}}
 
     <script src="/page/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
     <script src="/page/assets/js/pages/toastr.init.js"></script>

@@ -74,6 +74,7 @@ const dashboardCompanyAccess = async (req, res) => {
             companyReference: !!companyTable ? companyTable.companyId : "",
             tableConfig: !!companyTable ? companyTable.tableConfig : "",
             tableData: !!companyTable ? companyTable.tableData : "",
+            chartsData: !!companyTable ? companyTable.chartsData : "",
             helpers:  !!helpers ? helpers : ""
         })
     }

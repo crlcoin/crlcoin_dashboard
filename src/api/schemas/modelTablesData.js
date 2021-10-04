@@ -22,6 +22,10 @@ module.exports = {
             type: Array,
             require: true
         },
+        chartsData: {
+            type: Array,
+            default: []
+        },
         createdAt: {
             type: Date,
             default: Date.now

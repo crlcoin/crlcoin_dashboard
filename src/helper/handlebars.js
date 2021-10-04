@@ -93,6 +93,11 @@ module.exports = {
         string = string.replace(/\\r\\n|\\n/g, '<br>')
         string = string.slice(1, string.length - 1);
         return string
+    },
+
+    toApplicationJson: (...args) => {
+        let json = JSON.stringify(args[0])
+        return args[args.length - 1].fn({json})
     }
 
 }

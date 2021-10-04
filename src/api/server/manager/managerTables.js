@@ -7,7 +7,7 @@ const requireTablesDatas = async (id) => {
         return await managerTablesDatas.findOne({
                 companyId: id
             })
-            .select('_id tableId companyId tableConfig tableData')
+            .select('_id tableId companyId tableConfig tableData chartsData')
             .then((response) => {
 
                 if (!response)
@@ -33,7 +33,6 @@ const requireTablesDatas = async (id) => {
 }
 
 const filterTableData = (data) => {
-
     delete data.table_id
     delete data.functions
     data.columns = data.columns.map(({name, type}) => {
@@ -44,7 +43,6 @@ const filterTableData = (data) => {
     })
 
     return data
-
 }
 
 module.exports = {

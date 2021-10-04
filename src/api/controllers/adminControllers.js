@@ -168,11 +168,11 @@ const dashboardUse = async (req, res) => {
 }
 
 const companyTablesDataCreate = async (req, res) => {
-    const {r, c, config, data} = req.body
+    const {r, c, config, data, charts} = req.body
     let response = ''
 
-    if (!!r && !!c, !!config && !!data)
-        response = await createTablesDatas({tableId: r, companyId: c, tableConfig: config, tableData: data})
+    if (!!r && !!c, !!config && !!data && !!charts)
+        response = await createTablesDatas({tableId: r, companyId: c, tableConfig: config, tableData: data, chartsData: charts})
 
     if (!!response)
         return res.status(201).json({status: true, message: "Table Data Saved!"})
@@ -180,11 +180,11 @@ const companyTablesDataCreate = async (req, res) => {
 }
 
 const companyTablesDataUpdate = async (req, res) => {
-    const {ref, r, c, config, data} = req.body
+    const {ref, r, c, config, data, charts} = req.body
     let response = ''
 
-    if (!!ref, !!r && !!c, !!config && !!data)
-        response = await updateTablesDatas(ref, {tableId: r, companyId: c, tableConfig: config, tableData: data})
+    if (!!ref, !!r && !!c, !!config && !!data && !!charts)
+        response = await updateTablesDatas(ref, {tableId: r, companyId: c, tableConfig: config, tableData: data, chartsData: charts})
 
     if (!!response)
         return res.status(201).json({status: true, message: "Table Data Saved!"})

@@ -119,7 +119,9 @@ function addRowFunctions(row, objt) {
 }
 
 function saveTableData(table) {
-
+    let chartsData = chartValue.getAll()
+    let chartsKeys = Object.keys(chartsData)
+    let charts = []
     let config = table.getAttribute('data-table-config')
     let ref = table.getAttribute('data-table-data-ref')
     let rId = table.getAttribute('data-table-r')
@@ -143,10 +145,17 @@ function saveTableData(table) {
     if (!!ref)
         objt.ref = ref
 
+    if ( !!chartsKeys && chartsKeys.length > 0) {
+        chartsKeys.forEach(function(key) {
+            charts.push(chartsData[key])
+        })
+    }
+
     objt.r = rId
     objt.c = cId
     objt.config = JSON.parse(config)
     objt.data = tableData
+    objt.charts = charts
 
     return axiosSaveTableData( table.getAttribute('data-table-u'), objt )
 }
@@ -204,10 +213,8 @@ window.addEventListener('load', function() {
         let data = dataExi.getAttribute('data-table-exi').split('{;}')
 
         data.forEach(function(e) {
-
             if (!!e)
                 createNewRow(saveButton, table, e.split('{:}'))
-
         })
 
     }
