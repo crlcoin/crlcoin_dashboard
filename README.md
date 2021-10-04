@@ -10,14 +10,14 @@ Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos 
 - [x] Google Captcha
 ---
 ### Páginas de acesso
-- [ ] Entrar
+- [x] Entrar
 - [x] Registrar
-- [ ] Recuperar acesso
+- [x] Recuperar acesso
 ---
 ### Ambiente do usuário
-- [ ] Visualização de suas tabelas
+- [x] Visualização de suas tabelas
 - [ ] Download .CSV
-- [ ] Modificar dados da conta
+- [x] Modificar dados da conta
 ---
 ### Ambiente do administrador
 >Pré Cadastro de Usuários
@@ -28,15 +28,15 @@ Disponibilizar um ambiente para que a criação de tabelas e acompanhamento dos 
 - [x] Criação
 - [x] Modificação
 - [x] Remoção
-- [ ] Usar
+- [x] Usar
 
 >Gráficos
-- [ ] Vincular gráfico a coluna
+- [x] Vincular gráfico a coluna
 
 >Helpers
-- [ ] Criar
-- [ ] Modificar
-- [ ] visualizar
+- [x] Criar
+- [x] Modificar
+- [x] visualizar
 
 >Mensagens
 - [x] visualizar/responder/deletar mensagens enviadas da landing page
