@@ -51,11 +51,20 @@
         });
     },
 
+    Ubold.prototype.initLoginButton = function() {
+        $('.login-button').click(function(){
+            if (!!location) {
+                location.href = `https://${location.host}/login`
+            }
+        })
+    },
+
     Ubold.prototype.init = function() {
         this.initStickyMenu();
         this.initSmoothLink();
         this.initScrollspy();
         this.initBacktoTop();
+        this.initLoginButton();
     },
     //init
     $.Ubold = new Ubold, $.Ubold.Constructor = Ubold
