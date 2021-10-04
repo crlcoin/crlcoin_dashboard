@@ -1,0 +1,97 @@
+
+
+{{#if companyTableData}}
+<span style="display: none;" data-table-exi="{{#each companyTableData}}{{#each this}}{{this}}{:}{{/each}}{;}{{/each}}"></span>
+{{/if}}
+
+{{#with tableConfig}}
+
+    <div class="col-12">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box">
+                    <div class="responsive-table-plugin">
+                        <div class="row">
+                            <div class="col-12 d-flex flex-wrap align-items-center">
+                                <h4>
+                                    {{name}}
+                                </h4>
+                                <button type="button" class="btn btn-blue ml-auto" data-table="new-row">
+                                    <i class="mdi mdi-plus"></i>
+                                    Add Row
+                                </button>
+                                <button class="btn bg-success ml-1 text-light text-center"
+                                    data-table="save-table-data" disabled="true"
+                                    data-toggle="tooltip" data-placement="right" title=""
+                                    data-original-title="Save" aria-describedby="tooltip401869">
+                                    <i class="mdi mdi-content-save-settings-outline"></i>
+                                    Save data
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <div class="table-rep-plugin fixed-solution" data-pattern="priority-columns">
+                                <div class="table-responsive" data-pattern="priority-columns">
+                                    <div style="width: auto; top: -1px; padding-bottom: 250px;" class="pt-3">
+
+                                        <table id="table-company-data" class="table table-striped" data-function="{{functions}}"
+                                            data-table-u="/f/a/c/dashboard/{{#if ../companyTableData}}update{{else}}create{{/if}}/table-data"
+                                            data-table-config="{{toString ../tableConfig}}" data-table-data-ref="{{../tableReference}}"
+                                            data-table-r="{{../tableId}}" data-table-c="{{../companyId}}">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="max-width: 70px;">
+                                                        <div class="btn bg-danger p-2 text-light text-center"
+                                                            style="max-width: 70px!important;"
+                                                            data-toggle="tooltip" data-placement="right" title=""
+                                                            data-original-title="Delete" aria-describedby="tooltip401869">
+                                                            <i class="mdi mdi-help-network"></i>
+                                                        </div>
+                                                    </th>
+                                                    {{#each columns}}
+                                                    <th class="text-center"
+                                                        data-priority="1"
+                                                        style="max-width: 420px; vertical-align: middle;">
+                                                        {{name}}
+                                                    </th>
+                                                    {{/each}}
+                                                </tr>
+                                            </thead>
+                                            <tbody class="px-2"></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <table style="display: none;">
+        <tbody>
+            <tr class="position-relative" data-table-row='table-row-base'>
+                    <th class="border-left border-bottom text-center"
+                        data-type="action-button">
+                        <button data-table="delete-row" type="button" title="Delete row"
+                            class="btn bg-danger text-light p-2">
+                            <i class="mdi mdi-trash-can"></i>
+                        </button>
+                    </th>
+                {{#each columns}}
+                    <th class="border-left border-bottom position-relative" contenteditable="true"
+                        style="vertical-align: middle;"
+                        data-column="{{name}}" data-type="{{type}}" data-options="{{options}}"></th>
+                {{/each}}
+            </tr>
+        </tbody>
+    </table>
+
+{{/with}}

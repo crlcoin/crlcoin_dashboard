@@ -1,0 +1,89 @@
+
+<div class="left-side-menu">
+
+    <div class="h-100" data-simplebar >
+
+        <div id="sidebar-menu">
+
+            <ul id="side-menu">
+
+                <li class="menu-title">App</li>
+
+                {{#currentPage page.title "Overview" "true" 0}}
+                    <li data-crl="appTables">
+                        <a href="{{response}}">
+                            <i class="ti-layout-grid3"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                {{#currentPage page.title "Tables" "true" 0}}
+                    <li data-crl="appTables">
+                        <a href="{{response}}">
+                            <i class="mdi mdi-file-table-box-multiple"></i>
+                            <span>Tables</span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                {{#currentPage page.title "Companies" "true" 0}}
+                    <li data-crl="appCompanies">
+                        <a href="{{response}}">
+                            <i class="mdi mdi-office-building"></i>
+                            <span> Companies </span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                {{#currentPage page.title "Help" "true" 0}}
+                    <li data-crl="appTickets">
+                        <a href="{{response}}">
+                            <i class="mdi mdi-help-circle"></i>
+                            <span> FAQs </span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                <div class="dropdown-divider"></div>
+
+                <li class="menu-title">Landing Page</li>
+
+                {{#currentPage page.title "Messages" "true" 0}}
+                    <li data-crl="landingPageMessages">
+                        <a href="{{response}}">
+                            <i class="mdi mdi-message-reply-text"></i>
+                            <span> Messages </span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                <div class="dropdown-divider"></div>
+
+                <li class="menu-title">Manager</li>
+
+                {{#currentPage page.title "Account" "true" 0}}
+                    <li data-crl="managerAccount">
+                        <a href="{{response}}">
+                            <i class="fe-user"></i>
+                            <span> Account </span>
+                        </a>
+                    </li>
+                {{/currentPage}}
+
+                <li data-crl="managerLogout">
+                    <a href="/logout">
+                        <i class="fe-log-out"></i>
+                        <span> Logout </span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+
+</div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Recover | CRLcoin Technology Group</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Recover password page CRLcoin Technology Group" name="description" />
+        <meta content="CRLcoin Technology Group" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        {{!-- <!-- App favicon --> --}}
+        <link rel="shortcut icon" href="/page/images/favicon.ico">
+
+        {{!-- <!-- App css --> --}}
+        <link href="/page/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+        <link href="/page/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+        <link href="/page/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+        <link href="/page/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+        {{!-- <!-- icons --> --}}
+        <link href="/page/css/icons.min.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body class="loading authentication-bg authentication-bg-pattern">
+
+        <div class="account-pages mt-5 mb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <div class="card bg-pattern bg-dark">
+
+                            <div class="card-body p-4">
+
+                                <div class="text-center w-75 m-auto">
+                                    <div class="auth-logo">
+                                        <a href="/" class="logo text-center">
+                                            <span>
+                                                <img src="/page/images/crlcoin_logo.svg" alt="" height="133">
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <p class="text-muted mb-4 mt-3">
+                                        Enter your email address and we'll send you an email with instructions to reset your password.
+                                    </p>
+                                </div>
+
+                                <form action="/recover" method="POST">
+
+                                    <div class="mb-3">
+                                        <label for="emailaddress" class="form-label">Email address</label>
+                                        <input class="form-control" name="emailaddress" type="email" id="emailaddress" required="true" placeholder="Enter your email">
+                                    </div>
+
+                                    <div class="text-center d-grid">
+                                        <button class="btn btn-primary" type="submit"> Reset Password </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 text-center">
+                                <p>
+                                    <a href="/login" class="text-white-50 ms-1">
+                                        Back to <b>Log in</b>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer footer-alt">
+            {{>_copyright}}
+        </footer>
+
+        {{!-- <!-- Vendor js --> --}}
+        <script src="/page/js/vendor.min.js"></script>
+
+        {{!-- <!-- App js --> --}}
+        <script src="/page/js/app.min.js"></script>
+
+    </body>
+</html>

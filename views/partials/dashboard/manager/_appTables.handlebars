@@ -1,0 +1,77 @@
+
+{{>dashboard/charts/_donuts}}
+
+<div class="col-12 order-2" panel-crlcoin="appTablesConfig">
+
+    <div class="row" id="charts-container"></div>
+
+    <div class="row">
+
+        {{#if tableStatus}}
+
+        <div class="card col-12 mt-3 shadow-lg">
+
+                <div class="card-box">
+                    <div class="responsive-table-plugin">
+                        <div class="row">
+                            <div class="col-12 d-flex flex-wrap align-items-center">
+                                <h4>
+                                    {{tableConfig.name}}
+                                </h4>
+                                <button type="button" class="btn btn-success ml-auto" data-table="new-row" disabled="">
+                                    <i class="mdi mdi-download"></i>
+                                    CSV
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <div class="table-rep-plugin fixed-solution" data-pattern="priority-columns">
+                                <div class="table-responsive" data-pattern="priority-columns">
+                                    <div style="width: auto; top: -1px;" class="pt-3">
+
+                                        <table id="table-company-data" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    {{#each tableConfig.columns}}
+                                                    <th class="text-center" data-priority="1" data-column-type="{{type}}"
+                                                        data-column-text="{{name}}" style="max-width: 420px; vertical-align: middle;">
+                                                        {{name}}
+                                                    </th>
+                                                    {{/each}}
+                                                </tr>
+                                            </thead>
+                                            <tbody class="px-2">
+                                                {{#each tableData}}
+                                                <tr class="position-relative" data-table-row='table-row-base'>
+                                                    {{#each this}}
+                                                    <th class="border-left border-bottom position-relative"
+                                                        style="vertical-align: middle;" data-column="{{this}}">
+                                                        {{this}}
+                                                    </th>
+                                                    {{/each}}
+                                                </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        {{/if}}
+
+    </div>
+
+</div>
+
+{{#toApplicationJson chartsData}}
+<script type="apllication/json" id="json-charts-data">
+    {{{json}}}
+</script>
+{{/toApplicationJson}}

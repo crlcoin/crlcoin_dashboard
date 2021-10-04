@@ -1,0 +1,35 @@
+{
+  "name": "crlcon_dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
+    "mongoose": "^5.13.6",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.3",
+    "nodemailer-express-handlebars": "^4.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "scripts": {
+    "test": "node test/index.js",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viniciuscosmome/_crlcon_dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viniciuscosmome/_crlcon_dashboard/issues"
+  },
+  "homepage": "https://github.com/viniciuscosmome/_crlcon_dashboard#readme"
+}

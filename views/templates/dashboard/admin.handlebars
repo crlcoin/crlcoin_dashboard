@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{page.title}} | CRLcoin Technology Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="CRLcoin Technology Group" name="description" />
+    <meta content="CRLcoin Technology Group" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{!-- <!-- App favicon --> --}}
+    <link rel="shortcut icon" href="{{page.URL}}/dash/assets/images/favicon.ico">
+
+    {{!-- <!-- App css --> --}}
+    <link href="{{page.URL}}/dash/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+    <link href="{{page.URL}}/dash/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{page.URL}}/dash/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+    <link href="{{page.URL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{page.URL}}/dash/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="{{page.URL}}/dash/assets/libs/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js">
+
+    {{!-- icons --}}
+    <link href="{{page.URL}}/dash/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    {{!-- Custom --}}
+    <link href="{{page.URL}}/dash/assets/custom/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="application/json" id='link-conn-reference'>
+        {
+            "dashboardDeleteCompaniesRegister": "/f/a/c/dashboard/delete/companies-register",
+            "dashboardCreateCompaniesPrelogin": "/f/a/c/dashboard/create/companies",
+            "dashboardDeleteCompaniesPrelogin": "/f/a/c/dashboard/delete/companies",
+            "dashboardCreateTablesConfig": "/f/a/c/dashboard/create/tables",
+            "dashboardUpdateTablesConfig": "/f/a/c/dashboard/update/tables",
+            "dashboardDeleteTablesConfig": "/f/a/c/dashboard/delete/tables",
+            "dashboardDeleteMessage": "/f/a/c/dashboard/delete/message",
+            "dashboardDeleteMessageStatus": "/f/a/c/dashboard/update/message-status",
+            "dashboardDeleteHelper": "/f/a/c/dashboard/delete/helper"
+        }
+    </script>
+
+</head>
+
+<body class="loading">
+
+    {{!-- Begin page --}}
+    <div id="wrapper">
+
+        {{>dashboard/admin/_navbar}}
+
+        {{>dashboard/admin/_leftSlidebar}}
+
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">CRLcoin Technology
+                                                Group</a></li>
+                                        <li class="breadcrumb-item active">{{page.title}}</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">{{page.title}}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Overview --}}
+                        {{#if page.Overview}}
+                        {{>dashboard/admin/_app}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Tables --}}
+                        {{#if page.Tables}}
+                        {{>dashboard/admin/_appTables}}
+                        {{/if}}
+
+                        {{#if tablesConfig}}
+                        {{>dashboard/admin/_appTablesConfig}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Tables --}}
+                        {{#if page.editTables}}
+                        {{>dashboard/admin/support/_appTableEdit}}
+                        {{/if}}
+
+                        {{!-- Use Tables --}}
+                        {{#if page.useTables}}
+                        {{>dashboard/admin/support/_appTableUse}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Companies --}}
+                        {{#if page.Companies}}
+                        {{>dashboard/admin/_appCompanies}}
+                        {{/if}}
+
+                        {{#if preloginData}}
+                        {{>dashboard/admin/_appPreloginCompanies}}
+                        {{/if}}
+
+                        {{#if companiesData}}
+                        {{>dashboard/admin/_appCompaniesList}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Help --}}
+                        {{#if page.Help}}
+                        {{>dashboard/admin/_appHelp}}
+                        {{/if}}
+
+                    </div>
+
+                    <div class="row">
+
+                        {{!-- Messages --}}
+                        {{#if page.Messages}}
+                        {{>dashboard/admin/_appMessages}}
+                        {{/if}}
+
+                    </div>
+
+                    {{!-- Account --}}
+                    <div class="row">
+                    {{#if page.Account}}
+                        {{>dashboard/admin/_managerAccount}}
+                    {{/if}}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{>_copyright}}
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- ============================================================== -->
+
+    </div>
+
+    {{!-- Connect --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    {{!-- <!-- Vendor js --> --}}
+    <script src="{{page.URL}}/dash/assets/js/vendor.min.js"></script>
+
+    <script src="{{page.URL}}/dash/assets/libs/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <script src="{{page.URL}}/dash/assets/js/pages/toastr.init.js"></script>
+    <script src="{{page.URL}}/dash/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
+    {{!-- <!-- App js --> --}}
+    <script src="{{page.URL}}/dash/assets/js/app.min.js"></script>
+
+    <script src="{{page.URL}}/dash/assets/custom/js/helpers.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/notification.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-vqwdnjkqdfuwhafujv.js"></script>
+    <script src="{{page.URL}}/dash/assets/custom/js/app-f-a-c-dashboard-conn-vqwdnjkqdfuwhafujv.js"></script>
+
+    {{#if page.useTables}}
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-conn-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-support-lib-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+        <script type="text/javascript" src="/dash/assets/custom/js/app-f-a-c-dashboard-table-jkbasdvqwdnjkqdfuwhafujv.js"></script>
+    {{/if}}
+
+    {{#if page.Account}}
+        <script type="text/javascript" src="/dash/assets/custom/js/app-change-password-9be3621a90afd27c593036f2cbf622.js"></script>
+    {{/if}}
+
+</body>
+
+</html>

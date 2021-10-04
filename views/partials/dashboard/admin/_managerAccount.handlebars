@@ -1,0 +1,107 @@
+<div class="col-12">
+
+    <div class="row">
+
+        <div class="col-12 col-lg-6 col-xl-4">
+
+            <div class="card-box">
+                <div class="media mb-3">
+                    <img class="d-flex mr-3 bg-dark rounded-circle avatar-lg" src="/dash/assets/images/crlcoin_logo.svg"
+                        alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h4 class="mt-0 mb-1">{{company.name}}</h4>
+                        <p class="text-muted">{{company.email}}</p>
+                        {{!-- <p class="text-muted">
+                            <i class="mdi mdi-office-building"></i>
+                            Vine Corporation
+                        </p> --}}
+
+                        {{!-- <a href="javascript: void(0);" class="btn- btn-xs btn-info">Send Email</a>
+                        <a href="javascript: void(0);" class="btn- btn-xs btn-secondary">Call</a>
+                        <a href="javascript: void(0);" class="btn- btn-xs btn-secondary">Edit</a> --}}
+                    </div>
+                </div>
+
+                <h5 class="mb-3 mt-4 text-uppercase bg-light p-2">
+                    <i class="mdi mdi-account-key mr-1"></i>
+                    Change Password
+                </h5>
+                <div class="">
+
+                    <form action="/f/a/c/dashboard/account/change-password" method="POST"
+                        id="changer-password">
+
+                        <input type="hidden" id="reference-data" name="ref" value="{{company.id}}">
+
+                        <div id="error" class="form-group font-13 h4 text-danger text-uppercase mb-3"></div>
+
+                        <div class="form-group">
+                            <h4 class="font-13 text-muted text-uppercase">
+                                Email:
+                            </h4>
+                            <p class="mb-3">
+                                <input type="email" class="form-control"
+                                    id="currentemail" name="currentemail">
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <h4 class="font-13 text-muted text-uppercase">
+                                Current password:
+                            </h4>
+                            <p class="mb-3">
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="currentpassword" class="form-control"
+                                        autocomplete="off" name="currentpassword" required="true" placeholder="Enter your password">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <h4 class="font-13 text-muted text-uppercase">New password:</h4>
+                            <p class="mb-3">
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="newpassword" class="form-control"
+                                        autocomplete="off" name="newpassword" required="true" placeholder="Enter your password">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <h4 class="font-13 text-muted text-uppercase">Confirm New password:</h4>
+                            <p class="mb-3">
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="confirmpassword" class="form-control"
+                                        autocomplete="off" name="confirmpassword" required="true" placeholder="Enter your password">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <button id="submit" type="submit" disabled="true" class="btn btn-success w-100">
+                                <span style="display:none;" class="await-spinner spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>
+                                <span class="txt"> Save </span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</div>

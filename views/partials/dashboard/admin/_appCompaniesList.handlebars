@@ -1,0 +1,85 @@
+<div class="col-12 mb-5 order-3">
+
+    <h3>
+        Registered Companies
+    </h3>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputFindCompany" class="sr-only">Find by name/mail</label>
+                                    <input type="search" class="form-control" data-crl="inputFindCompany" filter-type='register' id="inputFindCompany" placeholder="Search...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-right">
+                                <button type="button" class="btn btn-danger waves-effect waves-light"
+                                    data-toggle="modal" data-target="#custom-modal" data-crl="deleteAllRegister">
+                                    <i class="mdi mdi-trash-can mr-1"></i>
+                                    Delete all selected
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{#each companiesData}}
+
+            <div class="card-box mb-2" filter-type='register' data-crl-filters="{{name}} {{email}}">
+                <div class="row align-items-center">
+                    <div class="col-sm-4">
+                        <div class="media">
+                            <img class="d-flex align-self-center mr-3 rounded-circle bg-dark"
+                                src="/dash/assets/images/crlcoin_logo.svg" alt="Generic placeholder image" height="64">
+                            <div class="media-body">
+                                <h4 class="mt-0 mb-2 font-16">
+                                    {{name}}
+                                </h4>
+                                <p class="mb-1">
+                                    <b>Contact/Login:</b> {{email}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="text-center my-3 my-sm-0">
+                            <p class="mb-0 text-muted">
+                                {{formatDate createdAt "2"}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="text-sm-right text-center mt-2 mt-sm-0">
+                            <div class="custom-control custom-switch">
+                                <input class="custom-control-input" type="checkbox" id="{{app_id}}"
+                                    data-crl="actionSelectbox" value="{{app_id}}">
+                                <label class="custom-control-label" for="{{app_id}}">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+    </div>
+
+</div>
+
+<hr />
