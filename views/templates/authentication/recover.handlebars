@@ -30,7 +30,7 @@
                     <div class="col-md-8 col-lg-6 col-xl-4">
                         <div class="card bg-pattern bg-dark">
 
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 pb-3">
 
                                 <div class="text-center w-75 m-auto">
                                     <div class="auth-logo">
@@ -41,35 +41,35 @@
                                         </a>
                                     </div>
                                     <p class="text-muted mb-4 mt-3">
-                                        Enter your email address and we'll send you an email with instructions to reset your password.
+                                        Enter your email and we'll send you an email with instructions to reset your password
                                     </p>
                                 </div>
 
                                 <form action="/recover" method="POST">
 
                                     <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Email address</label>
+                                        <label for="emailaddress" class="form-label text-white">Email</label>
                                         <input class="form-control" name="emailaddress" type="email" id="emailaddress" required="true" placeholder="Enter your email">
                                     </div>
 
                                     <div class="text-center d-grid">
-                                        <button class="btn btn-primary" type="submit"> Reset Password </button>
+                                        <button class="btn btn-blue" type="submit">
+                                            <b>Reset Password</b>
+                                        </button>
                                     </div>
 
                                 </form>
 
+                                <div class="col-12 mt-3 text-center">
+                                    <p>
+                                        <a href="/login" class="text-white ms-1">
+                                            Back to <b>Log in</b>
+                                        </a>
+                                    </p>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12 text-center">
-                                <p>
-                                    <a href="/login" class="text-white-50 ms-1">
-                                        Back to <b>Log in</b>
-                                    </a>
-                                </p>
-                            </div>
                         </div>
 
                     </div>
@@ -78,7 +78,9 @@
         </div>
 
         <footer class="footer footer-alt">
-            {{>_copyright}}
+            <a href="/" class="text-decoration-none text-white">
+                {{>_copyright}}
+            </a>
         </footer>
 
         {{!-- <!-- Vendor js --> --}}

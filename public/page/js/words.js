@@ -100,7 +100,7 @@ const words = {
 
     },
 
-    "pt-BR": {
+    "pt-pt": {
 
         "navigation": {
             login: "entrar"

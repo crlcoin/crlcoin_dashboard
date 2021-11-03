@@ -57,20 +57,22 @@
                 <div class="row">
                     <div class="col-12 mt-2 text-right">
 
-                        <button data-href="{{../page.URL}}/f/a/e/dashboard/use/tables"
-                            data-refLink="{{table_id}}"
-                            type="button" data-toggle="modal" data-target="#use-table-modal"
-                            data-crl="use-table" class="btn btn-success waves-effect waves-light">
-                            <i class="mdi mdi-file-table-box-multiple"></i>
-                        </button>
-                        <a href="{{../page.URL}}/f/a/e/dashboard/use/tables?id=edit&refLink={{table_id}}"
-                            data-crl="edit-table" class="btn btn-blue waves-effect waves-light">
-                            <i class="mdi mdi-square-edit-outline"></i>
-                        </a>
-                        <button type="button" value="{{table_id}}" data-crl="removeTable"
-                            class="btn btn-danger waves-effect waves-light">
-                            <i class="mdi mdi-close"></i>
-                        </button>
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Use table">
+                            <button data-href="{{../page.URL}}/f/a/e/dashboard/use/tables" data-refLink="{{table_id}}" 
+                                type="button" data-toggle="modal" data-target="#use-table-modal" data-crl="use-table" class="btn btn-success waves-effect waves-light">
+                                <i class="mdi mdi-file-table-box-multiple"></i>
+                            </button>
+                        </span>
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit table">
+                            <a href="{{../page.URL}}/f/a/e/dashboard/use/tables?id=edit&refLink={{table_id}}" data-crl="edit-table" class="btn btn-blue waves-effect waves-light">
+                                <i class="mdi mdi-square-edit-outline"></i>
+                            </a>
+                        </span>
+                        <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete table">
+                            <button type="button" value="{{table_id}}" data-crl="removeTable" class="btn btn-danger waves-effect waves-light">
+                                <i class="mdi mdi-close"></i>
+                            </button>
+                        </span>
 
                     </div>
                 </div>
@@ -106,7 +108,7 @@
                     </div>
 
                     <div class="form-group text-center">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-blue" type="submit">
                             Use table
                             <i class="mdi mdi-arrow-collapse-right"></i>
                         </button>

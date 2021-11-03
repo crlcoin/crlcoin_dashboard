@@ -136,6 +136,11 @@
                         {{>dashboard/admin/_appHelp}}
                         {{/if}}
 
+                        {{!-- Help --}}
+                        {{#if page.Guide}}
+                        {{>dashboard/admin/support/_appGuide}}
+                        {{/if}}
+
                     </div>
 
                     <div class="row">
@@ -161,7 +166,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-dark">
                             {{>_copyright}}
                         </div>
                     </div>

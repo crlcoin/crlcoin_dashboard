@@ -93,10 +93,12 @@ function changePassword(event) {
                 if (response.status === 200) {
                     awaitEffectSuccessfuly()
                     notification({ title: "Password changed successfully!" }, "success")
-                    let i = setInterval(function () {
-                        clearInterval(i)
-                        location.href = '/login'
-                    }, 1700)
+                    if (!!location) {
+                        let i = setInterval(function () {
+                            clearInterval(i)
+                            location.href = '/login'
+                        }, 1700)
+                    }
                 } else {
                     awaitEffectFalse()
                     showError("500")

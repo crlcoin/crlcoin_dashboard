@@ -40,16 +40,16 @@
                                             </span>
                                         </a>
                                     </div>
-                                    <p class="text-muted mb-1 mt-3">
-                                        A email has been send to <b class="text-success">{{email}}</b>.
+                                    <p class="text-white mb-1 mt-3">
+                                        A email has been send to <b class="text-success">{{email}}</b>
+                                    </p><br>
+                                    <p class="text-white my-1">
+                                        Please check for an email from company and click on the included link to reset your password
+                                    </p><br>
+                                    <p class="text-white mb-3">
+                                        If the email is not registered, you will not receive it
                                     </p>
-                                    <p class="text-muted my-1">
-                                        Please check for an email from company and click on the included link to reset your password.
-                                    </p>
-                                    <p class="text-muted mb-3">
-                                        If the email is not registered, you will not receive it.
-                                    </p>
-                                    <a href="/login" class="btn btn-success waves-effect waves-light">
+                                    <a href="/login" class="btn btn-blue waves-effect waves-light">
                                         Back to <b>Log In</b>
                                     </a>
                                 </div>
@@ -64,7 +64,9 @@
         </div>
 
         <footer class="footer footer-alt">
-            {{>_copyright}}
+            <a href="/" class="text-decoration-none text-white">
+                {{>_copyright}}
+            </a>
         </footer>
 
         {{!-- <!-- Vendor js --> --}}

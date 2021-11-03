@@ -33,8 +33,7 @@
         <div class="container-fluid">
 
             <a class="logo text-uppercase" href="#">
-                <img src="/page/images/crlcoin_logo.svg" alt="Logo" class="logo-light" height="70" />
-                <img src="/page/images/crlcoin_logo.svg" alt="Logo" class="logo-dark" height="70" />
+                <img src="/page/images/crlcoin_logo.svg" alt="Logo" class="logo-navbar" height="63" style="transition: all 200ms;visibility: hidden;" />
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,14 +43,14 @@
                 <ul class="navbar-nav" id="mySidenav" data-translate-block="navigation">
                     <li class="nav-item">
                         <div class="btn-group mb-2">
-                            <button class="btn translate" value="en">
-                                <img src="/page/images/flags/us.jpg" height="14" alt="Flag">
+                            <button class="btn translate" value="en" title="English">
+                                <img src="/page/images/flags/en.png" height="14" alt="Flag">
                             </button>
-                            <button class="btn translate" value= "es">
+                            <button class="btn translate" value= "es" title="Español">
                                 <img src="/page/images/flags/es.png" height="14" alt="Flag">
                             </button>
-                            <button class="btn translate" value="pt-BR">
-                                <img src="/page/images/flags/pt-br.png" height="14" alt="Flag">
+                            <button class="btn translate" value="pt-pt" title="Português">
+                                <img src="/page/images/flags/pt-pt.png" height="14" alt="Flag">
                             </button>
                         </div>
                     </li>
@@ -76,15 +75,15 @@
                         <div class="col-12 text-center pb-5">
                             <div class="position-relative">
                                 <img src="/page/images/crlcoin_logo.svg" class="crlcoin-principal-logo" alt="crlcoin logo"><br>
-                                <h1 class="crlcoin-font crlcoin-title-h1">CRLcoin</h1>
-                                <h3 class="crlcoin-font crlcoin-title-h2">TECHNOLOGY GROUP</h3>
+                                <h1 class="crlcoin-font crlcoin-title-h1 text-lowercase">CRLcoin</h1>
+                                <h3 class="crlcoin-font crlcoin-title-h2 text-lowercase">TECHNOLOGY GROUP</h3>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-10 col-lg-6 pt-5 text-center">
                             <div class="home-title mo-mb-20 text-center">
                                 <span data-translate-block="block_1">
-                                    <h1 class="crlcoin-font crlcoin-title mb-4 text-white" data-translate-part="title">
+                                    <h1 class="crlcoin-font text-lowercase crlcoin-title mb-4 text-white" data-translate-part="title">
                                         TO THE MOON and beyond
                                     </h1>
                                     <p class="text-white-50 mb-2" data-translate-part="paragraph">
@@ -93,10 +92,10 @@
                                     </p>
                                 </span>
 
-                                <img src="/page/images/other_logos/bull.svg" width="70" alt="Bull">
+                                <img src="/page/images/other_logos/bull.svg" width="56" alt="Bull">
 
                                 <span data-translate-block="block_2">
-                                    <h1 class="crlcoin-font crlcoin-title mb-4 text-white" data-translate-part="title">
+                                    <h1 class="crlcoin-font text-lowercase crlcoin-title mb-4 text-white" data-translate-part="title">
                                         be bull always
                                     </h1>
                                     <p class="text-white-50 mb-5" data-translate-part="paragraph">
@@ -121,7 +120,9 @@
             <div class="clients p-4 bg-white shadow">
                 <div class="row d-flex-between align-items-center justify-content-center">
                     <div class="col-12 text-center" data-translate-block="block_3">
-                        <p class="crlcoin-font crlcoin-title" data-translate-part="title">our investments</p>
+                        <p class="crlcoin-font text-lowercase crlcoin-title" data-translate-part="title">
+                            our investments
+                        </p>
                     </div>
                     <div class="col-6 col-md-2">
                         <div class="client-images">
@@ -130,7 +131,7 @@
                     </div>
                     <div class="col-6 col-md-2">
                         <div class="client-images">
-                            <img src="/page/images/other_logos/QA.svg" alt="logo-img" class="mx-auto img-fluid d-block px-2">
+                            <img src="/page/images/other_logos/QA.png" alt="logo-img" class="mx-auto img-fluid d-block px-2">
                         </div>
                     </div>
                 </div>
@@ -143,42 +144,42 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title text-center mb-4">
-                        <h3 class="crlcoin-font crlcoin-title-h2 text-primary" data-translate-part="title">CONTACT</h3>
+                        <h3 class="crlcoin-font text-lowercase crlcoin-title-h2 text-primary" data-translate-part="title">CONTACT</h3>
                         <p class="text-primary-50" data-translate-part="paragraph">Please fill out the following form and we will get back to you shortly</p>
                     </div>
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-10">
+                <div class="col-md-7 col-lg-5 col-xl-4">
 
-                    <div class="custom-form p-5 bg-white">
+                    <div class="custom-form px-3 py-4 bg-white">
                         <div id="message"></div>
                         <form method="post" action="contact" id="contact-form">
 
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-12">
                                     <div class="form-group" data-translate-form-part="name">
                                         <label for="name" data-translate-form-label>Name</label>
                                         <input name="name" data-translate-form-input id="name" type="text" required="true" class="form-control" placeholder="Enter your name...">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-12">
                                     <div class="form-group" data-translate-form-part="email">
-                                        <label for="emailaddress" data-translate-form-label>Email address</label>
+                                        <label for="emailaddress" data-translate-form-label>Email</label>
                                         <input name="emailaddress" data-translate-form-input id="emailaddress" type="email" required="true" class="form-control" placeholder="Enter your email...">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-12">
                                     <div class="form-group" data-translate-form-part="subject">
                                         <label for="subject" data-translate-form-label>Subject</label>
                                         <input name="subject" data-translate-form-input id="subject" type="text" class="form-control" required="true" placeholder="Enter Subject...">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-12">
                                     <div class="form-group" data-translate-form-part="phone">
                                         <label for="phoneNumber" data-translate-form-label>Phone</label>
                                         <input name="phoneNumber" data-translate-form-input id="phone-number" type="number" class="form-control" placeholder="+5511000123456">
@@ -187,7 +188,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <div class="form-group" data-translate-form-part="message">
                                         <label for="sdncomments" data-translate-form-label>Message</label>
                                         <textarea name="comments" data-translate-form-input id="comments" rows="4" class="form-control" required="true" placeholder="Enter your message..."></textarea>
@@ -195,13 +196,19 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <div class="g-recaptcha" data-sitekey="6LfQaSocAAAAAIIwrj6dHHeqVhCXX1JO0rAAwNZu"></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row justify-content-center pb-3">
+                                        <div class="col-12 w-auto">
+                                            <div class="g-recaptcha" data-sitekey="6LfQaSocAAAAAIIwrj6dHHeqVhCXX1JO0rAAwNZu"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-12 text-right" data-translate-form-part="submit">
-                                    <button type="submit" id="submit" data-translate-form-label class="submitBnt btn btn-success">
+                                <div class="col-12 text-center" data-translate-form-part="submit">
+                                    <button type="submit" id="submit" data-translate-form-label class="px-5 submitBnt btn btn-blue">
                                         Send
                                     </button>
                                     <div id="simple-msg"></div>
@@ -220,18 +227,22 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="pull-none">
-                        <p class="text-white-50">
+                        <small class="text-white">
                             {{>_copyright}}
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 text-end">
                     <div class="pull-none">
                         <ul class="list-inline social-links">
-                            <li class="list-inline-item text-white-50">
+                            <li class="list-inline-item text-white">
                                 Social :
                             </li>
-                            <li class="list-inline-item"><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/company/zerooneusability" rel="noreferrer" target="_blank">
+                                    <i class="mdi mdi-linkedin"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -256,6 +267,7 @@
 
     {{!-- <!-- custom js --> --}}
     <script src="/page/js/app.js"></script>
+    <script src="/page/js/app-custom.js"></script>
     <script src="/page/js/notification.js"></script>
     <script src="/page/js/contact.js"></script>
     <script src="/page/js/words.js"></script>

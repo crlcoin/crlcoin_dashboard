@@ -1,6 +1,7 @@
 function setRowDataId(rows) {
     rows.forEach((row, index) => {
-        row.querySelector('[data-type=id]').innerText = index + 1
+        if (!!row.querySelector('[data-type=id]'))
+            row.querySelector('[data-type=id]').innerText = index + 1
     })
 
     return
@@ -63,32 +64,48 @@ const setFunctions = {
 const setColumnStyle = {
 
     'action-button': function(column) {
-        column.style.minWidth = '50px'
-        column.style.maxWidth = '70px'
+        column.style = 'min-width: 50px;max-width: 70px;'
     },
     'function': function(column) {
-        column.style.maxWidth = '420px'
+        column.style = 'max-width: 420px;'
     },
     'id': function(column) {
-        column.style.maxWidth = '420px'
+        column.style = 'max-width: 420px;'
     },
     'link': function(column) {
-        column.style.minWidth = 'auto'
-        column.style.maxWidth = '420px'
+        column.style = 'max-width: 420px;'
     },
     'number': function(column) {
-        column.style.maxWidth = '280px'
+        column.style = 'max-width: 280px;'
+        column.addEventListener('input', function() {
+            let innerText = column.innerText
+            let result = ''
+            result = innerText.replace(/[^0-9-.]/g, '')
+
+            if (!!result) {
+                let split = result.split('')
+                let sup = split[0]
+                split.shift()
+                result = `${split.join('')}${sup}`
+            }
+
+            console.log(result)
+
+            column.innerText = result
+        })
     },
     'options': function(column) {
-        column.style.minWidth = '140px'
-        column.style.maxWidth = '420px'
+        column.style = 'min-width: 140px;'
+        column.style = 'max-width: 420px;'
     },
     'percent': function(column) {
-        column.style.minWidth = '140px'
+        column.style = 'min-width: 140px;'
     },
     'text': function(column) {
-        column.style.minWidth = '140px'
-        column.style.maxWidth = '420px'
+        column.style = 'min-width: 140px;max-width: 420px;'
+    },
+    'date': function(column) {
+        column.style = 'min-width: 140px;max-width: 420px;'
     }
 
 }
@@ -113,6 +130,12 @@ function columnFunctions(element, data){
 
 function addRowFunctions(row, objt) {
     row.addEventListener('input', function() {
+        objt.saveButton.removeAttribute('disabled')
+    })
+    row.addEventListener('change', function() {
+        objt.saveButton.removeAttribute('disabled')
+    })
+    row.addEventListener('focus', function() {
         objt.saveButton.removeAttribute('disabled')
     })
     return

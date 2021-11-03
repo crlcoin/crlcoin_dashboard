@@ -43,7 +43,7 @@
                                     </a>
                                 </div>
                                 <p class="text-muted mb-4 mt-3">
-                                    Create your account.
+                                    Create your account
                                 </p>
                             </div>
 
@@ -68,21 +68,21 @@
 
                             {{/if}}
 
-                            <form action="/auth/register" method="POST" class="text-white" id="register-form" {{#if
-                                message.boo}}style="display:none;" {{/if}}>
+                            <form action="/auth/register" method="POST" class="text-white" id="register-form"
+                                {{#if message.boo}}style="display:none;" {{/if}}>
 
                                 <input type="hidden" name="permission" value="{{permission}}">
 
                                 <div class="mb-2 text-danger" id="display-errors"></div>
 
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Company Name</label>
+                                    <label for="name" class="form-label">Company</label>
                                     <input class="form-control" type="text" id="name" name="name" required="true"
-                                        placeholder="Enter company name">
+                                        placeholder="Enter company">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <label for="emailaddress" class="form-label">Email</label>
                                     <input class="form-control" type="email" id="emailaddress" name="emailaddress"
                                         required="true" placeholder="Enter your email">
                                 </div>
@@ -97,11 +97,12 @@
                                             <span class="password-eye"></span>
                                         </div>
                                     </div>
+                                    <div class="mb-2 password-errors"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="cpassword" class="form-label">Confirm Password</label>
-                                    <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge border-bottom rounded border-3">
                                         <input type="password" id="cpassword" class="form-control" autocomplete="off"
                                             name="confirmNewPassword" required="true" minlength="8"
                                             placeholder="Confirm your password">
@@ -118,7 +119,7 @@
                                                 id="checkbox-signup" required="true">&nbsp;
                                             <span class="custom-control-label text-light" for="checkbox-signup">
                                                 I accept
-                                                <a href="javascript: void(0);" class="text-info fw-bold">
+                                                <a href="javascript: void(0);" class="text-success fw-bold">
                                                     Terms and Conditions
                                                 </a>
                                             </span>
@@ -127,8 +128,8 @@
                                 </div>
 
                                 <div class="text-center d-grid">
-                                    <button class="btn btn-primary" id="button-submit" type="submit" disabled="true">
-                                        Sign Up
+                                    <button class="btn" id="button-submit" type="submit" disabled="true">
+                                        <b>Sign Up</b>
                                     </button>
                                 </div>
 
@@ -144,7 +145,9 @@
     </div>
 
     <footer class="footer footer-alt">
-        {{>_copyright}}
+        <a href="/" class="text-decoration-none text-white">
+            {{>_copyright}}
+        </a>
     </footer>
 
     {{!--

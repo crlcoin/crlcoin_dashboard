@@ -1,7 +1,6 @@
 
 module.exports = {
-    PrincipalULR: 'http://localhost:3000',
-    PagesList: ["Overview", "Tables", "Companies", "Help", "Account", "Messages"],
+    PagesList: ["Overview", "Tables", "Companies", "Help", "Guide", "Account", "Messages"],
     managerPagesList: ["Overview", "Tables", "Help", "Account"],
     ActionsList: ["use", "edit"],
 

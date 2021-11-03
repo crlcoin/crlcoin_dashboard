@@ -4,7 +4,7 @@
         <div class="col-12">
 
             <div class="card">
-                <div class="card-body bg-pattern bg-dark rounded">
+                <div class="card-body bg-pattern bg-dark rounded py-1">
 
                     <div class="d-flex align-items-center justify-content-left">
 
@@ -12,13 +12,13 @@
                             Register new Company
                         </h3>
 
-                        <div class="card-widgets float-right mb-3 ml-auto">
+                        <div class="card-widgets float-right mb-3 mt-1 ml-auto">
                             {{!-- <a title="Settings" href="javascript:void(0);" type="button"
                                 class="btn btn-blue waves-effect waves-light text-light">
                                 <i class="mdi mdi-cog"></i>
                             </a> --}}
                             <a title="Refresh" data-crl="refreshCreateCompany" href="javascript: void(0);"
-                                data-toggle="reload" class="btn btn-blue text-light">
+                                data-toggle="reload" class="btn btn-danger text-light">
                                 <i class="mdi mdi-refresh"></i>
                             </a>
                             <a title="Show/Hidden" data-toggle="collapse" href="#cardCollNewCompany" role="button"
@@ -49,24 +49,22 @@
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label for="companyName" class="form-label text-light">Company Name</label>
+                                        <label for="companyName" class="form-label text-light">Company</label>
                                         <input type="text" class="form-control" id="companyName" data-crl="companyName"
                                             placeholder="CRLcoin Technology Group" required="true">
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label for="companyMail" class="form-label text-light">Company Email
-                                            address</label>
+                                        <label for="companyMail" class="form-label text-light">Email</label>
                                         <input type="email" class="form-control" id="companyMail" data-crl="companyMail"
                                             placeholder="example@mail.com" required="true">
                                     </div>
 
                                     <div class="col-12 mb-3">
-                                        <label for="companyPermission" class="form-label text-light">Company
-                                            Permission</label>
+                                        <label for="companyPermission" class="form-label text-light">Permission</label>
                                         <input type="text" disabled="true" class="form-control" id="companyPermission"
                                             data-crl="companyPermission" required="true">
-                                        <label for="companyPermission" class="btn btn-primary mt-2"
+                                        <label for="companyPermission" class="btn btn-blue mt-2"
                                             data-crl="generatePermission">
                                             <i class="fas fa-random"></i>
                                             Random Permission

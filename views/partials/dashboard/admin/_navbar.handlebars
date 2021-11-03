@@ -5,26 +5,30 @@
         <ul class="list-unstyled topnav-menu float-right mb-0">
 
             <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" title="fullscreen" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
             </li>
 
             <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="/dash/assets/images/flags/us.jpg" alt="lang-image" height="16">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" title="English">
+                    <img src="/dash/assets/images/flags/en.png" alt="lang-image" class="mr-1" height="12"> <span class="align-middle">English</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="/dash/assets/images/flags/br.png" alt="lang-image" class="mr-1" height="12"> <span class="align-middle">Português - BR</span>
+                    <a href="javascript:void(0);" class="dropdown-item" title="Português">
+                        <img src="/dash/assets/images/flags/pt-pt.png" alt="lang-image" class="mr-1" height="12"> <span class="align-middle">Português</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="dropdown-item" title="Español">
+                        <img src="/dash/assets/images/flags/es.png" alt="lang-image" class="mr-1" height="12"> <span class="align-middle">Español</span>
                     </a>
 
                 </div>
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link nav-user mr-0 waves-effect waves-light" href="javascript:void(0);">
+                <a class="nav-link nav-user mr-0 waves-effect waves-light" href="/f/a/c/dashboard/account">
                     <img src="{{#if manager.logo}}{{manager.logo}}{{else}}/dash/assets/images/crlcoin_logo.svg{{/if}}" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
                         {{#if manager.name}}{{manager.name}}{{else}}CRLcoin Manager{{/if}}

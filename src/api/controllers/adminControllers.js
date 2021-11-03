@@ -9,6 +9,10 @@ const {
 } = require('../../constants')
 
 const {
+    SITE_URL
+} = require('../../config')
+
+const {
     createTablesConfig,
     deleteTableConfig,
     requireTablesConfig,
@@ -209,6 +213,7 @@ const dashboardAccess = async (req, res) => {
                 [template]: true,
                 title: template
             },
+            SITE_URL: SITE_URL,
             company: manager || '',
             preloginData: req.preloginData,
             companiesData: req.companies,

@@ -10,6 +10,7 @@ const {
 const constants = require('../../constants')
 
 const {
+    SITE_URL,
     adminEmail
 } = require('../../config')
 
@@ -217,7 +218,7 @@ const resetPassword = async (data) => {
             from: 'no-reply@crlcoin.com.br',
             subject: 'Reset Password',
             template: 'recoverpass',
-            context: { token }
+            context: { SITE_URL, token }
         }, (err) => {
             if (err) {
                 console.log(err)

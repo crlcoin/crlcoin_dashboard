@@ -4,9 +4,19 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 const session = require('express-session')
 const cors = require('cors')
-const app = express()
+const helmet = require('helmet')
 const routes = require('./routes')
 const handlebarsHelpers = require('./helper/handlebars')
+
+const app = express()
+app.use( helmet() )
+app.use( helmet.contentSecurityPolicy({
+    useDefaults:true,
+    directives: {
+        "script-src": ["'self'", "https://www.google.com/recaptcha/", "https://www.gstatic.com/recaptcha/", "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"],
+        "frame-src": ["'self'", "https://www.google.com/recaptcha/", "https://recaptcha.google.com/recaptcha/"]
+    }
+}) )
 
 // Session
 app.use(session({
@@ -16,11 +26,23 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: IS_PRODUCTION,
-        maxAge: 1000 * 60 * 60 * 3,
+        maxAge: 3600000 * 3,
     }
 }))
 
-app.use(cors())
+const whitelist = ['https://crlcoin-example.herokuapp.com/']
+const corsOptions = {
+    origin: function(origin, callback) {
+        if (whitelist.indexOf(origin) !== -1 || !IS_PRODUCTION) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+
+app.use( cors(corsOptions) )
+
 app.use( express.json() )
 app.use( express.urlencoded({ extended: true }) )
 app.use( express.static( path.join(__dirname, '../public/') ) )

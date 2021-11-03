@@ -7,10 +7,22 @@ const axiosSaveTableData = function(URL, data) {
 
     axios.post(URL, data, headers)
         .then((response) => {
-            console.log(response)
+            if (!!response) {
+                notification({ title: "Saved!" }, "success-2");
+
+                if (!!location) {
+                    let i = setInterval(function () {
+                        clearInterval(i);
+                        location.reload();
+                    }, 2e3);
+                }
+            }
         })
         .catch((err) => {
-            console.log(err)
+            if (err)
+                console.log(err)
+
+            notification({ title: "Error" }, "error");
         })
 
     return

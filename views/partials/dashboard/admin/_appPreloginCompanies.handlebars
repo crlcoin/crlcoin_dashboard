@@ -64,22 +64,23 @@
                     <div class="col-sm-4">
                         <div class="text-center button-list">
                             <button data-crl="copyLinkPermission" title="Copy link for first access"
-                                value="https://crlcoin-example.herokuapp.com/auth/register?refLink={{permission}}"
-                                class="btn btn-xs btn-primary waves-effect waves-light">
+                                value="{{../SITE_URL}}/auth/register?refLink={{permission}}"
+                                class="btn btn-xs btn-success waves-effect waves-light">
                                 <i class="fas fa-link"></i>&nbsp;
-                                Copy Link
+                                <b>Copy Link</b>
                             </button>
                         </div>
                     </div>
 
                     <div class="col-sm-2">
-                        <div class="text-sm-right text-center mt-2 mt-sm-0">
-                            <div class="custom-control custom-switch">
+                        <div class="text-sm-right text-center mt-2 ml-auto mt-sm-0">
+                            <label class="custom-control custom-switch" for="random{{_id}}">
                                 <input class="custom-control-input" type="checkbox" id="random{{_id}}"
                                     data-crl="actionSelectbox" value="{{permission}}">
-                                <label class="custom-control-label" for="random{{_id}}">
-                                </label>
-                            </div>
+                                <span class="custom-control-label">
+                                    <i class="mdi mdi-trash-can"></i>
+                                </span>
+                            </label>
                         </div>
                     </div>
 

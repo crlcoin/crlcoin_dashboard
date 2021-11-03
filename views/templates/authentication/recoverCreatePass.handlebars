@@ -40,7 +40,7 @@
                                             </span>
                                         </a>
                                     </div>
-                                    <p class="text-muted mb-4 mt-3">
+                                    <p class="text-white mb-4 mt-3">
                                         Enter your new password to reset access
                                     </p>
                                 </div>
@@ -54,21 +54,21 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="password" class="form-label  text-light">
+                                        <label for="password" class="form-label  text-white">
                                             New Password
                                         </label>
                                         <input class="form-control" autocomplete="off" name="password" type="password" id="password" required="true" placeholder="Enter your password">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="confirmpassword" class="form-label text-light">Confirm Password</label>
+                                        <label for="confirmpassword" class="form-label text-white">Confirm Password</label>
                                         <input class="form-control" autocomplete="off" name="confirmpassword" type="password" id="confirmpassword" required="true" placeholder="Confirm your password">
                                         <input type="hidden" value="{{token}}" name="token">
                                     </div>
 
                                     <div class="text-center d-grid">
-                                        <button class="btn btn-primary" disabled="true" type="submit" id="submit">
-                                            Save New Password
+                                        <button class="btn btn-blue" disabled="true" type="submit" id="submit">
+                                            <b>Save New Password</b>
                                         </button>
                                     </div>
 
@@ -84,7 +84,9 @@
         </div>
 
         <footer class="footer footer-alt">
-            {{>_copyright}}
+            <a href="/" class="text-decoration-none text-white">
+                {{>_copyright}}
+            </a>
         </footer>
 
         {{!-- <!-- Vendor js --> --}}

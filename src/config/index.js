@@ -7,7 +7,7 @@ module.exports = {
     IS_PRODUCTION: process.env.NODE_ENV === "production",
     SESSION_SECRET: process.env.SESSI_SECRET,
     CAPTCHA_SECRET: process.env.GGL_SECRET,
-    SITE_URL: process.env.SITE_URL,
+    SITE_URL: process.env.SITE_URL || 'http://localhost:3000',
     PORT: process.env.PORT,
 
     databaseReadAndWriteDashboard: process.env.DB_RW_DASH,

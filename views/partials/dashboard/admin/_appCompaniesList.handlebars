@@ -63,12 +63,12 @@
 
                     <div class="col-sm-2">
                         <div class="text-sm-right text-center mt-2 mt-sm-0">
-                            <div class="custom-control custom-switch">
-                                <input class="custom-control-input" type="checkbox" id="{{app_id}}"
-                                    data-crl="actionSelectbox" value="{{app_id}}">
-                                <label class="custom-control-label" for="{{app_id}}">
-                                </label>
-                            </div>
+                            <label class="custom-control custom-switch" style="cursor: pointer;" for="{{app_id}}" title="Select to add to removal list">
+                                <input class="custom-control-input" type="checkbox" id="{{app_id}}" data-crl="actionSelectbox" value="{{app_id}}">
+                                <span class="custom-control-label">
+                                    <i class="mdi mdi-trash-can"></i>
+                                </span>
+                            </label>
                         </div>
                     </div>
 
